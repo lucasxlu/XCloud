@@ -13,8 +13,8 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Race Recognition
         - [x] Age Estimation
     * Image Recognition
-        -[x] Scene Recognition
-        -[x] Flower Recognition
+        - [x] Scene Recognition
+        - [x] Flower Recognition
 * NLP
     - [x] Text Similarity Comparison
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
