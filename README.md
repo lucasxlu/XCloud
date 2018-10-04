@@ -7,20 +7,20 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 ## Features
 * Computer  vision
     * Face Analysis
-        -[x] Face  Comparison
-        -[x] Facial Beauty Prediction
-        -[x] Gender Recognition
-        -[x] Race Recognition
-        -[x] Age Estimation
+        - [x] Face  Comparison
+        - [x] Facial Beauty Prediction
+        - [x] Gender Recognition
+        - [x] Race Recognition
+        - [x] Age Estimation
     * Image Recognition
         -[x] Scene Recognition
         -[x] Flower Recognition
 * NLP
-    -[x] Text Similarity Comparison
-    -[x] Sentiment Classification for [douban.com](https://www.douban.com/)
-    -[x] News Classification
+    - [x] Text Similarity Comparison
+    - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
+    - [x] News Classification
 * Data Mining
-    -[x] Zhihu Live Quality Evaluation
+    - [x] Zhihu Live Quality Evaluation
     
 ## Note
 XCloud is free for researchers but your should cite our paper for your usage.
