@@ -1,3 +1,5 @@
+<p align="left"><img src="logo/horizontal.svg" alt="XCloud" height="120px"></p>
+
 # XCloud (EXplore Cloud)
 ## Introduction
 __XCloud__ is an open-source AI platform which provides common AI services 
