@@ -21,9 +21,15 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] News Classification
 * Data Mining
     - [x] Zhihu Live Quality Evaluation
+* Data Services
+    - [x] Zhihu Live & Comments
+    - [x] Major Hospital Information
+    - [x] Primary and Secondary School on [Baidu Baike](https://baike.baidu.com/)
+    - [x] Weather History
     
 ## Note
-XCloud is free for researchers but your should cite our paper for your usage.
+XCloud is **free for researchers** but your should cite our paper for your 
+usage.
 ```
 @inproceedings{xu2018crnet,
   title={CRNet: Classification and Regression Neural Network for Facial Beauty Prediction},
@@ -44,7 +50,7 @@ XCloud is free for researchers but your should cite our paper for your usage.
 }
 ```
 
-For commercial use, please email me AT [xulu0620@gmail.com](xulu0620@gmail.com) for more details. 
+For commercial use, please email me AT **xulu0620@gmail.com** for more details. 
 
 ## License
 [MIT](./LICENSE)
