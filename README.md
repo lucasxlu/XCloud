@@ -7,7 +7,7 @@ __XCloud__ is an open-source AI platform which provides common AI services
 with RESTful APIs. The platform is developed and maintained by [@LucasX](https://github.com/lucasxlu) based on [Django](https://www.djangoproject.com/) and [PyTorch](https://pytorch.org/).
 
 ## Features
-* Computer  vision
+* Computer  Vision
     * Face Analysis
         - [x] Face  Comparison
         - [x] Facial Beauty Prediction
@@ -29,9 +29,23 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Primary and Secondary School on [Baidu Baike](https://baike.baidu.com/)
     - [x] Weather History
     
+## Contributor
+* [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment
+* [@reallinfo](https://github.com/reallinfo): logo design
+
 ## Note
-XCloud is **free for researchers** but your should cite our paper for your 
-usage.
+XCloud is **free for researchers**. For commercial use, please email me AT 
+**xulu0620@gmail.com** for more details. 
+
+More features will be added in the next future!
+For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to 
+[CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
+
+
+## Reference
+If you find this project useful in your research, please consider citing our
+ paper!
+ 
 ```
 @inproceedings{xu2018crnet,
   title={CRNet: Classification and Regression Neural Network for Facial Beauty Prediction},
@@ -51,8 +65,6 @@ usage.
   year={2018}
 }
 ```
-
-For commercial use, please email me AT **xulu0620@gmail.com** for more details. 
 
 ## License
 [MIT](./LICENSE)
