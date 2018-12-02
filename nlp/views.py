@@ -1,6 +1,5 @@
 import json
 from collections import OrderedDict
-from random import randint
 
 import jieba as jieba
 import jieba.analyse
@@ -15,7 +14,7 @@ STOPWORDS_FILE = './stopwords.txt'
 
 def welcome(request):
     """
-    welcome page for computer vision welcome
+    welcome page for NLP welcome
     :param request:
     :return:
     """
@@ -31,15 +30,17 @@ def word_seg(request):
     sentence = request.GET.get('sentence')
     result = OrderedDict()
 
-    if not sentence or sentence.strip() == '':
+    if sentence is None:
         result['code'] = 1
         result['msg'] = 'Invalid Sentence Input'
         result['data'] = None
     else:
         result['code'] = 0
         result['msg'] = 'success'
-        jieba.load_userdict(USER_DICT)
-        jieba.analyse.set_stop_words(STOPWORDS_FILE)
+
+        # jieba.load_userdict(USER_DICT)
+        # jieba.analyse.set_stop_words(STOPWORDS_FILE)
+
         tags = jieba.analyse.extract_tags(sentence, topK=30, withWeight=True)
 
         seg_words = []
