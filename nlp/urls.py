@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('welcome', views.welcome, name='welcome'),
+    url('wordseg', views.word_seg, name='wordseg'),
 ]
