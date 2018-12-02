@@ -17,6 +17,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     * Image Recognition
         - [x] Scene Recognition
         - [x] Flower Recognition
+        - [x] Porn Image Recognition
 * NLP
     - [x] Text Similarity Comparison
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
@@ -29,6 +30,12 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Primary and Secondary School on [Baidu Baike](https://baike.baidu.com/)
     - [x] Weather History
     
+## Deployment
+1. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
+2. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
+3. open your browser and visit: ```http://www.lucasx.top:8001/cv/welcome```
+
+
 ## Contributor
 * [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment
 * [@reallinfo](https://github.com/reallinfo): logo design

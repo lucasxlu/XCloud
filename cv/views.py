@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 # Create your views here.
@@ -7,8 +6,9 @@ from django.http import HttpResponse
 
 def welcome(request):
     """
-    test page for computer vision welcome
+    welcome page for computer vision welcome
     :param request:
     :return:
     """
-    return HttpResponse("Hello, welcome to computer vision section.")
+    return render(request, 'welcome.html')
+

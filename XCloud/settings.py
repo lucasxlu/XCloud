@@ -25,7 +25,9 @@ SECRET_KEY = 'xl7$yz_iet-f%&as-z@=-4hyj9=)$ogzyrr__ws=tsxyl8!q3p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
 # Application definition
@@ -54,7 +56,11 @@ ROOT_URLCONF = 'XCloud.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + "/cv/templates",
+            BASE_DIR + "/nlp/templates",
+            BASE_DIR + "/dm/templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
