@@ -14,6 +14,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Gender Recognition
         - [x] Race Recognition
         - [x] Age Estimation
+        - [x] Facial Expression Recognition
     * Image Recognition
         - [x] Scene Recognition
         - [x] Flower Recognition
@@ -68,7 +69,7 @@ If you find this project useful in your research, please consider citing our
 @article{xu2018transferring,
   title={Transferring Rich Deep Features for Facial Beauty Prediction},
   author={Xu, Lu and Xiang, Jinhai and Yuan, Xiaohui},
-  journal={arXiv preprint arXiv:1803.07253},
+  journal={The 3th International Symposium on Artificial Intelligence and Robotics 2018},
   year={2018}
 }
 ```
