@@ -58,3 +58,42 @@ def word_seg(request):
     json_result = json.dumps(result, ensure_ascii=False)
 
     return HttpResponse(json_result)
+
+
+def sentiment(request):
+    """
+    calculate sentiment of a specific sentence
+    :param request:
+    :return:
+    """
+    sentence = request.GET.get('sentence')
+    result = OrderedDict()
+
+    if sentence is None:
+        result['code'] = 1
+        result['msg'] = 'Invalid Sentence Input'
+        result['data'] = None
+    else:
+        result['code'] = 0
+        result['msg'] = 'success'
+
+        from snownlp import SnowNLP
+
+        s = SnowNLP(sentence)
+
+        senti_score = s.sentiments
+        if senti_score >= 0.65:
+            tp = 'positive'
+        elif senti_score <= 0.4:
+            tp = 'negative'
+        else:
+            tp = 'neutral'
+
+        result['data'] = {
+            'type': tp,
+            'score': senti_score
+        }
+
+    json_result = json.dumps(result, ensure_ascii=False)
+
+    return HttpResponse(json_result)
