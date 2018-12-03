@@ -24,6 +24,7 @@ def welcome(request):
 def word_seg(request):
     """
     sentence segmentation by jieba
+    @Note: supported by jieba
     :param request: sentence
     :return:
     """
@@ -63,6 +64,7 @@ def word_seg(request):
 def sentiment(request):
     """
     calculate sentiment of a specific sentence
+    @Note: currently supported by snownlp, but will be replaced customized model in the near future!
     :param request:
     :return:
     """

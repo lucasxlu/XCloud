@@ -32,9 +32,13 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Weather History
     
 ## Deployment
-1. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
-2. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
-3. open your browser and visit: ```http://www.lucasx.top:8001/cv/welcome```
+1. create a virtual enviroment named ```pyWeb```
+2. install [Django](https://docs.djangoproject.com/en/2.1/intro/install/) and [PyTorch](https://pytorch.org/)
+3. install all dependent libraries: ```pip3 install -r requirements.txt```
+4. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
+5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
+6. open your browser and visit welcome page: ```http://www.lucasx
+.top:8001/cv/welcome```
 
 
 ## Contributor
@@ -69,7 +73,7 @@ If you find this project useful in your research, please consider citing our
 @article{xu2018transferring,
   title={Transferring Rich Deep Features for Facial Beauty Prediction},
   author={Xu, Lu and Xiang, Jinhai and Yuan, Xiaohui},
-  journal={The 3th International Symposium on Artificial Intelligence and Robotics 2018},
+  journal={arXiv preprint arXiv:1803.07253},
   year={2018}
 }
 ```
