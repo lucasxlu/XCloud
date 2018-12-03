@@ -7,7 +7,7 @@ __XCloud__ is an open-source AI platform which provides common AI services
 with RESTful APIs. The platform is developed and maintained by [@LucasX](https://github.com/lucasxlu) based on [Django](https://www.djangoproject.com/) and [PyTorch](https://pytorch.org/).
 
 ## Features
-* Computer  Vision
+* [Computer  Vision](./cv)
     * Face Analysis
         - [x] Face  Comparison
         - [x] Facial Beauty Prediction
@@ -19,11 +19,11 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Scene Recognition
         - [x] Flower Recognition
         - [x] Porn Image Recognition
-* NLP
+* [NLP](./nlp)
     - [x] Text Similarity Comparison
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
     - [x] News Classification
-* Data Mining
+* [Data Mining](./dm)
     - [x] Zhihu Live Quality Evaluation
 * Data Services
     - [x] Zhihu Live & Comments
