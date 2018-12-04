@@ -30,6 +30,8 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Major Hospital Information
     - [x] Primary and Secondary School on [Baidu Baike](https://baike.baidu.com/)
     - [x] Weather History
+* [Research](./research)    
+    - [x] Age Estimation 
     
 ## Deployment
 1. create a virtual enviroment named ```pyWeb```
