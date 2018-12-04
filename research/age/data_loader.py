@@ -17,8 +17,8 @@ def load_data(dataset_name):
     :param dataset_name:
     :return:
     """
+    batch_size = cfg['batch_size']
     if dataset_name == 'UTKFace':
-        batch_size = [_['batch_size'] for _ in cfg['dataset'] if _['name'] == dataset_name][0]
 
         print('loading %s dataset...' % dataset_name)
         train_dataset = UTKFaceDataset(type='train',

@@ -17,7 +17,7 @@ from sklearn.metrics import confusion_matrix
 from torch.optim import lr_scheduler
 from torchvision import models
 
-sys.path.append('../')
+sys.path.append('../../')
 from research.age import data_loader
 from research.age.utils import mkdirs_if_not_exist
 from research.age.cfg import cfg
@@ -74,9 +74,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                 # for inputs, labels, filenames in dataloaders[phase]:
                 for i, data in enumerate(dataloaders[phase], 0):
 
-                    inputs, labels = data['image'], data['label']
+                    inputs, ages = data['image'], data['age']
                     inputs = inputs.to(device)
-                    labels = labels.to(device)
+                    ages = ages.to(device)
 
                     # zero the parameter gradients
                     optimizer.zero_grad()
@@ -86,7 +86,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     with torch.set_grad_enabled(phase == 'train'):
                         outputs = model(inputs)
                         _, preds = torch.max(outputs, 1)
-                        loss = criterion(outputs, labels)
+                        loss = criterion(outputs, ages)
 
                         # backward + optimize only if in training phase
                         if phase == 'train':
@@ -95,7 +95,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
 
                     # statistics
                     running_loss += loss.item() * inputs.size(0)
-                    running_corrects += torch.sum(preds == labels.data)
+                    running_corrects += torch.sum(preds == ages.data)
 
                 epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
                 epoch_acc = running_corrects.double() / (dataset_sizes[phase] * cfg['batch_size'])
@@ -112,17 +112,17 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     tmp_filenames = []
 
                     for data in dataloaders['val']:
-                        images, labels, filename = data['image'], data['label'], data['filename']
+                        images, ages, filename = data['image'], data['age'], data['filename']
                         images = images.to(device)
-                        labels = labels.to(device)
+                        ages = ages.to(device)
 
                         outputs = model(images)
                         _, predicted = torch.max(outputs.data, 1)
-                        tmp_total += labels.size(0)
-                        tmp_correct += (predicted == labels).sum().item()
+                        tmp_total += ages.size(0)
+                        tmp_correct += (predicted == ages).sum().item()
 
                         tmp_y_pred += predicted.to("cpu").detach().numpy().tolist()
-                        tmp_y_true += labels.to("cpu").detach().numpy().tolist()
+                        tmp_y_true += ages.to("cpu").detach().numpy().tolist()
                         tmp_filenames += filename
 
                     tmp_acc = tmp_correct / tmp_total
@@ -180,9 +180,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
 
     with torch.no_grad():
         for data in dataloaders['test']:
-            images, labels, filename = data['image'], data['label'], data['filename']
+            images, ages, filename = data['image'], data['age'], data['filename']
             images = images.to(device)
-            labels = labels.to(device)
+            ages = ages.to(device)
 
             outputs = model(images)
 
@@ -192,11 +192,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
             probs += topK_prob.to("cpu").detach().numpy().tolist()
 
             _, predicted = torch.max(outputs.data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
+            total += ages.size(0)
+            correct += (predicted == ages).sum().item()
 
             y_pred += predicted.to("cpu").detach().numpy().tolist()
-            y_true += labels.to("cpu").detach().numpy().tolist()
+            y_true += ages.to("cpu").detach().numpy().tolist()
             filenames += filename
 
     print('Accuracy of {0} on test set: {1}% '.format(model.__class__.__name__, 100 * correct / total))
@@ -245,7 +245,7 @@ def run_age_estimator(model, epoch):
 
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=50, gamma=0.1)
 
-    print('start loading PlantsDiseaseDataset...')
+    print('start loading UTKFaceDataset...')
     trainloader, valloader, testloader = data_loader.load_data("UTKFace")
 
     dataloaders = {
