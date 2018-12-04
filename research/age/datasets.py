@@ -56,7 +56,7 @@ class UTKFaceDataset(Dataset):
 
         image = io.imread(img_name)
         sample = {'image': image, 'age': self.agelist[idx], "gender": self.genderlist[idx],
-                  "race": self.racelist[idx]}
+                  "race": self.racelist[idx], 'filename': img_name}
 
         if self.transform:
             sample['image'] = self.transform(Image.fromarray(sample['image'].astype(np.uint8)))
