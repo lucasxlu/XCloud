@@ -22,7 +22,8 @@ class UTKFaceDataset(Dataset):
 
         train_files, test_files, train_ages, test_ages = train_test_split(files, ages, test_size=0.2, stratify=ages,
                                                                           random_state=42)
-        train_files, val_files, train_ages, val_ages = train_test_split(files, ages, test_size=0.05, stratify=ages,
+        train_files, val_files, train_ages, val_ages = train_test_split(train_files, train_ages, test_size=0.05,
+                                                                        stratify=ages,
                                                                         random_state=2)
 
         if type == 'train':
