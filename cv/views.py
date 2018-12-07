@@ -1,4 +1,5 @@
 import json
+import time
 from random import randint
 from collections import OrderedDict
 
@@ -25,30 +26,13 @@ def index(request):
     return render(request, 'index.html')
 
 
+def facerank(request):
+    from cv import controllers
+    return controllers.upload_and_rec(request)
+
+
 def fbp(request):
-    """
-    calculate facial beauty score
-    :param request:
-    faceImagePath: face image path
-    :return:
-    """
-    face_img_path = request.GET.get('faceImagePath')
-    result = OrderedDict()
-
-    if not face_img_path or face_img_path.strip() == '':
-        result['code'] = 1
-        result['msg'] = 'Invalid Path for Face Image'
-        result['data'] = None
-    else:
-        result['code'] = 0
-        result['msg'] = 'success'
-        result['data'] = {
-            'beauty': randint(0, 9)
-        }
-
-    json_result = json.dumps(result, ensure_ascii=False)
-
-    return HttpResponse(json_result)
+    return render(request, 'fbp.html')
 
 
 def detect_face(request):
