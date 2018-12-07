@@ -30,16 +30,26 @@ def prepare_data():
     for i in range(len(files)):
         img = cv2.imread(os.path.join(SCUT5500_DIR, files[i]))
         mtcnn_result = detector.detect_faces(img)
-        bbox = mtcnn_result['box']
 
-        if bbox is not None:
-            face_region = img[bbox[0] - int(bbox[2] / 2): bbox[0] + int(bbox[2] / 2),
-                          bbox[1] - int(bbox[3] / 2): bbox[1] + int(bbox[3] / 2)]
-            ratio = max(face_region[0], face_region[1]) / min(face_region[0], face_region[1])
-            if face_region[0] > face_region[1]:
-                face_region = cv2.resize(face_region, (int((face_region[0] / ratio) * 64 / face_region[1]), 64))
+        if len(mtcnn_result) > 0:
+            bbox = mtcnn_result[0]['box']
+            print(bbox)
+
+            margin_pixel = 10
+            face_region = img[bbox[0] - margin_pixel: bbox[0] + bbox[2] + margin_pixel,
+                          bbox[1] - margin_pixel: bbox[1] + bbox[3] + margin_pixel]
+
+            # cv2.imshow('face', face_region)
+            # cv2.waitKey()
+            # cv2.destroyAllWindows()
+
+            ratio = max(face_region.shape[0], face_region.shape[1]) / min(face_region.shape[0], face_region.shape[1])
+            if face_region.shape[0] > face_region.shape[1]:
+                face_region = cv2.resize(face_region,
+                                         (int((face_region.shape[0] / ratio) * 64 / face_region.shape[1]), 64))
             else:
-                face_region = cv2.resize(face_region, (64, int((face_region[1] / ratio) * 64 / face_region[0])))
+                face_region = cv2.resize(face_region,
+                                         (64, int((face_region.shape[1] / ratio) * 64 / face_region.shape[0])))
         else:
             face_region = cv2.resize(img, (64, 64))
 
@@ -47,7 +57,7 @@ def prepare_data():
         hog = HOG_from_cv(face_region)
         ldmk = Geo_from_cv(img)
 
-        feature = lbp + hog + ldmk
+        feature = lbp
         features.append(feature)
         lbs.append(scores[i])
 

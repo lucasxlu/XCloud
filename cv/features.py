@@ -110,7 +110,7 @@ def Geo_from_cv(img):
             result[k] = {"bbox": [d.left(), d.top(), d.right(), d.bottom()],
                          "landmarks": [[shape.part(i).x, shape.part(i).y] for i in range(68)]}
 
-    xs = np.array([_[0] for _ in result['landmarks']])
-    ys = np.array([_[1] for _ in result['landmarks']])
+    xs = np.array([_[0] for _ in result[0]['landmarks']])
+    ys = np.array([_[1] for _ in result[0]['landmarks']])
 
     return list(xs - np.mean(xs)) + list(ys - np.mean(ys))

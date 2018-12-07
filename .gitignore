@@ -2,3 +2,6 @@
 .idea/
 XCloud/__pycache__/
 cv/__pycache__/
+cv/static/FaceUpload/
+dm/__pycache__/
+nlp/__pycache__/
