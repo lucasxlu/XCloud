@@ -16,7 +16,7 @@ def upload_and_rec(request):
     :param request:
     :return:
     """
-    image_dir = '/cv/static/FaceUpload'
+    image_dir = 'cv/static/FaceUpload'
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
 

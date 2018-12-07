@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Facial Beauty Prediction</title>
     {#    {% load static %}#}
-    {#    <script src="{% static '/porndetect/jquery-3.2.1.min.js' %}"></script>#}
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link rel="stylesheet"
           href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
@@ -26,7 +25,8 @@
         <input type="button" value="detect" id='upload-btn'
                class="am-btn am-btn-success" onclick="upload()">
     </form>
-    <img class="am-img-responsive" alt=""/>
+    <img class="am-img-responsive" alt="" src="" style="max-height: 320px;
+    margin-top: 5px"/>
 </div>
 <div align="center">
     <p>Your Face Beauty Score is <span id="desc" style="color:
@@ -39,7 +39,7 @@
     function upload() {
         var src = $("input[name='image']").val();
         var imgName = src.split("\\")[src.split('\\').length - 1];
-        $('img').attr('src', '../../../FaceUpload/' + imgName);
+        $('img').attr('src', '../../../static/FaceUpload/' + imgName);
         var data = new FormData($('form').get(0));
 
         $.ajax({
