@@ -39,8 +39,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 3. install all dependent libraries: ```pip3 install -r requirements.txt```
 4. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
 5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
-6. open your browser and visit welcome page: ```http://www.lucasx
-.top:8001/cv/welcome```
+6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/cv/index```
 
 
 ## Contributor
