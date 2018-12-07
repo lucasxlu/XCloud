@@ -3,7 +3,9 @@ import os
 import time
 from random import randint
 
+import cv2
 from django.http import HttpResponse
+from mtcnn.mtcnn import MTCNN
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -60,3 +62,30 @@ def upload_and_rec(request):
         json_result = json.dumps(result, ensure_ascii=False)
 
         return HttpResponse(json_result)
+
+
+def detect_face(img_path):
+    """
+    detect face with MTCNN
+    :param img_path:
+    :return:
+    """
+    img = cv2.imread(img_path)
+    detector = MTCNN()
+    mtcnn_result = detector.detect_faces(img)
+
+    return mtcnn_result
+
+
+class BeautyRecognizer:
+    def __init__(self, pretrained_model):
+        self.model = None
+
+    def infer(self, img_path):
+        img = cv2.imread(img_path)
+        mtcnn_result = detect_face(img_path)
+        bbox = mtcnn_result['box']
+        face_region = img[bbox[0] - int(bbox[2] / 2): bbox[0] + int(bbox[2] / 2),
+                      bbox[1] - int(bbox[3] / 2): bbox[1] + int(bbox[3] / 2)]
+
+        return self.model.infer(face_region)
