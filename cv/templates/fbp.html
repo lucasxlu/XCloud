@@ -30,7 +30,7 @@
 </div>
 <div align="center">
     <p>Your Face Beauty Score is <span id="desc" style="color:
-    red"></span>，HMT-Net takes
+    red"></span>，AI takes
         <span id="time" style="color: red">0</span> seconds!
     </p>
 </div>
@@ -43,7 +43,7 @@
         var data = new FormData($('form').get(0));
 
         $.ajax({
-            url: 'facerank',
+            url: 'fbp',
             type: 'POST',
             data: data,
             cache: false,

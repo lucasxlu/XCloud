@@ -52,9 +52,9 @@ def upload_and_rec_beauty(request):
             result['msg'] = 'success'
             result['data'] = {
                 'imgpath': imagepath,
-                'beauty': beauty
+                'beauty': round(beauty, 2)
             }
-            result['elapse'] = time.time() - tik
+            result['elapse'] = round(time.time() - tik, 2)
 
             json_str = json.dumps(result, ensure_ascii=False)
 
