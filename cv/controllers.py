@@ -1,18 +1,21 @@
 import json
 import os
 import time
-from random import randint
 
+import numpy as np
 import cv2
 from django.http import HttpResponse
 from mtcnn.mtcnn import MTCNN
+from sklearn.externals import joblib
+
+from cv import features
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 URL_PORT = 'http://localhost:8000'
 
 
-def upload_and_rec(request):
+def upload_and_rec_beauty(request):
     """
     upload and recognize image
     :param request:
@@ -43,11 +46,13 @@ def upload_and_rec(request):
             tik = time.time()
             imagepath = URL_PORT + '/static/FaceUpload/' + image.name
 
+            beauty = BeautyRecognizer().infer(os.path.join(image_dir, image.name))
+
             result['code'] = 0
             result['msg'] = 'success'
             result['data'] = {
                 'imgpath': imagepath,
-                'beauty': randint(0, 9)
+                'beauty': beauty
             }
             result['elapse'] = time.time() - tik
 
@@ -78,14 +83,27 @@ def detect_face(img_path):
 
 
 class BeautyRecognizer:
-    def __init__(self, pretrained_model):
-        self.model = None
+    def __init__(self, pretrained_model='./model/GradientBoostingRegressor.pkl'):
+        gbr = joblib.load(pretrained_model)
+        self.model = gbr
 
     def infer(self, img_path):
         img = cv2.imread(img_path)
         mtcnn_result = detect_face(img_path)
-        bbox = mtcnn_result['box']
-        face_region = img[bbox[0] - int(bbox[2] / 2): bbox[0] + int(bbox[2] / 2),
-                      bbox[1] - int(bbox[3] / 2): bbox[1] + int(bbox[3] / 2)]
+        bbox = mtcnn_result[0]['box']
 
-        return self.model.infer(face_region)
+        margin_pixel = 10
+        face_region = img[bbox[0] - margin_pixel: bbox[0] + bbox[2] + margin_pixel,
+                      bbox[1] - margin_pixel: bbox[1] + bbox[3] + margin_pixel]
+
+        ratio = max(face_region.shape[0], face_region.shape[1]) / min(face_region.shape[0], face_region.shape[1])
+        if face_region.shape[0] < face_region.shape[1]:
+            face_region = cv2.resize(face_region, (int(ratio * 64), 64))
+            face_region = face_region[:,
+                          int((face_region.shape[0] - 64) / 2): int((face_region.shape[0] - 64) / 2) + 64]
+        else:
+            face_region = cv2.resize(face_region, (64, int(ratio * 64)))
+            face_region = face_region[int((face_region.shape[1] - 64) / 2): int((face_region.shape[1] - 64) / 2) + 64,
+                          :]
+
+        return self.model.predict(np.array(features.HOG_from_cv(face_region).reshape(1, -1)))[0]

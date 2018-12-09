@@ -5,3 +5,5 @@ cv/__pycache__/
 cv/static/FaceUpload/
 dm/__pycache__/
 nlp/__pycache__/
+__pycache__/
+pyWeb/

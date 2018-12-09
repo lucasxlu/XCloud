@@ -28,7 +28,7 @@ def index(request):
 
 def fbp(request):
     from cv import controllers
-    return controllers.upload_and_rec(request)
+    return controllers.upload_and_rec_beauty(request)
 
 
 def fbp_view(request):

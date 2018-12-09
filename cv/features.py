@@ -82,6 +82,13 @@ def RAW(img_path):
     return img.reshape(img.shape[0] * img.shape[1])
 
 
+def RAW_from_cv(img):
+    img = skimage.color.rgb2gray(img)
+    img = (img - np.mean(img)) / np.std(img)
+
+    return img.reshape(img.shape[0] * img.shape[1])
+
+
 def HOG_from_cv(img):
     """
     extract HOG feature from opencv image object
