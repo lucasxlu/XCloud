@@ -1,13 +1,10 @@
 import json
-import time
-from random import randint
 from collections import OrderedDict
 
+import cv2
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from mtcnn.mtcnn import MTCNN
-import cv2
 
 
 # Create your views here.

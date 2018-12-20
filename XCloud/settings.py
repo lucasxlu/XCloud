@@ -120,4 +120,4 @@ USE_TZ = True
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ('D:/Users/LucasX/PycharmProjects/XCloud/cv/static', '/root/Project/XCloud/cv/static',
-                    'D:/Users/29140\PycharmProjects\XCloud\cv\static')
+                    'D:/Users/29140/PycharmProjects/XCloud/cv/static')
