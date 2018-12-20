@@ -35,11 +35,16 @@
     </p>
 </div>
 
+<footer style="text-align: center">
+    Powered by <a href="http://www.lucasx.top:8001/cv/index" target="_blank">XCloud</a>
+    Supported by <a href="https://www.zhihu.com/people/xulu-0620/activities"
+                    target="_blank">LucasX</a>
+</footer>
+
 <script>
     function upload() {
         var src = $("input[name='image']").val();
         var imgName = src.split("\\")[src.split('\\').length - 1];
-        $('img').attr('src', '../../../static/FaceUpload/' + imgName);
         var data = new FormData($('form').get(0));
 
         $.ajax({
@@ -54,6 +59,7 @@
                 var result = eval('(' + data + ')');
                 $('#desc').text(result.data.beauty);
                 $('#time').text(result.elapse);
+                $('img').attr('src', '../../../static/FaceUpload/' + imgName);
             }
         });
 
