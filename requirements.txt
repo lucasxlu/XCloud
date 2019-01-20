@@ -1,5 +1,5 @@
 jieba==0.39
 opencv_python==3.4.0.12
 mtcnn==0.0.6
-Django==2.1.4
+django>=2.1.5
 snownlp==0.12.3
