@@ -38,7 +38,7 @@ class NSFWDataset(Dataset):
         train_files, test_files, train_types, test_types = train_test_split(files, types, test_size=0.2, stratify=types,
                                                                             random_state=42)
         train_files, val_files, train_types, val_types = train_test_split(train_files, train_types, test_size=0.05,
-                                                                          stratify=types, random_state=2)
+                                                                          stratify=train_types, random_state=2)
 
         if type == 'train':
             self.filelist = train_files

@@ -245,7 +245,7 @@ def run_nsfw(model, epoch):
 
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=cfg['lr_decay_step'], gamma=0.1)
 
-    print('start loading UTKFaceDataset...')
+    print('start loading NSFWDataset...')
     trainloader, valloader, testloader = data_loader.load_nsfw_data()
 
     dataloaders = {
@@ -307,7 +307,7 @@ def batch_inference(model, inferencedataloader):
 
 if __name__ == '__main__':
     densenet = models.densenet121(pretrained=True)
-    num_ftrs = densenet.fc.in_features
-    densenet.fc = nn.Linear(num_ftrs, cfg['out_num'])
+    num_ftrs = densenet.classifier.in_features
+    densenet.classifier = nn.Linear(num_ftrs, cfg['out_num'])
 
     run_nsfw(model=densenet, epoch=cfg['epoch'])
