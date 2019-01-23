@@ -25,7 +25,7 @@ def load_nsfw_data():
                                     transforms.ToTensor(),
                                     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                                 ]))
-    trainloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+    trainloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4, drop_last=True)
 
     val_dataset = NSFWDataset(type='val',
                               transform=transforms.Compose([
@@ -34,7 +34,7 @@ def load_nsfw_data():
                                   transforms.ToTensor(),
                                   transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                               ]))
-    valloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
+    valloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4, drop_last=True)
 
     test_dataset = NSFWDataset(type='test',
                                transform=transforms.Compose([
@@ -43,6 +43,6 @@ def load_nsfw_data():
                                    transforms.ToTensor(),
                                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                                ]))
-    testloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
+    testloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=4, drop_last=True)
 
     return trainloader, valloader, testloader

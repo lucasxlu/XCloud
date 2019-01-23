@@ -1,8 +1,14 @@
+import json
 import os
 import shutil
-import json
+import sys
 
 import pandas as pd
+from skimage import io
+from skimage.color import gray2rgb, rgba2rgb
+
+sys.path.append('../../')
+from research.imgcensor.cfg import cfg
 
 
 def mkdirs_if_not_exist(dir_name):
@@ -56,5 +62,32 @@ def cvt_submission_format(csv_path):
     print('Converting JSON successfully~~~')
 
 
+def remove_mal_images():
+    types = ['drawings', 'hentai', 'neutral', 'porn', 'sexy']
+
+    for tp in types:
+        print('process {0} ...'.format(tp))
+        for img in os.listdir(os.path.join(cfg['root'], tp, 'IMAGES')):
+            filename = os.path.join(cfg['root'], tp, 'IMAGES', img)
+            print(filename)
+            if '.jpg?' in filename:
+                dst = filename.split('?')[0]
+                shutil.move(filename, dst)
+                filename = dst
+
+            if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'):
+                try:
+                    image = io.imread(filename)
+                    if len(list(image.shape)) < 3:
+                        image = gray2rgb(filename)
+                    elif len(list(image.shape)) > 3:
+                        image = rgba2rgb(image)
+                    io.imsave(filename, image)
+                except:
+                    os.remove(filename)
+            else:
+                os.remove(filename)
+
+
 if __name__ == '__main__':
-    cvt_submission_format('./ResNet.csv')
+    remove_mal_images()

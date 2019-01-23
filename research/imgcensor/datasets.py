@@ -6,6 +6,7 @@ from PIL import Image
 from skimage import io
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset
+from skimage.color import gray2rgb, rgba2rgb
 
 sys.path.append('../')
 from research.imgcensor.cfg import cfg
@@ -59,8 +60,15 @@ class NSFWDataset(Dataset):
 
     def __getitem__(self, idx):
         img_name = self.filelist[idx]
+        print(img_name)
 
         image = io.imread(img_name)
+
+        if len(list(image.shape)) < 3:
+            image = gray2rgb(image)
+        elif len(list(image.shape)) > 3:
+            image = rgba2rgb(image)
+
         sample = {'image': image, "type": self.typelist[idx], 'filename': img_name}
 
         if self.transform:

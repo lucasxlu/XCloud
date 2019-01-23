@@ -3,9 +3,9 @@ import sys
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 
-sys.path.append('../')
-from fbp.cfg import cfg
-from fbp.datasets import SCUTFBP5500Dataset
+sys.path.append('../../')
+from research.fbp.cfg import cfg
+from research.fbp.datasets import SCUTFBP5500Dataset
 
 
 def load_scutfbp5500_data():
