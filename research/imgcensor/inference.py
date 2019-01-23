@@ -1,5 +1,6 @@
 # Model Inference for NSFW Estimation
 # Author: LucasX
+import sys
 from pprint import pprint
 
 import torch
@@ -8,6 +9,9 @@ import torch.nn.functional as F
 import torchvision.transforms as transforms
 from PIL import Image
 from torchvision import models
+
+sys.path.append('../')
+from research.imgcensor import cfg
 
 
 class NSFWEstimator:
@@ -18,7 +22,7 @@ class NSFWEstimator:
     def __init__(self, pretrained_model_path):
         model = models.resnet18(pretrained=True)
         num_ftrs = model.fc.in_features
-        model.fc = nn.Linear(num_ftrs, 5)
+        model.fc = nn.Linear(num_ftrs, cfg['out_num'])
 
         model = model.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -37,7 +41,8 @@ class NSFWEstimator:
         #     for k, v in state_dict.items():
         #         name = k[7:]  # remove `module.`
         #         new_state_dict[name] = v
-        #         model.load_state_dict(new_state_dict)
+        #
+        #     model.load_state_dict(new_state_dict)
 
         model.to(device)
         model.eval()
@@ -83,5 +88,5 @@ class NSFWEstimator:
 
 
 if __name__ == '__main__':
-    nsfw = NSFWEstimator('./model/ResNet18_NSFW.pth')
+    nsfw = NSFWEstimator('./model/DenseNet121_NSFW.pth')
     pprint(nsfw.infer('./1.jpg'))

@@ -306,8 +306,8 @@ def batch_inference(model, inferencedataloader):
 
 
 if __name__ == '__main__':
-    resnet = models.resnet18(pretrained=True)
-    num_ftrs = resnet.fc.in_features
-    resnet.fc = nn.Linear(num_ftrs, cfg['out_num'])
+    densenet = models.densenet121(pretrained=True)
+    num_ftrs = densenet.fc.in_features
+    densenet.fc = nn.Linear(num_ftrs, cfg['out_num'])
 
-    run_nsfw(model=resnet, epoch=cfg['epoch'])
+    run_nsfw(model=densenet, epoch=cfg['epoch'])

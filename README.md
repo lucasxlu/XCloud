@@ -18,7 +18,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     * Image Recognition
         - [x] Scene Recognition
         - [x] Flower Recognition
-        - [x] Porn Image Recognition
+        - [x] Pornography Image Recognition
 * [NLP](./nlp)
     - [x] Text Similarity Comparison
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)

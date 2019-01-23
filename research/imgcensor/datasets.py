@@ -30,12 +30,14 @@ class NSFWDataset(Dataset):
 
         for k, v in mp.items():
             for img in os.listdir(os.path.join(cfg['root'], k, 'IMAGES')):
-                files.append(os.path.join(cfg['root'], k, 'IMAGES', img))
-                types.append(v)
+                filename = os.path.join(cfg['root'], k, 'IMAGES', img)
+                if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'):
+                    files.append(filename)
+                    types.append(v)
 
         train_files, test_files, train_types, test_types = train_test_split(files, types, test_size=0.2, stratify=types,
                                                                             random_state=42)
-        train_files, val_files, train_types, val_types = train_test_split(train_files, train_ages, test_size=0.05,
+        train_files, val_files, train_types, val_types = train_test_split(train_files, train_types, test_size=0.05,
                                                                           stratify=types, random_state=2)
 
         if type == 'train':
