@@ -19,6 +19,7 @@ def load_nsfw_data():
     train_dataset = NSFWDataset(type='train',
                                 transform=transforms.Compose([
                                     transforms.Resize(224),
+                                    transforms.RandomCrop(224),
                                     transforms.ColorJitter(),
                                     transforms.RandomRotation(30),
                                     transforms.ToTensor(),
@@ -29,8 +30,7 @@ def load_nsfw_data():
     val_dataset = NSFWDataset(type='val',
                               transform=transforms.Compose([
                                   transforms.Resize(224),
-                                  transforms.ColorJitter(),
-                                  transforms.RandomRotation(30),
+                                  transforms.CenterCrop(224),
                                   transforms.ToTensor(),
                                   transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                               ]))
@@ -39,8 +39,7 @@ def load_nsfw_data():
     test_dataset = NSFWDataset(type='test',
                                transform=transforms.Compose([
                                    transforms.Resize(224),
-                                   transforms.ColorJitter(),
-                                   transforms.RandomRotation(30),
+                                   transforms.CenterCrop(224),
                                    transforms.ToTensor(),
                                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
                                ]))
