@@ -74,9 +74,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                 # for inputs, labels, filenames in dataloaders[phase]:
                 for i, data in enumerate(dataloaders[phase], 0):
 
-                    inputs, ages = data['image'], data['age']
+                    inputs, types = data['image'], data['type']
                     inputs = inputs.to(device)
-                    ages = ages.to(device)
+                    types = types.to(device)
 
                     # zero the parameter gradients
                     optimizer.zero_grad()
@@ -86,7 +86,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     with torch.set_grad_enabled(phase == 'train'):
                         outputs = model(inputs)
                         _, preds = torch.max(outputs, 1)
-                        loss = criterion(outputs, ages)
+                        loss = criterion(outputs, types)
 
                         # backward + optimize only if in training phase
                         if phase == 'train':
@@ -95,7 +95,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
 
                     # statistics
                     running_loss += loss.item() * inputs.size(0)
-                    running_corrects += torch.sum(preds == ages.data)
+                    running_corrects += torch.sum(preds == types.data)
 
                 epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
                 epoch_acc = running_corrects.double() / (dataset_sizes[phase] * cfg['batch_size'])
@@ -112,7 +112,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     tmp_filenames = []
 
                     for data in dataloaders['val']:
-                        images, ages, filename = data['image'], data['age'], data['filename']
+                        images, types, filename = data['image'], data['type'], data['filename']
                         images = images.to(device)
                         ages = ages.to(device)
 
@@ -180,7 +180,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
 
     with torch.no_grad():
         for data in dataloaders['test']:
-            images, ages, filename = data['image'], data['age'], data['filename']
+            images, types, filename = data['image'], data['type'], data['filename']
             images = images.to(device)
             ages = ages.to(device)
 
