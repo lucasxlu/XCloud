@@ -114,15 +114,15 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     for data in dataloaders['val']:
                         images, types, filename = data['image'], data['type'], data['filename']
                         images = images.to(device)
-                        ages = ages.to(device)
+                        types = types.to(device)
 
                         outputs = model(images)
                         _, predicted = torch.max(outputs.data, 1)
-                        tmp_total += ages.size(0)
-                        tmp_correct += (predicted == ages).sum().item()
+                        tmp_total += types.size(0)
+                        tmp_correct += (predicted == types).sum().item()
 
                         tmp_y_pred += predicted.to("cpu").detach().numpy().tolist()
-                        tmp_y_true += ages.to("cpu").detach().numpy().tolist()
+                        tmp_y_true += types.to("cpu").detach().numpy().tolist()
                         tmp_filenames += filename
 
                     tmp_acc = tmp_correct / tmp_total
@@ -182,7 +182,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
         for data in dataloaders['test']:
             images, types, filename = data['image'], data['type'], data['filename']
             images = images.to(device)
-            ages = ages.to(device)
+            types = types.to(device)
 
             outputs = model(images)
 
@@ -192,11 +192,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
             probs += topK_prob.to("cpu").detach().numpy().tolist()
 
             _, predicted = torch.max(outputs.data, 1)
-            total += ages.size(0)
-            correct += (predicted == ages).sum().item()
+            total += types.size(0)
+            correct += (predicted == types).sum().item()
 
             y_pred += predicted.to("cpu").detach().numpy().tolist()
-            y_true += ages.to("cpu").detach().numpy().tolist()
+            y_true += types.to("cpu").detach().numpy().tolist()
             filenames += filename
 
     print('Accuracy of {0} on test set: {1}% '.format(model.__class__.__name__, 100 * correct / total))
