@@ -60,7 +60,6 @@ class NSFWDataset(Dataset):
 
     def __getitem__(self, idx):
         img_name = self.filelist[idx]
-        print(img_name)
 
         image = io.imread(img_name)
 
