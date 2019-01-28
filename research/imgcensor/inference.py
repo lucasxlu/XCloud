@@ -28,20 +28,6 @@ class NSFWEstimator:
 
         model.load_state_dict(torch.load(pretrained_model_path))
 
-        # if torch.cuda.device_count() > 1:
-        #     print("We are running on", torch.cuda.device_count(), "GPUs!")
-        #     model = nn.DataParallel(model)
-        #     model.load_state_dict(torch.load(pretrained_model_path))
-        # else:
-        #     state_dict = torch.load(pretrained_model_path)
-        #     from collections import OrderedDict
-        #     new_state_dict = OrderedDict()
-        #     for k, v in state_dict.items():
-        #         name = k[7:]  # remove `module.`
-        #         new_state_dict[name] = v
-        #
-        #     model.load_state_dict(new_state_dict)
-
         model.to(device)
         model.eval()
 
@@ -60,8 +46,8 @@ class NSFWEstimator:
         img = Image.open(img_file)
 
         preprocess = transforms.Compose([
-            transforms.Resize(227),
-            transforms.RandomCrop(224),
+            transforms.Resize(224),
+            transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
@@ -93,4 +79,4 @@ class NSFWEstimator:
 
 if __name__ == '__main__':
     nsfw = NSFWEstimator('./model/DenseNet121_NSFW.pth')
-    pprint(nsfw.infer('./3.jpg'))
+    pprint(nsfw.infer('./1.jpg'))
