@@ -20,7 +20,7 @@ Note: The dataset for pornography recognition is downloaded from [nsfw_data_scra
 
 
 ## Usage
-1. downloaded pretrained model from [Google Drive]()
+1. download pretrained model from [Google Drive](https://drive.google.com/open?id=1BF2FaCqhr1LYeZ4vA56pTTlfFumUrg5q)
 2. run [inference](./inference.py) by passing your own image
 3. model will return json results as:
 
