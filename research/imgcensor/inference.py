@@ -11,7 +11,7 @@ from PIL import Image
 from torchvision import models
 
 sys.path.append('../')
-from research.imgcensor import cfg
+from research.imgcensor.cfg import cfg
 
 
 class NSFWEstimator:
@@ -20,14 +20,12 @@ class NSFWEstimator:
     """
 
     def __init__(self, pretrained_model_path):
-        model = models.resnet18(pretrained=True)
-        num_ftrs = model.fc.in_features
-        model.fc = nn.Linear(num_ftrs, cfg['out_num'])
+        model = models.densenet121(pretrained=True)
+        num_ftrs = model.classifier.in_features
+        model.classifier = nn.Linear(num_ftrs, cfg['out_num'])
 
-        model = model.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-        # model = nn.DataParallel(model)
         model.load_state_dict(torch.load(pretrained_model_path))
 
         # if torch.cuda.device_count() > 1:
@@ -50,6 +48,13 @@ class NSFWEstimator:
         self.device = device
         self.model = model
         self.topK = 5
+        self.mapping = {
+            0: 'drawings',
+            1: 'hentai',
+            2: 'neutral',
+            3: 'porn',
+            4: 'sexy'
+        }
 
     def infer(self, img_file):
         img = Image.open(img_file)
@@ -69,19 +74,18 @@ class NSFWEstimator:
         outputs = self.model(img)
         outputs = F.softmax(outputs, dim=1)
 
-        # get TOP-K output labels and corresponding probabilities
         topK_prob, topK_label = torch.topk(outputs, self.topK)
         prob = topK_prob.to("cpu").detach().numpy().tolist()
 
         _, predicted = torch.max(outputs.data, 1)
 
         return {
-            'status': 0,
-            'message': 'success',
-            'results': [
+            "status": 0,
+            "message": "success",
+            "results": [
                 {
-                    'age': None,
-                    'prob': round(prob[0][i], 4)
+                    "prob": round(prob[0][i], 4),
+                    "type": self.mapping[int(topK_label[0][i].to("cpu"))],
                 } for i in range(self.topK)
             ]
         }
@@ -89,4 +93,4 @@ class NSFWEstimator:
 
 if __name__ == '__main__':
     nsfw = NSFWEstimator('./model/DenseNet121_NSFW.pth')
-    pprint(nsfw.infer('./1.jpg'))
+    pprint(nsfw.infer('./3.jpg'))
