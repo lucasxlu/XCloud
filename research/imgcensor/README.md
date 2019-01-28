@@ -25,6 +25,7 @@ Note: The dataset for pornography recognition is downloaded from [nsfw_data_scra
 3. model will return json results as:
 
 * Example 1 
+
 ![1](./1.jpg)
 
 ```json
@@ -41,6 +42,7 @@ Note: the returned result indicates that ```sexy``` has the highest
 probability (prob=1.0)
 
 * Example 2 
+
 ![2](./2.jpg)
 ```json
 {"message": "success",
