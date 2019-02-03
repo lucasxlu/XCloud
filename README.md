@@ -56,30 +56,5 @@ More features will be added in the next future!
 For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to 
 [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 
-
-## Reference
-If you find this project useful in your research, please consider citing our
- paper!
- 
-```
-@inproceedings{xu2018crnet,
-  title={CRNet: Classification and Regression Neural Network for Facial Beauty Prediction},
-  author={Xu, Lu and Xiang, Jinhai and Yuan, Xiaohui},
-  booktitle={Pacific Rim Conference on Multimedia},
-  pages={661--671},
-  year={2018},
-  organization={Springer}
-}
-```
-
-```
-@article{xu2018transferring,
-  title={Transferring Rich Deep Features for Facial Beauty Prediction},
-  author={Xu, Lu and Xiang, Jinhai and Yuan, Xiaohui},
-  journal={arXiv preprint arXiv:1803.07253},
-  year={2018}
-}
-```
-
 ## License
 [MIT](./LICENSE)
