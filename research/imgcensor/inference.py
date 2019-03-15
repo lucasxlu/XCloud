@@ -79,4 +79,4 @@ class NSFWEstimator:
 
 if __name__ == '__main__':
     nsfw = NSFWEstimator('./model/DenseNet121_NSFW.pth')
-    pprint(nsfw.infer('./1.jpg'))
+    pprint(nsfw.infer('./3.jpg'))

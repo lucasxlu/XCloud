@@ -23,6 +23,10 @@ def index(request):
     return render(request, 'index.html')
 
 
+def mcloud(request):
+    return render(request, 'mcloud.html')
+
+
 def fbp(request):
     from cv import controllers
     return controllers.upload_and_rec_beauty(request)

@@ -38,7 +38,7 @@ Note: The dataset for pornography recognition is downloaded from [nsfw_data_scra
  "status": 0}
 ```
 
-Note: the returned result indicates that ```sexy``` has the highest 
+**Note**: the returned result indicates that ```sexy``` has the highest 
 probability (prob=1.0)
 
 * Example 2 
@@ -54,5 +54,21 @@ probability (prob=1.0)
  "status": 0}
 ```
 
-Note: the returned result indicates that ```neutral``` has the highest 
+**Note**: the returned result indicates that ```neutral``` has the highest 
 probability (prob=0.6981)
+
+* Example 3
+
+![3](./3.jpg)
+```json
+{"message": "success",
+ "results": [{"prob": 0.9982, "type": "porn"},
+             {"prob": 0.0011, "type": "neutral"},
+             {"prob": 0.0004, "type": "hentai"},
+             {"prob": 0.0002, "type": "sexy"},
+             {"prob": 0.0, "type": "drawings"}],
+ "status": 0}
+```
+
+**Note**: the returned result indicates that ```porn``` has the highest 
+probability (prob=0.9982)
