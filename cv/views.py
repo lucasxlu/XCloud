@@ -1,3 +1,4 @@
+import time
 import json
 from collections import OrderedDict
 
@@ -56,6 +57,55 @@ def detect_face(request):
         result['code'] = 0
         result['msg'] = 'success'
         result['data'] = detector.detect_faces(img)
+
+    json_result = json.dumps(result, ensure_ascii=False)
+
+    return HttpResponse(json_result)
+
+
+def rec_skin(request):
+    """
+    recognize 198 skin disease
+    :param request:
+    :return:
+    """
+    face_img_path = request.GET.get('faceImagePath')
+    tik = time.time()
+
+    result = OrderedDict()
+    result['code'] = 0
+    result['msg'] = 'success'
+    result['results'] = [
+        {'disease': 'Median_Nail_Dystrophy', 'probability': 0.96},
+        {'disease': 'Acute_Eczema', 'probability': 0.01},
+        {'disease': 'Keloid', 'probability': 0.01},
+        {'disease': 'Lipoma', 'probability': 0.01},
+        {'disease': 'Myxoid_Cyst', 'probability': 0.1},
+    ]
+    tok = time.time()
+    result['elapse'] = tok - tik
+
+    json_result = json.dumps(result, ensure_ascii=False)
+
+    return HttpResponse(json_result)
+
+
+def stat_skin(request):
+    """
+    skin API statistics
+    :param request:
+    :return:
+    """
+    username = request.GET.get('username')
+    result = OrderedDict()
+    result['code'] = 0
+    result['msg'] = 'success'
+    result['api'] = {'name': 'cv/mcloud/skin', 'count': 10256}
+    result['history'] = [
+        {'disease': 'Median_Nail_Dystrophy', 'count': 1002},
+        {'disease': 'Keloid', 'count': 526},
+        {'disease': 'Lipoma', 'count': 295},
+    ]
 
     json_result = json.dumps(result, ensure_ascii=False)
 
