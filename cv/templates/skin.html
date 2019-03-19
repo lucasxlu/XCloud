@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Facial Beauty Prediction</title>
+    <title>Skin Disease Recognition</title>
     {#    {% load static %}#}
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link rel="stylesheet"
@@ -13,7 +13,7 @@
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
 </head>
 <body>
-<h2 align="center">Face Rank</h2>
+<h2 align="center">Skin Disease Recognition</h2>
 <div align="center">
     <form enctype="multipart/form-data">{% csrf_token %}
         <div class="am-form-group am-form-file">
@@ -30,14 +30,14 @@
     margin-top: 5px"/>
 </div>
 <div align="center">
-    <p>Your Face Beauty Score is <span id="desc" style="color:
+    <p>The disease is <span id="desc" style="color:
     red"></span>, AI takes
         <span id="time" style="color: red">0</span> seconds!
     </p>
 </div>
 
 <footer style="text-align: center">
-    Powered by <a href="http://www.lucasx.top:8001/cv/index" target="_blank">XCloud</a>
+    Powered by <a href="http://www.lucasx.top:8001/cv/mcloud" target="_blank">MCloud</a>
     Supported by <a href="https://www.zhihu.com/people/xulu-0620/activities"
                     target="_blank">LucasX</a>
 </footer>
@@ -49,7 +49,7 @@
         var data = new FormData($('form').get(0));
 
         $.ajax({
-            url: 'fbp',
+            url: 'mcloud/skin',
             type: 'POST',
             data: data,
             cache: false,
@@ -58,9 +58,9 @@
             success: function (data) {
                 console.log('success');
                 var result = eval('(' + data + ')');
-                $('#desc').text(result.data.beauty);
+                $('#desc').text(result.results[0].disease);
                 $('#time').text(result.elapse);
-                $('img').attr('src', '../../../static/FaceUpload/' + imgName);
+                $('img').attr('src', '../../../static/SkinUpload/' + imgName);
             }
         });
 

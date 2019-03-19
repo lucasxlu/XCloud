@@ -37,6 +37,10 @@ def fbp_view(request):
     return render(request, 'fbp.html')
 
 
+def skin_view(request):
+    return render(request, 'skin.html')
+
+
 def detect_face(request):
     """
     face detection
@@ -69,25 +73,28 @@ def rec_skin(request):
     :param request:
     :return:
     """
-    face_img_path = request.GET.get('faceImagePath')
-    tik = time.time()
+    # skin_img_path = request.GET.get('skinImagePath')
+    # tik = time.time()
+    #
+    # result = OrderedDict()
+    # result['code'] = 0
+    # result['msg'] = 'success'
+    # result['results'] = [
+    #     {'disease': 'Median_Nail_Dystrophy', 'probability': 0.96},
+    #     {'disease': 'Acute_Eczema', 'probability': 0.01},
+    #     {'disease': 'Keloid', 'probability': 0.01},
+    #     {'disease': 'Lipoma', 'probability': 0.01},
+    #     {'disease': 'Myxoid_Cyst', 'probability': 0.1},
+    # ]
+    # tok = time.time()
+    # result['elapse'] = tok - tik
+    #
+    # json_result = json.dumps(result, ensure_ascii=False)
+    #
+    # return HttpResponse(json_result)
 
-    result = OrderedDict()
-    result['code'] = 0
-    result['msg'] = 'success'
-    result['results'] = [
-        {'disease': 'Median_Nail_Dystrophy', 'probability': 0.96},
-        {'disease': 'Acute_Eczema', 'probability': 0.01},
-        {'disease': 'Keloid', 'probability': 0.01},
-        {'disease': 'Lipoma', 'probability': 0.01},
-        {'disease': 'Myxoid_Cyst', 'probability': 0.1},
-    ]
-    tok = time.time()
-    result['elapse'] = tok - tik
-
-    json_result = json.dumps(result, ensure_ascii=False)
-
-    return HttpResponse(json_result)
+    from cv import controllers
+    return controllers.upload_and_rec_skin_disease(request)
 
 
 def stat_skin(request):

@@ -8,3 +8,4 @@ nlp/__pycache__/
 __pycache__/
 pyWeb/
 research/imgcensor/model/
+cv/model/
