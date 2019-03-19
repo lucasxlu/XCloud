@@ -134,8 +134,45 @@ class SkinDiseaseRecognizer:
             for line in f.readlines():
                 self.mapping[int(line.split(' ')[0].strip()) - 1] = line.split(' ')[1]
 
-    def infer(self, img_path):
+    def infer_from_img_file(self, img_path):
         img = Image.open(img_path)
+
+        preprocess = transforms.Compose([
+            transforms.Resize(224),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+
+        img = preprocess(img)
+        img.unsqueeze_(0)
+
+        img = img.to(self.device)
+
+        outputs = self.model(img)
+        outputs = F.softmax(outputs, dim=1)
+
+        topK_prob, topK_label = torch.topk(outputs, self.topK)
+        prob = topK_prob.to("cpu").detach().numpy().tolist()
+
+        _, predicted = torch.max(outputs.data, 1)
+
+        return {
+            "status": 0,
+            "message": "success",
+            "results": [
+                {
+                    "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
+                    "probability": round(prob[0][i], 4),
+                } for i in range(self.topK)
+            ]
+        }
+
+    def infer_from_img(self, img):
+        import io
+        from PIL import Image
+        img_np = np.array(Image.open(io.BytesIO(img)))
+        img = Image.fromarray(img_np.astype(np.uint8))
 
         preprocess = transforms.Compose([
             transforms.Resize(224),
@@ -277,7 +314,8 @@ def upload_and_rec_skin_disease(request):
             tik = time.time()
             imagepath = URL_PORT + '/static/SkinUpload/' + image.name
 
-            skin_disease = skin_disease_recognizer.infer(os.path.join(image_dir, image.name))
+            skin_disease = skin_disease_recognizer.infer_from_img_file(os.path.join(image_dir, image.name))
+            # skin_disease = skin_disease_recognizer.infer_from_img(destination)
 
             result['code'] = 0
             result['msg'] = 'success'

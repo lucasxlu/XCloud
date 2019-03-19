@@ -1,0 +1,212 @@
+body, html {
+    -webkit-font-smoothing: antialiased
+}
+
+.btn, body {
+    font-weight: 400
+}
+
+*, :after, :before {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html {
+    font-size: 62.5%
+}
+
+body {
+    background: #fff;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    color: #606060;
+    line-height: 30px;
+    -webkit-text-size-adjust: 100%
+}
+
+img {
+    max-width: 100%;
+    height: auto
+}
+
+button, input, textarea {
+    letter-spacing: 1px
+}
+
+.inner-padding {
+    padding: 60px 0
+}
+
+.inner-padding5 {
+    padding: 120px 0 60px
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: translateY(60px)
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+.btn {
+    border-radius: 0;
+    padding: 15px 35px;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default.focus, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .btn-default:focus, .btn-default:hover, .btn-sm-outline {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0;
+    color: #fff;
+    padding: 7px 18px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 3px
+}
+
+.btn-readmore, .btn-sm {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0;
+    text-transform: uppercase
+}
+
+.btn-sm-outline:hover {
+    color: #07aca7;
+    background-color: transparent;
+    border: 1px solid #07aca7
+}
+
+.btn-readmore {
+    color: #303030;
+    background-color: #fff;
+    padding: 5px 18px;
+    border: 1px solid #ebebeb;
+    border-radius: 5px
+}
+
+.btn-readmore:hover {
+    color: #0882b4;
+    background-color: #fff;
+    border: 1px solid #0882b4
+}
+
+.btn-sm {
+    color: #303030;
+    padding: 3px 20px;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.btn-sm:hover {
+    background-color: #08ada7;
+    border: 1px solid #08ada7;
+    color: #fff !important
+}
+
+.owl-carousel .owl-item img {
+    width: 100%;
+    height: 100%;
+    max-width: none
+}
+
+.hero-area {
+    background: #E4EBFF;
+}
+
+.hero-area, .hero-area .item {
+    height: 100vh;
+    position: relative
+}
+
+.hero-caption-inner h1, .hero-caption-inner h3 {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #fff;
+    letter-spacing: 0
+}
+
+.hero-area {
+    width: 100%;
+    min-height: 600px
+}
+
+.hero-area .item:after, .hero-caption {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0
+}
+
+.hero-area .item:after {
+    content: "";
+    left: 0;
+    background-color: #000;
+    opacity: .65;
+    z-index: 1
+}
+
+.hero-caption {
+    padding-top: 60px;
+    text-align: center;
+    z-index: 10;
+    display: table
+}
+
+.hero-caption-inner {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    display: table-cell
+}
+
+.hero-caption-inner h3 {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 32px
+}
+
+.hero-caption-inner h1 {
+    font-size: 70px;
+    font-weight: 700;
+    line-height: 75px
+}
+
+.hero-caption-inner p {
+    width: 600px;
+    height: auto;
+    margin: auto auto 50px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0;
+    color: #fff
+}
+
+.hero-caption-inner span {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 0;
+    color: #fff
+}

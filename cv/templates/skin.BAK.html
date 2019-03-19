@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=1024, minimal-ui">
+    <title>MCloud for Medical AI</title>
+    {#    {% load static %}#}
+    <link rel="stylesheet" href="/static/css/skin.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/upload.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon.ico">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/static/js/skin.js"></script>
+</head>
+<body>
+<div id="app" data-server-rendered="true" class="page-home">
+    <div class="view">
+        <div class="sec-slider">
+            <div class="bg with-video">
+                <div id="bg2-1" class="bg2">
+                    <video autoplay="" loop="" muted=""
+                           src="/static/img/skin/linkdoc-bg1.15a95c35cc5be7a2a0f38998be75d083.mp4"></video>
+                    <div id="vidown_float_panel_div" style="display: block; left: 1460px; top: 50px;"><span
+                            id="vidown_float_panel_sep">|</span><input type="button" value=" "
+                                                                       id="vidown_float_panel_close"
+                                                                       title="Close"></div>
+                </div>
+                <div>
+                    <script>
+                        $(function () {
+                            $('#bg2-1').html('\x3cvideo autoplay loop muted src="/static/img/skin/linkdoc-bg1.15a95c35cc5be7a2a0f38998be75d083.mp4" \x3e')
+                                .parent().addClass('with-video')
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="container"><h2>Medical AI<br>Service Provider</h2>
+                <p class="desc">Power Healthcare with AI</p></div>
+        </div>
+    </div>
+</div>
+<div class="nav_box">
+    <div class="picture">
+        <div class="container">
+            <div class="picture_box">
+                <div class="picture_list">
+                    <div class="row_r m439">
+                        <div class="md-8 picture_left">
+                            <div class="row_r">
+                                <div class="md-12 ">
+                                    <div class="picture_max_border imgBox">
+                                        <div class="loadingBox  loading_Box" style="z-index:2">
+                                            <div style="left:0;" class="loading loadan">
+                                            </div>
+                                        </div>
+                                        <div class="picture_icon">
+                                            <img id="img3"
+                                                 src="/static/img/skin/ei-vertifyimage-1-big.jpg"
+                                                 alt="" class="picture_max imgBox_picture">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="md-4 picture_right">
+                            <div class="identify_result">
+                                <div class="identify_result_list">
+
+                                    <div class="picture_right_box">
+                                        <div class="result_title" style="color: deeppink">Recognition Results</div>
+                                        <div class="row_ro">
+                                            <div class="loading_list"><img
+                                                    src="/static/img/skin/loading.png"
+                                                    class="loading_icon" alt="">
+                                                <div class="loading_list_text">Analyzing...</div>
+                                            </div>
+                                            <div class="identify_result_box" id="identify_result_box">
+
+                                            </div>
+                                            <div class="identify_result_box1" id="identify_result_box1">
+
+
+                                            </div>
+                                            <div class="identify_result_box2" id="identify_result_box2">
+
+
+                                            </div>
+                                            <div class="identify_result_box3" id="identify_result_box3">
+
+
+                                            </div>
+                                            <div class="identify_result_box4" id="identify_result_box4">
+
+
+                                            </div>
+                                            <div class="identify_result_box5 " id="identify_result_box5">
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="row_r row_top">
+                        <div class="md-8">
+
+                            <div class="picture_min_border">
+                                <div class="row_r picture_col_row ">
+                                    <div class="md-3 picture_col">
+                                        <div class="picture_vertifyimage picture_vertifyimage_active"
+                                             onclick="shibieBtn('1',this)" bi_name="ImageLabel-Case1">
+                                            <img src="/static/img/skin/ei-vertifyimage-1-big.jpg"
+                                                 alt="" class="picture_min picture_frame" id="picture_min">
+                                        </div>
+                                    </div>
+                                    <div class="md-3 picture_col">
+                                        <div class="picture_vertifyimage" onclick="shibieBtn('2',this)"
+                                             bi_name="ImageLabel-Case2">
+                                            <img src="/static/img/skin/ei-vertifyimage-2-big.jpg"
+                                                 alt="" class="picture_min ">
+                                        </div>
+                                    </div>
+                                    <div class="md-3 picture_col">
+                                        <div class="picture_vertifyimage" onclick="shibieBtn('3',this)"
+                                             bi_name="ImageLabel-Case3">
+                                            <img src="/static/img/skin/ei-vertifyimage-3-big.jpg"
+                                                 alt="" class="picture_min">
+                                        </div>
+                                    </div>
+                                    <div class="md-3 picture_col">
+                                        <div class="picture_vertifyimage" onclick="shibieBtn('4',this)"
+                                             bi_name="ImageLabel-Case4">
+                                            <img src="/static/img/skin/ei-vertifyimage-4-big.jpg"
+                                                 alt="" class="picture_min">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-4 picture_right_md4">
+                            <div class="row_r">
+                                <div class="dispose_list">
+                                    <div class="immigration_box">
+                                        <div class="md-12">
+
+                                            <div class="dispose_box dispose_border">
+                                                <div class="dispose_box_hover">
+                                                    <div class="dispose_url_hint">
+                                                        Format: JPG、JPEG、BMP
+                                                        <br>
+                                                        Size: less than 10M
+                                                    </div>
+                                                    <input type="text" class="dispose_url"
+                                                           placeholder="Input image url">
+                                                </div>
+                                                <div class="dispose dispose_btn" onclick="dispose_btn()"
+                                                     bi_name="ImageLabel-URLProcess">Process
+                                                </div>
+                                                <div class="prevent"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="md-12">
+                                            <div class="local_upload" id="local_upload">{% csrf_token %}
+                                                Upload from local disk
+                                                <input type="file" maxlength="0" onclick="img_upload(this)"
+                                                       class="local_upload_file"
+                                                       bi_name="ImageLabel-LocalUploadProcess">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="immigration" bi_name="ImageLabel-SwitchUploadMyImage">
+                                        <div class="immigration_list">
+                                            <div class="immigration_icon"><img
+                                                    src="/static/img/skin/ei-icon-upload.png"
+                                                    alt=""></div>
+                                            <div class="immigration_desc">Upload my image</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    shibieBtn(1, '.picture_vertifyimage_active')
+</script>
+
+<footer style="text-align: center">
+    Powered by <a href="http://www.lucasx.top:8001/cv/mcloud" target="_blank" style="text-decoration: none">MCloud</a>
+    Supported by <a href="https://www.zhihu.com/people/xulu-0620/activities"
+                    target="_blank" style="text-decoration: none">LucasX</a>
+</footer>
+</body>
+</html>

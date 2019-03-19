@@ -1,0 +1,129 @@
+@media screen and (min-width: 769px) and (max-width: 999999px) {
+    body {
+        line-height: 140%;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+    }
+
+    #container a, #container a:hover, #container a:visited, #container a:active {
+        /*color: #333;*/
+        text-decoration: none !important;
+        outline: none;
+    }
+
+    div {
+        display: block;
+    }
+
+    #container .container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    img {
+        border: 0;
+        display: block;
+    }
+
+    #container a, #container a:hover, #container a:visited, #container a:active {
+        text-decoration: none;
+        outline: none;
+    }
+
+    #container ul, #container li {
+        list-style: none;
+    }
+
+    .row_r {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .row_ro {
+        margin-right: 0;
+        margin-left: -15px;
+    }
+
+    .md-12, .md-3, .md-4,  .md-8{
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+        float: left;
+    }
+
+
+    .md-3 {
+        width: 25%;
+    }
+
+    .md-4 {
+        width: 33.33333333%;
+    }
+
+    .md-8 {
+        width: 66.66666667%;
+    }
+
+    .md-12 {
+        width: 100%;
+    }
+
+    .container:after, .container:before, .row_r:after, .row_r:before, .row_ro:after, .row_ro:before {
+        display: table;
+        content: " ";
+        display: block;
+        clear: both;
+    }
+
+    :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        position: relative;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        display: block;
+        font-size: 10px;
+    }
+
+    .main h3 {
+        padding: 30px 0;
+        font-size: 34px;
+        color: #282828;
+        text-align: center;
+        margin: 30px;;
+
+    }
+
+    .container {
+        margin: 0 auto;
+    }
+
+    .loading_list_text{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        bottom: 20px;
+        color: #0063ff;
+        font-size: 16px;
+    }
+}
