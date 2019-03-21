@@ -41,6 +41,15 @@ def skin_view(request):
     return render(request, 'skin.html')
 
 
+def nsfw_view(request):
+    return render(request, 'nsfw.html')
+
+
+def nsfw(request):
+    from cv import controllers
+    return controllers.upload_and_rec_porn(request)
+
+
 def detect_face(request):
     """
     face detection
