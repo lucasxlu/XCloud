@@ -1,3 +1,5 @@
+import datetime
+import sys
 import time
 import json
 from collections import OrderedDict
@@ -6,6 +8,9 @@ import cv2
 from django.http import HttpResponse
 from django.shortcuts import render
 from mtcnn.mtcnn import MTCNN
+
+sys.path.append('../')
+from cv import db_utils
 
 
 # Create your views here.
@@ -102,8 +107,21 @@ def rec_skin(request):
     #
     # return HttpResponse(json_result)
 
+    conn = db_utils.connect_mysql_db()
+
     from cv import controllers
-    return controllers.upload_and_rec_skin_disease(request)
+    skin_disease_result = controllers.upload_and_rec_skin_disease(request)
+
+    skin_disease_result_json = json.loads(skin_disease_result.content.decode('utf-8'))
+
+    print(skin_disease_result_json)
+
+    if skin_disease_result_json['code'] == 0:
+        db_utils.insert_to_api(conn, 'LucasX', 'cv/mcloud/skin', skin_disease_result_json['elapse'],
+                               datetime.time(), 0, skin_disease_result_json['imgpath'],
+                               skin_disease_result_json['results'][0]['disease'])
+
+    return skin_disease_result
 
 
 def stat_skin(request):
@@ -114,14 +132,15 @@ def stat_skin(request):
     """
     username = request.GET.get('username')
     result = OrderedDict()
+    tik = time.time()
+
+    conn = db_utils.connect_mysql_db()
+
     result['code'] = 0
     result['msg'] = 'success'
-    result['api'] = {'name': 'cv/mcloud/skin', 'count': 10256}
-    result['history'] = [
-        {'disease': 'Median_Nail_Dystrophy', 'count': 1002},
-        {'disease': 'Keloid', 'count': 526},
-        {'disease': 'Lipoma', 'count': 295},
-    ]
+    result['api'] = db_utils.query_api_hist(conn, username)
+    tok = time.time()
+    result['epalse'] = tok - tik
 
     json_result = json.dumps(result, ensure_ascii=False)
 

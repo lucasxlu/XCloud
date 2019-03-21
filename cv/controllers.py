@@ -395,6 +395,7 @@ def upload_and_rec_skin_disease(request):
         result['code'] = 3
         result['msg'] = 'Invalid HTTP Method'
         result['data'] = None
+        result['elapse'] = 0
 
         json_result = json.dumps(result, ensure_ascii=False)
 
