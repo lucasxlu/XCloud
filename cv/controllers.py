@@ -294,21 +294,17 @@ class PlantRecognizer():
         model = model.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-        # model.load_state_dict(torch.load(pretrained_model_path))
-
-        # if torch.cuda.device_count() > 1:
-        #     print("We are running on", torch.cuda.device_count(), "GPUs!")
-        #     model = nn.DataParallel(model)
-        #     model.load_state_dict(torch.load(pretrained_model_path))
-        # else:
-        state_dict = torch.load(pretrained_model_path)
-        from collections import OrderedDict
-        new_state_dict = OrderedDict()
-        for k, v in state_dict.items():
-            name = k[7:]  # remove `module.`
-            new_state_dict[name] = v
-
-        model.load_state_dict(new_state_dict)
+        if torch.cuda.device_count() > 1:
+            print("We are running on", torch.cuda.device_count(), "GPUs!")
+            model = nn.DataParallel(model)
+            model.load_state_dict(torch.load(pretrained_model_path))
+        else:
+            state_dict = torch.load(pretrained_model_path)
+            from collections import OrderedDict
+            new_state_dict = OrderedDict()
+            for k, v in state_dict.items():
+                name = k[7:]  # remove `module.`
+                new_state_dict[name] = v
 
         model.to(device)
         model.eval()
@@ -536,7 +532,7 @@ def upload_and_rec_skin_disease(request):
             result['code'] = 0
             result['msg'] = 'success'
             result['imgpath'] = imagepath
-            if skin_disease['results'][0]['probability'] > PROB_THRESH:
+            if max(_['probability'] for _ in skin_disease['results']) > PROB_THRESH:
                 result['results'] = skin_disease['results']
             else:
                 result['results'] = [{'disease': 'Unknown', 'probability': skin_disease['results'][0]['probability']}]
@@ -592,7 +588,7 @@ def upload_and_rec_porn(request):
             result['code'] = 0
             result['msg'] = 'success'
             result['imgpath'] = imagepath
-            if nswf_result['results'][0]['prob'] > PROB_THRESH:
+            if max([_['prob'] for _ in nswf_result['results']]) > PROB_THRESH:
                 result['results'] = nswf_result['results']
             else:
                 result['results'] = [{'type': 'Unknown', 'prob': nswf_result['results'][0]['prob']}]
@@ -647,12 +643,7 @@ def upload_and_rec_plant(request):
             result['code'] = 0
             result['msg'] = 'success'
             result['imgpath'] = imagepath
-            if plant_result['results'][0]['prob'] > PROB_THRESH:
-                result['results'] = plant_result['results']
-            else:
-                result['results'] = [
-                    {'name': 'Unknown', 'prob': plant_result['results'][0]['prob'], 'category_id': 999}
-                ]
+            result['results'] = plant_result['results']
             result['elapse'] = round(time.time() - tik, 2)
 
             json_str = json.dumps(result, ensure_ascii=False)
