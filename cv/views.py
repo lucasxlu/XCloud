@@ -33,13 +33,22 @@ def mcloud(request):
     return render(request, 'mcloud.html')
 
 
+def fbp_view(request):
+    return render(request, 'fbp.html')
+
+
 def fbp(request):
     from cv import controllers
     return controllers.upload_and_rec_beauty(request)
 
 
-def fbp_view(request):
-    return render(request, 'fbp.html')
+def plant_view(request):
+    return render(request, 'plant.html')
+
+
+def plant(request):
+    from cv import controllers
+    return controllers.upload_and_rec_plant(request)
 
 
 def skin_view(request):
