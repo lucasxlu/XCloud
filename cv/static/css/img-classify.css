@@ -1,0 +1,124 @@
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+.page-header h1,.container h2{
+    font-family: Times, serif;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+}
+body{
+    font-size: 14px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    line-height: 1.5em;
+    color: #232323;
+    -webkit-font-smoothing: antialiased;
+}
+.form-group label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.form-group input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 137px;
+    height: 42px;
+    cursor: pointer;
+}
+.file-uploader{display: block;}
+.upload-img {
+    position: relative;
+    width: 135px;
+    height: 40px;
+    line-height: 36px;
+    transition: all .3s ease 0s;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    color: #4c4c4c;
+    border: 1px solid #cacaca;
+    background-color: #fff;
+    font-size: 14px;
+    float: left;
+}
+.upload-img:hover{
+    border: 1px solid #379edf;
+}
+.icon-upload {
+    margin-right: 10px;
+    width: 20px;
+    height: 24px;
+    background-image: url(../img/icon-upload.png);
+    display: inline-block;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+.media{
+    margin-top: 15px;
+    overflow: hidden;
+    zoom: 1;
+}
+.media>.pull-left {
+    margin-right: 10px;
+}
+.pull-left {
+    float: left!important;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+.nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+.nav>li {
+    position: relative;
+    display: block;
+}
+.list-group{
+    margin-bottom: 20px !important;
+}
+.list-group-item>.badge {
+    float: right;
+}
+.list-group-item h4{
+    font-size: 18px;
+}
+.list-group-item{
+    padding: 10px 15px !important;
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #999;
+    border-radius: 10px;
+}

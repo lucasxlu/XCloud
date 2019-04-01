@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Porn Image Recognition With Deep Learning</title>
+    {#    {% load static %}#}
+    <link rel="stylesheet" href="/static/css/img-classify.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrapValidator.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/js/layer/mobile/need/layer.css">
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/bootstrapv3.min.js"></script>
+    <script src="/static/js/bootstrapValidator.js" type="text/javascript"></script>
+    <script src="/static/js/layer/layer.js"></script>
+    <script src="/static/js/common.js"></script>
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon.ico">
+</head>
+<script type="text/javascript">
+    $(document).ready(
+        function () {
+            var index = layer.load(0, {shade: false});
+            String.prototype.evalJSON = function () {
+                return eval('(' + this + ')');
+            }
+            $('#classifyfile').attr('disabled', true);
+            $('#imagefile').change(
+                function () {
+                    if ($(this).val()) {
+                        var index = layer.load(0, {shade: false});
+                        var formdata = new FormData($('#formupload')[0]);
+                        $.ajax({
+                            url: "nsfw",
+                            type: "POST",
+                            contentType: false,
+                            processData: false,
+                            data: formdata,
+                            success: function (data) {
+                                layer.close(index);
+                                var obj = data.evalJSON();
+                                console.log(obj);
+                                if (obj.status == 0) {
+                                    $(".media-object").attr("src", obj.data.imgSrc);
+                                    $(".media").show();
+                                    var html = gethtmlbyObj(obj.data.result.precision);
+                                    var html1 = gethtmlbyObj(obj.data.result.recall);
+                                    $("#infopred ul").html(html);
+                                    $("#flatpred ul").html(html1);
+                                    $('.ctimes').text(obj.data.time);
+                                }
+                            },
+                            error: function (data) {
+                                $('#serverResponse').html(data.status + " : " + data.statusText + " : " + data.responseText);
+                            }
+                        });
+                    }
+                }
+            );
+            layer.close(index);
+        }
+    );
+
+    function classifyUrl() {
+        var index = layer.load(0, {shade: false});
+        if (!$('#urlsubmit').bootstrapValidator('validate')) {
+            return false;
+        }
+        if ($("input[name='imageurl']").val().trim() != "") {
+            $.ajax({
+                url: "/api/hzau/image/url",
+                type: "POST",
+                data: {url: $("#imageurl").val().trim()},
+                success: function (data) {
+                    var obj = data.evalJSON();
+                    if (obj.status == 0) {
+                        $(".media-object").attr("src", obj.data.imgSrc);
+                        $(".media").show();
+                        var html = gethtmlbyObj(obj.data.result.precision);
+                        var html1 = gethtmlbyObj(obj.data.result.recall);
+                        $("#infopred ul").html(html);
+                        $("#flatpred ul").html(html1);
+                        $('.ctimes').text(obj.data.time);
+                    }
+                },
+                error: function (data) {
+                    $('#serverResponse').html(data.status + " : " + data.statusText + " : " + data.responseText);
+                }
+            })
+        }
+        layer.close(index);
+    }
+
+    function gethtmlbyObj(obj) {
+        var html = "";
+        for (var key in obj) {
+            html += '<li class="list-group-item"><span class="badge">' + obj[key] +
+                '</span><h4 class="list-group-item-heading">' +
+                '<a href="https://www.baidu.com/s?wd=' + key + '" target="_blank">' + key + '</a></h4></li>';
+        }
+        return html;
+    }
+
+    $(function () {
+        $('#urlsubmit')
+            .bootstrapValidator({
+                /*message: '输入无效',
+                excluded: ':disabled',
+                feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+                },*/
+                fields: {
+                    /*username: {
+                        validators: {
+                            notEmpty: {
+                                message: '不能为空！'
+                            },
+                            stringLength: {
+                                min: 3,
+                                max: 12,
+                                message: '用户名长度必须在5到12之间'
+                            },
+                            threshold :  3,
+                            remote: {
+                                url: 'user/checkNameExistsMethod1.do',
+                                message: '用户名已存在！',
+                                data: function(validator) {
+                                    return {
+                                        id: $('[name="id"]').val(),
+                                    };
+                                },
+                                delay :  2000,
+                                type: 'POST'
+                            }
+                        }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: '不能为空！'
+                            },
+                            stringLength: {
+                                min: 6,
+                                message: '密码不少于6位数！'
+                            }
+                        }
+                    },*/
+                    imageurl: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Invalid Image URL'
+                            }
+                        }
+                    },
+                    /*  email:{
+                          validators: {
+                              regexp: {
+                                  regexp: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+                                  message: '输入邮箱格式不正确！'
+                              }
+                          }
+                      },
+                      roleid: {
+                          validators: {
+                              regexp: {  //正则校验
+                                  regexp: /^(?!-1$)/,
+                                  message: '请选择所属角色'
+                              },
+                          }
+                      }*/
+                }
+            }).on('error.form.bv',
+            function (e) {
+                var $form = $(e.target), validator = $form.data('bootstrapValidator'),
+                    $invalidField = validator.getInvalidFields().eq(0), $collapse = $invalidField.parents('.collapse');
+                $collapse.collapse('show');
+            });
+    })
+
+    function upload() {
+        var src = $("input[name='image']").val();
+        var imgName = src.split("\\")[src.split('\\').length - 1];
+        var data = new FormData($('form').get(0));
+
+        $.ajax({
+            url: 'nsfw',
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('success');
+                var result = eval('(' + data + ')');
+                $('#desc').text(result.results[0].type);
+                $('#time').text(result.elapse);
+                $('img').attr('src', '../../../static/ImgCensorUpload/' + imgName);
+            }
+        });
+
+        return false;
+    }
+</script>
+<body>
+<!-- Begin page content -->
+<div class="container">
+    <div class="page-header">
+        <h1><a href="#">Image Classification Online</a></h1>
+        <p>
+            Powered by <a href="index" target="_blank">XCloud</a>.
+            Supported by <a href="https://www.zhihu.com/people/xulu-0620/activities"
+                            target="_blank">LucasX</a>
+        </p>
+    </div>
+
+    <div>
+        <h2 style="text-align: left">Classification</h2>
+    </div>
+    <!--RETURN RESULT BEGIN-->
+    <div class="media" style="display: none">
+        <a class="pull-left" href="#"><img class="media-object" width="192" height="192"></a>
+        <div class="media-body">
+            <div class="bs-example bs-example-tabs">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active"><a href="#infopred" data-toggle="tab">Maximally accurate</a></li>
+                    <li><a href="#flatpred" data-toggle="tab">Maximally specific</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="infopred">
+                        <ul class="list-group">
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="flatpred">
+                        <ul class="list-group">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--RETURN RESULT END-->
+    <p> AI takes <span class="ctimes">0</span> seconds. </p>
+    <hr>
+
+
+    <form id="urlsubmit">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" name="imageurl" id="imageurl"
+                       placeholder="Provide an image URL">
+                <span class="input-group-btn">
+              <input class="btn btn-primary" placeholder="Classify URL" id="classifyurl" onclick="classifyUrl()">
+            </span>
+            </div><!-- /input-group -->
+        </div>
+    </form>
+
+    <form id="formupload" class="form-inline" action="upload" method="post"
+          enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="imagefile">Or upload an image:</label>
+            <div for="file-uploader" class="upload-img"><i class="icons icon-upload"></i><span>Upload</span>
+                <input type="file" name="file" id="imagefile" class="file-uploader-one">
+            </div>
+        </div>
+        <!--<input type="submit" class="btn btn-primary" value="Classify File" id="classifyfile"></input>-->
+    </form>
+</div>
+
+<hr>
+<div class="amz-toolbar" id="amz-toolbar" style="right: 10px;">
+    <a title="Back to Top" class="am-icon-btn am-active" id="amz-go-top"><i class="fa fa-arrow-up"></i></a>
+    <a href="index.html" title="Back to Home" class="am-icon-btn am-icon-faq am-icon-question-circle"><i
+            class="fa fa-home"></i></a>
+</div>
+<footer id="footer" class="footer hidden-print">
+    Copyright &copy; 2019 <a href="https://www.zhihu.com/people/xulu-0620/activities"
+                             target="_blank">LucasX</a>
+</footer>
+
+</body>
+</html>
