@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Facial Beauty Prediction</title>
+    <title>Plant Disease Recognition</title>
     {#    {% load static %}#}
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link rel="stylesheet"
@@ -21,7 +21,9 @@
     </style>
 </head>
 <body>
-<h2 align="center" style="font-family: 'Times New Roman'">Face Rank</h2>
+
+<h2 align="center" style="font-family: 'Times New Roman'">Plant Disease Recognition</h2>
+
 <div align="center">
     <form enctype="multipart/form-data" style="width: 30%">{% csrf_token %}
         <div class="am-form-group am-form-file">
@@ -40,7 +42,7 @@
 </div>
 
 <div align="center">
-    <p>Your Face Beauty Score is <span id="desc" style="color:
+    <p>The image is <span id="desc" style="color:
     red"></span>, AI takes
         <span id="time" style="color: red">0</span> seconds!
     </p>
@@ -64,7 +66,7 @@
         var data = new FormData($('form').get(0));
 
         $.ajax({
-            url: 'fbp',
+            url: 'pdr',
             type: 'POST',
             data: data,
             cache: false,
@@ -73,9 +75,9 @@
             success: function (data) {
                 console.log('success');
                 var result = eval('(' + data + ')');
-                $('#desc').text(result.data.beauty);
+                $('#desc').text(result.results[0].name);
                 $('#time').text(result.elapse);
-                $('img').attr('src', '../../../static/FaceUpload/' + imgName);
+                $('img').attr('src', '../../../static/PDRUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));
             }
         });

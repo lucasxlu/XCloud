@@ -64,6 +64,15 @@ def nsfw(request):
     return controllers.upload_and_rec_porn(request)
 
 
+def pdr_view(request):
+    return render(request, 'pdr.html')
+
+
+def pdr(request):
+    from cv import controllers
+    return controllers.upload_and_rec_plant_disease(request)
+
+
 def detect_face(request):
     """
     face detection
