@@ -2,7 +2,7 @@ import time
 import json
 from collections import OrderedDict
 
-import jieba as jieba
+import jieba
 import jieba.analyse
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -55,7 +55,7 @@ def word_seg(request):
 
         result['data'] = {
             'words': seg_words,
-            'tf-idf': tfidf
+            'tfidf': tfidf
         }
 
     json_result = json.dumps(result, ensure_ascii=False)
@@ -110,3 +110,38 @@ def sentiment(request):
 
 def sentiment_view(request):
     return render(request, 'sentiment.html')
+
+
+def hotwords(request):
+    """
+    calculation for wordcloud
+    @Note: currently supported by jieba, but will be replaced customized model in the near future!
+    :param request:
+    :return:
+    """
+    sentence = request.GET.get('sentence')
+    result = OrderedDict()
+
+    tik = time.time()
+
+    if sentence is None:
+        result['code'] = 1
+        result['msg'] = 'Invalid Sentence Input'
+        result['data'] = None
+    else:
+        result['code'] = 0
+        result['msg'] = 'success'
+
+        words_and_weights = jieba.analyse.textrank(sentence, topK=30, withWeight=True)
+
+        result['data'] = words_and_weights
+
+    result['elapse'] = time.time() - tik
+
+    json_result = json.dumps(result, ensure_ascii=False)
+
+    return HttpResponse(json_result)
+
+
+def hotwords_view(request):
+    return render(request, 'hotwords.html')

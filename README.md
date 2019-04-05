@@ -43,6 +43,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
 6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/cv/index```
 
+![index](index.png)
 
 ## Contributor
 * [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment

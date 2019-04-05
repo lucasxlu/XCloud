@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Government Report</title>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/echarts-wordcloud.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/layer/layer.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-4.0.0-alpha.5-dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <style>
+        textarea {
+            width: 100%;
+            padding: 15px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        h2 {
+            font-family: Times, serif;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="padding-top: 20px;">Hot Words Analysis</h2>
+    <textarea name="text" rows="10"></textarea>
+    <button class="btn btn-primary btn-block" onclick="showKeywords()"><i class="fa fa-calculator"
+                                                                          aria-hidden="true"></i>TF-IDF
+    </button>
+    <div id="keywords" style="width: 100%; height:600px;"></div>
+</div>
+
+<script type="text/javascript">
+
+    function showKeywords() {
+        var index = layer.load(0, {shade: false});
+        var urlPrefix = "/nlp/hotwords";
+        var myChart = echarts.init(document.getElementById('keywords'));
+
+        var wordcloud = [];
+        $.ajax({
+            url: urlPrefix,
+            data: {"sentence": $("textarea").val().trim()},
+            dataType: "json",
+            type: "GET"
+        }).done(function (data) {
+            console.log(data);
+
+            for (var i = 0; i < data.data.length; i++) {
+                var item = data.data[i];
+                var keywordsObj = new Object();
+                keywordsObj['name'] = item[0];
+                keywordsObj['value'] = item[1];
+                wordcloud.push(keywordsObj);
+            }
+            layer.close(index);
+
+            var option = {
+                tooltip: {},
+                series: [{
+                    type: 'wordCloud',
+                    gridSize: 2,
+                    sizeRange: [25, 60],
+                    rotationRange: [-90, 90],
+                    shape: 'pentagon',
+                    width: 900,
+                    height: 600,
+                    textStyle: {
+                        normal: {
+                            color: function () {
+                                return 'rgb(' + [
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160)
+                                ].join(',') + ')';
+                            }
+                        },
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        }
+                    },
+                    data: wordcloud
+                }]
+            };
+            myChart.setOption(option);
+        });
+    }
+</script>
+
+<div align="center">
+    <div class="amz-toolbar" id="amz-toolbar" style="right: 10px;">
+        <a title="Back to Top" class="am-icon-btn am-active" id="amz-go-top"><i class="fa fa-arrow-up"></i></a>
+        <a href="/cv/index" title="Back to Home" class="am-icon-btn am-icon-faq am-icon-question-circle"><i
+                class="fa fa-home"></i></a>
+    </div>
+    <footer>Copyright &copy; 2019 <a href="/cv/index" style="text-decoration: none">XCloud</a></footer>
+</div>
+
+<link rel="stylesheet" href="/static/css/index.css">
+<link rel="stylesheet" href="/static/css/common.css">
+</body>
+</html>
