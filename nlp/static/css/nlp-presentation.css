@@ -1,0 +1,1038 @@
+ul.horizontal-nav {
+    height: 34px;
+    font-size: 0
+}
+
+ul.horizontal-nav a,ul.horizontal-nav span {
+    display: inline-block;
+    height: 26px;
+    font-size: 14px;
+    line-height: 24px
+}
+
+ul.horizontal-nav a {
+    padding: 0 13px 0 13px;
+    color: #777
+}
+
+ul.horizontal-nav li {
+    position: relative;
+    display: inline-block;
+    height: 34px
+}
+
+ul.horizontal-nav li.selected a {
+    color: #fff;
+    background-color: #488fce
+}
+
+ul.horizontal-nav li.selected .arrow {
+    position: absolute;
+    top: 26px;
+    left: 50%;
+    margin-left: -6px;
+    border: 6px solid #488fce;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent
+}
+
+ul.horizontal-nav li.septal {
+    margin: 0 5px;
+    font-size: 12px
+}
+
+ul.horizontal-nav li .icon {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    vertical-align: text-top
+}
+
+.switch-wrap {
+    float: right;
+    border-radius: 0;
+    box-shadow: none;
+    width: 200px;
+    background-color: #fff
+}
+
+.switch-wrap.switch-5 {
+    width: 300px
+}
+
+.switch-wrap.switch-6 {
+    width: 360px
+}
+
+.switch-wrap.low-bowser {
+    background-color: transparent
+}
+
+.switch-wrap.low-bowser label {
+    border: 0 none
+}
+
+.switch-wrap a {
+    height: 28px;
+    border-radius: 0;
+    box-shadow: none;
+    background-image: none;
+    background-color: #488fce;
+    border: 0 none
+}
+
+.switch-wrap label {
+    font-size: 12px;
+    color: #777;
+    text-shadow: none;
+    font-weight: 400;
+    border: 1px solid #ebebeb;
+    border-right: 0 none;
+    cursor: pointer
+}
+
+.switch-wrap input:checked+label {
+    color: #fff;
+    text-shadow: none
+}
+
+.switch-wrap .last-label {
+    border-right: 1px solid #ebebeb
+}
+
+.bs-sidebar-chunk {
+    width: 300px
+}
+
+#demo-page .warn-svg {
+    text-align: center;
+    margin-top: 90px
+}
+
+#demo-page .warn-svg a {
+    margin: 0 5px
+}
+
+#demo-page .btn-arrow {
+    float: right;
+    margin-top: 22px;
+    padding: 0 0 0 14px;
+    width: 112px;
+    height: 40px;
+    font-size: 14px;
+    line-height: 40px
+}
+
+#demo-page .main-title {
+    position: relative;
+    margin: 28px 0 22px 0;
+    height: 32px;
+    font-size: 24px;
+    line-height: 32px;
+    color: #565656
+}
+
+#demo-page .main-title .dot-line-gray {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    z-index: 0
+}
+
+#demo-page .main-title .title {
+    position: absolute;
+    padding-right: 26px;
+    background-color: #fff;
+    z-index: 1
+}
+
+#demo-page .input-chunk {
+    position: relative;
+    padding: 30px;
+    height: 350px
+}
+
+#demo-page .input-chunk .nav .switch-wrap {
+    width: 400px
+}
+
+#demo-page .input-chunk .nav .switch-wrap label {
+    font-size: 12px
+}
+
+#demo-page .input-chunk .nav .switch-wrap a {
+    height: 28px;
+    font-size: 12px
+}
+
+#demo-page .input-chunk textarea.input {
+    margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    height: 170px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #979797
+}
+
+#demo-page .input-chunk .warn-msg {
+    position: absolute;
+    top: 280px;
+    left: 30px;
+    right: auto;
+    color: #f57900;
+    text-align: left
+}
+
+#demo-page .input-chunk .warn-msg .icon {
+    display: inline-block;
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    background: 0 0
+}
+
+#demo-page .main-content {
+    padding-right: 0
+}
+
+#demo-page .main-content.col-xs-9 {
+    padding-left: 20px;
+    width: 960px
+}
+
+#demo-page #overview-analysis .col-xs-12,#demo-page #overview-analysis .col-xs-9,#demo-page #overview-ner .col-xs-12,#demo-page #overview-ner .col-xs-9,#demo-page #overview-relation .col-xs-12,#demo-page #overview-relation .col-xs-9 {
+    padding: 0
+}
+
+#demo-page #overview-ner .word-mean dd,#demo-page #overview-ner .words dd,#demo-page #overview-relation .word-mean dd,#demo-page #overview-relation .words dd,#demo-page #overview-wc .word-mean dd,#demo-page #overview-wc .words dd {
+    background-color: #ccc
+}
+
+#demo-page #overview-ner .word-mean dd.time,#demo-page #overview-ner .words dd.time,#demo-page #overview-relation .word-mean dd.time,#demo-page #overview-relation .words dd.time,#demo-page #overview-wc .word-mean dd.time,#demo-page #overview-wc .words dd.time {
+    background-color: #ffcccb
+}
+
+#demo-page #overview-ner .word-mean dd.person_name,#demo-page #overview-ner .words dd.person_name,#demo-page #overview-relation .word-mean dd.person_name,#demo-page #overview-relation .words dd.person_name,#demo-page #overview-wc .word-mean dd.person_name,#demo-page #overview-wc .words dd.person_name {
+    background-color: #9acccd
+}
+
+#demo-page #overview-ner .word-mean dd.location,#demo-page #overview-ner .words dd.location,#demo-page #overview-relation .word-mean dd.location,#demo-page #overview-relation .words dd.location,#demo-page #overview-wc .word-mean dd.location,#demo-page #overview-wc .words dd.location {
+    background-color: #488fce
+}
+
+#demo-page #overview-ner .word-mean dd.job_title,#demo-page #overview-ner .words dd.job_title,#demo-page #overview-relation .word-mean dd.job_title,#demo-page #overview-relation .words dd.job_title,#demo-page #overview-wc .word-mean dd.job_title,#demo-page #overview-wc .words dd.job_title {
+    background-color: #4dd9e6
+}
+
+#demo-page #overview-ner .word-mean dd.desc,#demo-page #overview-ner .word-mean dd.org_name,#demo-page #overview-ner .words dd.desc,#demo-page #overview-ner .words dd.org_name,#demo-page #overview-relation .word-mean dd.desc,#demo-page #overview-relation .word-mean dd.org_name,#demo-page #overview-relation .words dd.desc,#demo-page #overview-relation .words dd.org_name,#demo-page #overview-wc .word-mean dd.desc,#demo-page #overview-wc .word-mean dd.org_name,#demo-page #overview-wc .words dd.desc,#demo-page #overview-wc .words dd.org_name {
+    background-color: #ffcb99
+}
+
+#demo-page #overview-ner .word-mean dd.aspect,#demo-page #overview-ner .word-mean dd.company_name,#demo-page #overview-ner .words dd.aspect,#demo-page #overview-ner .words dd.company_name,#demo-page #overview-relation .word-mean dd.aspect,#demo-page #overview-relation .word-mean dd.company_name,#demo-page #overview-relation .words dd.aspect,#demo-page #overview-relation .words dd.company_name,#demo-page #overview-wc .word-mean dd.aspect,#demo-page #overview-wc .word-mean dd.company_name,#demo-page #overview-wc .words dd.aspect,#demo-page #overview-wc .words dd.company_name {
+    background-color: #99cc67
+}
+
+#demo-page #overview-ner .word-mean dd.product,#demo-page #overview-ner .word-mean dd.product_name,#demo-page #overview-ner .words dd.product,#demo-page #overview-ner .words dd.product_name,#demo-page #overview-relation .word-mean dd.product,#demo-page #overview-relation .word-mean dd.product_name,#demo-page #overview-relation .words dd.product,#demo-page #overview-relation .words dd.product_name,#demo-page #overview-wc .word-mean dd.product,#demo-page #overview-wc .word-mean dd.product_name,#demo-page #overview-wc .words dd.product,#demo-page #overview-wc .words dd.product_name {
+    background-color: #ff9899
+}
+
+#demo-page #overview-ner .word-mean dd.condition,#demo-page #overview-ner .words dd.condition,#demo-page #overview-relation .word-mean dd.condition,#demo-page #overview-relation .words dd.condition,#demo-page #overview-wc .word-mean dd.condition,#demo-page #overview-wc .words dd.condition {
+    background-color: #f48363
+}
+
+#demo-page #overview-ner .word-mean dd.marginR,#demo-page #overview-ner .words dd.marginR,#demo-page #overview-relation .word-mean dd.marginR,#demo-page #overview-relation .words dd.marginR,#demo-page #overview-wc .word-mean dd.marginR,#demo-page #overview-wc .words dd.marginR {
+    margin-right: 5px
+}
+
+#demo-page #overview-ner .word-mean dd.paddingL,#demo-page #overview-ner .words dd.paddingL,#demo-page #overview-relation .word-mean dd.paddingL,#demo-page #overview-relation .words dd.paddingL,#demo-page #overview-wc .word-mean dd.paddingL,#demo-page #overview-wc .words dd.paddingL {
+    padding-left: 11px
+}
+
+#demo-page #overview-ner .word-mean dd.paddingR,#demo-page #overview-ner .words dd.paddingR,#demo-page #overview-relation .word-mean dd.paddingR,#demo-page #overview-relation .words dd.paddingR,#demo-page #overview-wc .word-mean dd.paddingR,#demo-page #overview-wc .words dd.paddingR {
+    padding-right: 11px
+}
+
+#demo-page #overview-relation .title .tips,#demo-page #overview-wc .title .tips {
+    font-size: 12px;
+    color: #7b7b7b
+}
+
+#demo-page #overview-relation .title .tips .count,#demo-page #overview-wc .title .tips .count {
+    color: #eb6a5a
+}
+
+#demo-page #overview-relation .words,#demo-page #overview-wc .words {
+    margin-top: 0;
+    margin-bottom: 5px
+}
+
+#demo-page #overview-relation .words:first-child,#demo-page #overview-wc .words:first-child {
+    margin-top: 20px
+}
+
+#demo-page #overview-relation .words:last-child,#demo-page #overview-wc .words:last-child {
+    margin-bottom: 20px
+}
+
+#demo-page #overview-relation .words dd,#demo-page #overview-wc .words dd {
+    padding-right: 0
+}
+
+#demo-page #overview-relation .words dd span,#demo-page #overview-wc .words dd span {
+    margin-left: 11px;
+    padding: 0 11px;
+    color: #777;
+    display: inline-block;
+    background-color: #e7e7e7
+}
+
+#demo-page #overview-relation .words dd span {
+    color: #333
+}
+
+#demo-page #overview-relation dd span.desc {
+    background-color: #ffcb99
+}
+
+#demo-page #overview-relation dd span.aspect {
+    background-color: #99cc67
+}
+
+#demo-page #overview-relation dd span.product {
+    background-color: #ff9899
+}
+
+#demo-page .col-xs-9 .chunk {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 30px 20px;
+    min-height: 296px
+}
+
+#demo-page .col-xs-9 .chunk table {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 28px;
+    color: #979797;
+    background-color: #fff
+}
+
+#demo-page .col-xs-9 .chunk table thead {
+    background-color: #488fce;
+    color: #fff
+}
+
+#demo-page .col-xs-9 .chunk table thead td {
+    border: 1px solid #488fce
+}
+
+#demo-page .col-xs-9 .chunk table td {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    text-align: center
+}
+
+#demo-page .col-xs-9 .chunk table.name-result {
+    width: 830px
+}
+
+#demo-page .col-xs-9 .chunk table.name-result td {
+    width: 25%
+}
+
+#demo-page .col-xs-9 .chunk table.time-result {
+    width: 415px
+}
+
+#demo-page .col-xs-9 .chunk table.time-result td {
+    width: 50%
+}
+
+#demo-page .col-xs-9 .chunk .title {
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px
+}
+
+#demo-page .col-xs-9 .chunk .title .docs {
+    margin-left: 15px;
+    font-size: 12px;
+    display: none
+}
+
+#demo-page .col-xs-9 .chunk .words {
+    margin-top: 20px
+}
+
+#demo-page .col-xs-9 .chunk .word-mean,#demo-page .col-xs-9 .chunk .words {
+    font-size: 0
+}
+
+#demo-page .col-xs-9 .chunk .word-mean dt,#demo-page .col-xs-9 .chunk .words dt {
+    margin-bottom: 22px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #979797
+}
+
+#demo-page .col-xs-9 .chunk .word-mean dd,#demo-page .col-xs-9 .chunk .words dd {
+    display: inline-block;
+    padding: 0 11px;
+    height: 26px;
+    font-size: 14px;
+    line-height: 26px;
+    margin: 0 5px 5px 0
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .n,#demo-page .col-xs-9 .chunk .word-mean .nl,#demo-page .col-xs-9 .chunk .words .n,#demo-page .col-xs-9 .chunk .words .nl {
+    background-color: #488fce
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .nr,#demo-page .col-xs-9 .chunk .words .nr {
+    background-color: #50c6fb
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .ns,#demo-page .col-xs-9 .chunk .words .ns {
+    background-color: #d07f7f
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .nt,#demo-page .col-xs-9 .chunk .words .nt {
+    background-color: #8e8b8b
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .nz,#demo-page .col-xs-9 .chunk .words .nz {
+    background-color: #8bc3f5
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .t,#demo-page .col-xs-9 .chunk .word-mean .tg,#demo-page .col-xs-9 .chunk .words .t,#demo-page .col-xs-9 .chunk .words .tg {
+    background-color: #c7aee7
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .s,#demo-page .col-xs-9 .chunk .words .s {
+    background-color: #cee887
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .f,#demo-page .col-xs-9 .chunk .words .f {
+    background-color: #c9aaca
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .v,#demo-page .col-xs-9 .chunk .word-mean .vd,#demo-page .col-xs-9 .chunk .word-mean .vf,#demo-page .col-xs-9 .chunk .word-mean .vi,#demo-page .col-xs-9 .chunk .word-mean .vl,#demo-page .col-xs-9 .chunk .word-mean .vn,#demo-page .col-xs-9 .chunk .word-mean .vs,#demo-page .col-xs-9 .chunk .word-mean .vy,#demo-page .col-xs-9 .chunk .words .v,#demo-page .col-xs-9 .chunk .words .vd,#demo-page .col-xs-9 .chunk .words .vf,#demo-page .col-xs-9 .chunk .words .vi,#demo-page .col-xs-9 .chunk .words .vl,#demo-page .col-xs-9 .chunk .words .vn,#demo-page .col-xs-9 .chunk .words .vs,#demo-page .col-xs-9 .chunk .words .vy {
+    background-color: #ffcb99
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .a,#demo-page .col-xs-9 .chunk .word-mean .ad,#demo-page .col-xs-9 .chunk .word-mean .al,#demo-page .col-xs-9 .chunk .word-mean .an,#demo-page .col-xs-9 .chunk .words .a,#demo-page .col-xs-9 .chunk .words .ad,#demo-page .col-xs-9 .chunk .words .al,#demo-page .col-xs-9 .chunk .words .an {
+    background-color: #67ccaa
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .b,#demo-page .col-xs-9 .chunk .word-mean .bl,#demo-page .col-xs-9 .chunk .words .b,#demo-page .col-xs-9 .chunk .words .bl {
+    background-color: #67a6d9
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .z,#demo-page .col-xs-9 .chunk .words .z {
+    background-color: #f3e988
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .r,#demo-page .col-xs-9 .chunk .words .r {
+    background-color: #9acccd
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .m,#demo-page .col-xs-9 .chunk .word-mean .mq,#demo-page .col-xs-9 .chunk .words .m,#demo-page .col-xs-9 .chunk .words .mq {
+    background-color: #986699
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .q,#demo-page .col-xs-9 .chunk .word-mean .qt,#demo-page .col-xs-9 .chunk .word-mean .qv,#demo-page .col-xs-9 .chunk .words .q,#demo-page .col-xs-9 .chunk .words .qt,#demo-page .col-xs-9 .chunk .words .qv {
+    background-color: #ff9899
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .d,#demo-page .col-xs-9 .chunk .word-mean .dl,#demo-page .col-xs-9 .chunk .words .d,#demo-page .col-xs-9 .chunk .words .dl {
+    background-color: #ffcccb
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .p,#demo-page .col-xs-9 .chunk .word-mean .pb,#demo-page .col-xs-9 .chunk .words .p,#demo-page .col-xs-9 .chunk .words .pb {
+    background-color: #99cc67
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .c,#demo-page .col-xs-9 .chunk .word-mean .cc,#demo-page .col-xs-9 .chunk .words .c,#demo-page .col-xs-9 .chunk .words .cc {
+    background-color: #8ea4de
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .u,#demo-page .col-xs-9 .chunk .word-mean .ud,#demo-page .col-xs-9 .chunk .word-mean .ug,#demo-page .col-xs-9 .chunk .word-mean .ul,#demo-page .col-xs-9 .chunk .word-mean .us,#demo-page .col-xs-9 .chunk .word-mean .uy,#demo-page .col-xs-9 .chunk .word-mean .uz,#demo-page .col-xs-9 .chunk .words .u,#demo-page .col-xs-9 .chunk .words .ud,#demo-page .col-xs-9 .chunk .words .ug,#demo-page .col-xs-9 .chunk .words .ul,#demo-page .col-xs-9 .chunk .words .us,#demo-page .col-xs-9 .chunk .words .uy,#demo-page .col-xs-9 .chunk .words .uz {
+    background-color: #4dd9e6
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .e,#demo-page .col-xs-9 .chunk .words .e {
+    background-color: #d7acd7
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .y,#demo-page .col-xs-9 .chunk .words .y {
+    background-color: #f48363
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .o,#demo-page .col-xs-9 .chunk .words .o {
+    background-color: #f2d404
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .h,#demo-page .col-xs-9 .chunk .words .h {
+    background-color: #30aadd
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .k,#demo-page .col-xs-9 .chunk .words .k {
+    background-color: #55bfcc
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .em,#demo-page .col-xs-9 .chunk .word-mean .id,#demo-page .col-xs-9 .chunk .word-mean .ip,#demo-page .col-xs-9 .chunk .word-mean .nx,#demo-page .col-xs-9 .chunk .word-mean .te,#demo-page .col-xs-9 .chunk .word-mean .ur,#demo-page .col-xs-9 .chunk .word-mean .x,#demo-page .col-xs-9 .chunk .word-mean .xu,#demo-page .col-xs-9 .chunk .word-mean .xx,#demo-page .col-xs-9 .chunk .words .em,#demo-page .col-xs-9 .chunk .words .id,#demo-page .col-xs-9 .chunk .words .ip,#demo-page .col-xs-9 .chunk .words .nx,#demo-page .col-xs-9 .chunk .words .te,#demo-page .col-xs-9 .chunk .words .ur,#demo-page .col-xs-9 .chunk .words .x,#demo-page .col-xs-9 .chunk .words .xu,#demo-page .col-xs-9 .chunk .words .xx {
+    background-color: #96dbf8
+}
+
+#demo-page .col-xs-9 .chunk .word-mean .w,#demo-page .col-xs-9 .chunk .word-mean .wb,#demo-page .col-xs-9 .chunk .word-mean .wd,#demo-page .col-xs-9 .chunk .word-mean .wf,#demo-page .col-xs-9 .chunk .word-mean .wh,#demo-page .col-xs-9 .chunk .word-mean .wj,#demo-page .col-xs-9 .chunk .word-mean .wk,#demo-page .col-xs-9 .chunk .word-mean .wm,#demo-page .col-xs-9 .chunk .word-mean .wn,#demo-page .col-xs-9 .chunk .word-mean .wp,#demo-page .col-xs-9 .chunk .word-mean .ws,#demo-page .col-xs-9 .chunk .word-mean .wt,#demo-page .col-xs-9 .chunk .word-mean .ww,#demo-page .col-xs-9 .chunk .word-mean .wy,#demo-page .col-xs-9 .chunk .words .w,#demo-page .col-xs-9 .chunk .words .wb,#demo-page .col-xs-9 .chunk .words .wd,#demo-page .col-xs-9 .chunk .words .wf,#demo-page .col-xs-9 .chunk .words .wh,#demo-page .col-xs-9 .chunk .words .wj,#demo-page .col-xs-9 .chunk .words .wk,#demo-page .col-xs-9 .chunk .words .wm,#demo-page .col-xs-9 .chunk .words .wn,#demo-page .col-xs-9 .chunk .words .wp,#demo-page .col-xs-9 .chunk .words .ws,#demo-page .col-xs-9 .chunk .words .wt,#demo-page .col-xs-9 .chunk .words .ww,#demo-page .col-xs-9 .chunk .words .wy {
+    background-color: #ccc
+}
+
+#demo-page .col-xs-9 .chunk .emotion-chart {
+    width: 550px;
+    height: 226px
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips {
+    float: right;
+    width: 288px;
+    height: 175px;
+    font-size: 0
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips dd,#demo-page .col-xs-9 .chunk .emotion-tips dt {
+    font-size: 12px;
+    color: #777;
+    font-weight: 400
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips dt {
+    margin-bottom: 4px
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips dt li {
+    height: 28px;
+    line-height: 28px
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips dd {
+    line-height: 24px
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips .icon {
+    margin-right: 10px;
+    width: 15px;
+    height: 15px;
+    vertical-align: text-top
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips .positive .icon {
+    background-color: #4daf7c
+}
+
+#demo-page .col-xs-9 .chunk .emotion-tips .passive .icon {
+    background-color: #e5613b
+}
+
+#demo-page .col-xs-9 .chunk .info-containers li {
+    position: relative;
+    display: inline-block;
+    width: 64px;
+    height: 41px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 41px;
+    color: #fff;
+    z-index: 2
+}
+
+#demo-page .col-xs-9 .chunk .info-containers li.selected {
+    font-size: 18px;
+    color: #000
+}
+
+#demo-page .col-xs-9 .chunk .title-other {
+    margin-top: 30px
+}
+
+#demo-page .col-xs-9 .chunk .keywords-tags {
+    margin-top: 30px;
+    font-size: 0
+}
+
+#demo-page .col-xs-9 .chunk .keywords-tags li {
+    display: inline-block;
+    margin-left: 6px;
+    height: 90px;
+    width: 90px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 90px;
+    border-radius: 90px;
+    background-color: #6ba4d6
+}
+
+#demo-page .col-xs-9 .chunk .suggest-word {
+    margin-top: 20px
+}
+
+#demo-page .affix {
+    top: 22px
+}
+
+#demo-page .no-data {
+    margin-top: 20px;
+    color: #777
+}
+
+#demo-page .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -5px 0 0 -8px
+}
+
+#demo-page .warn-tips {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center
+}
+
+#demo-page .helper-tips .col-0,#demo-page .helper-tips .col-1,#demo-page .result .col-0,#demo-page .result .col-1 {
+    float: left
+}
+
+#demo-page .helper-tips .col-small-0,#demo-page .helper-tips .col-small-1,#demo-page .helper-tips .col-small-2,#demo-page .helper-tips .col-small-3,#demo-page .result .col-small-0,#demo-page .result .col-small-1,#demo-page .result .col-small-2,#demo-page .result .col-small-3 {
+    float: left;
+    margin-left: 15px
+}
+
+#demo-page .helper-tips .col-small-0,#demo-page .result .col-small-0 {
+    margin-left: 0
+}
+
+#demo-page .helper-tips .col-small-0,#demo-page .helper-tips .col-small-0 table,#demo-page .helper-tips .col-small-1,#demo-page .helper-tips .col-small-1 table,#demo-page .helper-tips .col-small-2,#demo-page .helper-tips .col-small-2 table,#demo-page .helper-tips .col-small-3,#demo-page .helper-tips .col-small-3 table,#demo-page .result .col-small-0,#demo-page .result .col-small-0 table,#demo-page .result .col-small-1,#demo-page .result .col-small-1 table,#demo-page .result .col-small-2,#demo-page .result .col-small-2 table,#demo-page .result .col-small-3,#demo-page .result .col-small-3 table {
+    width: 290px
+}
+
+#demo-page .helper-tips .col-small-0 table td,#demo-page .helper-tips .col-small-0 td,#demo-page .helper-tips .col-small-1 table td,#demo-page .helper-tips .col-small-1 td,#demo-page .helper-tips .col-small-2 table td,#demo-page .helper-tips .col-small-2 td,#demo-page .helper-tips .col-small-3 table td,#demo-page .helper-tips .col-small-3 td,#demo-page .result .col-small-0 table td,#demo-page .result .col-small-0 td,#demo-page .result .col-small-1 table td,#demo-page .result .col-small-1 td,#demo-page .result .col-small-2 table td,#demo-page .result .col-small-2 td,#demo-page .result .col-small-3 table td,#demo-page .result .col-small-3 td {
+    width: 50%
+}
+
+#demo-page .helper-tips .col-0,#demo-page .helper-tips .col-0 table,#demo-page .helper-tips .col-1,#demo-page .helper-tips .col-1 table,#demo-page .result .col-0,#demo-page .result .col-0 table,#demo-page .result .col-1,#demo-page .result .col-1 table {
+    width: 440px
+}
+
+#demo-page .helper-tips .col-0 table td,#demo-page .helper-tips .col-0 td,#demo-page .helper-tips .col-1 table td,#demo-page .helper-tips .col-1 td,#demo-page .result .col-0 table td,#demo-page .result .col-0 td,#demo-page .result .col-1 table td,#demo-page .result .col-1 td {
+    width: 50%
+}
+
+#demo-page .helper-tips .col-0,#demo-page .result .col-0 {
+    margin-right: 10px
+}
+
+#demo-page .helper-tips .col-1,#demo-page .result .col-1 {
+    margin-left: 10px
+}
+
+#demo-page #overview-depend {
+    position: relative
+}
+
+#demo-page #overview-depend .working {
+    position: relative
+}
+
+#demo-page #overview-depend .working .img-wrap {
+    width: 900px;
+    height: 300px;
+    overflow-x: scroll;
+    overflow-y: hidden
+}
+
+#demo-page #overview-depend .working .dep-tips {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    padding: 20px;
+    margin-left: -200px;
+    width: 400px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(72,143,206,.8)
+}
+
+#demo-page #overview-depend .working .dep-tips .t1 {
+    font-size: 20px
+}
+
+#demo-page #overview-depend .working .dep-tips .t2 {
+    font-size: 14px
+}
+
+#demo-page #overview-depend .working .dep-tips .t2 a {
+    color: #defd10;
+    text-decoration: underline
+}
+
+#demo-page .tree-shadow-wrap {
+    position: absolute;
+    top: 60px
+}
+
+#demo-page .tree-shadow-wrap .btn {
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    margin: -20px 0 0 -56px;
+    color: #fff;
+    width: 112px;
+    height: 40px
+}
+
+#demo-page .tree-shadow-wrap .tree-shadow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ccc;
+    -moz-opacity: .75;
+    opacity: .75
+}
+
+#demo-page #overview-info.chunk {
+    min-height: 200px
+}
+
+#demo-page #overview-summary.chunk {
+    min-height: 200px
+}
+
+#demo-page #overview-summary.chunk .result {
+    margin-top: 37px;
+    color: #488fce
+}
+
+#page-footer {
+    margin-top: 150px
+}
+
+path.slice {
+    stroke-width: 2px
+}
+
+polyline {
+    opacity: .3;
+    stroke: #000;
+    stroke-width: 2px;
+    fill: none
+}
+
+#demo-page .demo2 .input-chunk textarea.input {
+    height: 230px
+}
+
+#demo-page .demo2 #overview-cloud .wrap {
+    background-color: #f6f6f6
+}
+
+#demo-page .demo2 #overview-cloud .loading,#demo-page .demo2 #overview-cloud .warn-tips {
+    top: 50%
+}
+
+#demo-page .demo2 .loading,#demo-page .demo2 .warn-tips {
+    top: 65%
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap {
+    margin-top: 18px;
+    background-color: #fff;
+    min-height: 0
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap.col-xs-12 {
+    padding: 0
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .header-bar {
+    padding: 8px 25px 9px 10px;
+    height: 52px;
+    font-size: 12px;
+    color: #3e3e3e;
+    line-height: 34px;
+    border-bottom: 1px solid #efefef
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .header-bar span {
+    color: #7b7b7b
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .header-bar .standard {
+    display: inline-block;
+    vertical-align: middle
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .header-bar .note {
+    color: #eb6a5a
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list {
+    position: relative;
+    padding-bottom: 18px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .v-line {
+    position: absolute;
+    left: 35px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #efefef
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item:after,#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item:before {
+    display: table;
+    content: " "
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item:after {
+    clear: both
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item {
+    position: relative;
+    padding-top: 14px;
+    min-height: 85px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl {
+    margin: 4px 26px 0 74px;
+    border: 1px solid #efefef;
+    border-radius: 8px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl dd,#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl dt {
+    padding: 10px 15px;
+    min-height: 41px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    border-bottom: 1px solid #efefef
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl .multi,#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl dt {
+    background-color: #f7f7f7
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl dd {
+    padding-left: 37px;
+    color: #488fcf
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl dd:last-child {
+    border-bottom: 0 none
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item dl .cursor {
+    cursor: pointer
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item .value {
+    position: absolute;
+    left: 17px;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+    border-radius: 18px;
+    border: 1px solid #eb6a5a;
+    color: #eb6a5a;
+    text-align: center;
+    line-height: 36px;
+    background-color: #fff
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item .arrow {
+    position: absolute;
+    left: 60px;
+    top: 34px;
+    border: 7px solid #dfdfdf;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item .chart {
+    float: left;
+    margin-left: 5px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .list .list-item .more-msg {
+    text-align: right;
+    padding-right: 26px;
+    padding: 5px 26px;
+    font-size: 12px;
+    color: #777
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 {
+    padding: 0
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .header-bar {
+    padding-right: 6px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .header-bar ul li {
+    width: 58px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .list {
+    margin-top: 8px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .list .list-item dl {
+    margin-left: 26px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .list .list-item .arrow {
+    left: 12px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .list .list-item .highlight {
+    color: #eb6a5a
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list {
+    margin-top: 20px;
+    margin-left: 24px
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd {
+    display: inline-block;
+    padding: 0 11px;
+    font-size: 14px;
+    line-height: 26px;
+    margin: 0 5px 5px 0;
+    cursor: pointer;
+    color: #fff
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-0 {
+    background-color: #3075b3
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-1 {
+    background-color: #3583c7
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-2 {
+    background-color: #488fce
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-3 {
+    background-color: #5c9bd3
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-4 {
+    background-color: #5798d2
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-5 {
+    background-color: #70a8d9
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-6 {
+    background-color: #67a2d6
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-7 {
+    background-color: #76abda
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.l-8 {
+    background-color: #86b5df
+}
+
+#demo-page .demo2 .col-xs-9 .chunk .wrap .col-xs-6 .classic-list dd.active {
+    background-color: #eb6a5a
+}
+
+#demo-page .tool .input-chunk textarea.input {
+    margin-top: 0;
+    height: 220px
+}
+
+#demo-page .tool .loading.helper-loading {
+    top: 76%
+}
+
+#demo-page .chunk .btn-arrow.download .icon {
+    background: 0 -18px
+}
+
+#demo-page .pagination-wrap {
+    text-align: right;
+    padding-top: 15px;
+    margin-right: 26px
+}
+
+#demo-page .col-xs-9 .chunk .title {
+    font-size: 14px
+}
+
+#demo-page .helper-tips .time-table table {
+    width: 440px
+}
+
+#demo-page .helper-tips .col-0 {
+    margin-top: 30px;
+    margin-left: 230px
+}
+
+#demo-page .helper-tips .title .time-tips {
+    color: #888
+}
+
+.switch-toggle.switch-6 a,.switch-toggle.switch-6 label {
+    width: 60px
+}
+
+.switch-toggle.switch-6 input:checked:nth-of-type(2)~a {
+    left: 60px
+}
+
+.switch-toggle.switch-6 input:checked:nth-of-type(3)~a {
+    left: 120px
+}
+
+.switch-toggle.switch-6 input:checked:nth-of-type(4)~a {
+    left: 180px
+}
+
+.switch-toggle.switch-6 input:checked:nth-of-type(5)~a {
+    left: 240px
+}
+
+.switch-toggle.switch-6 input:checked:last-of-type~a {
+    left: 300px
+}
+
+.bs-sidebar .nav li a {
+    font-size: 14px;
+    display: inline-block;
+    width: 250px;
+    height: 100%;
+    line-height: 33px;
+    color: #777;
+}

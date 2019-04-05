@@ -43,7 +43,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware', # close CSRF to avoid CS problems
+    'django.middleware.csrf.CsrfViewMiddleware',  # close CSRF to avoid CS problems
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -119,5 +119,11 @@ USE_TZ = True
 
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ('D:/Users/LucasX/PycharmProjects/XCloud/cv/static', '/root/Project/XCloud/cv/static',
-                    'D:/Users/29140/PycharmProjects/XCloud/cv/static')
+STATICFILES_DIRS = (
+    'D:/Users/LucasX/PycharmProjects/XCloud/cv/static',
+    '/root/Project/XCloud/cv/static',
+    'D:/Users/29140/PycharmProjects/XCloud/cv/static',
+    'D:/Users/LucasX/PycharmProjects/XCloud/nlp/static',
+    '/root/Project/XCloud/nlp/static',
+    'D:/Users/29140/PycharmProjects/XCloud/nlp/static',
+)

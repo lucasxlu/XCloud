@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis</title>
+    {#    {% load static %}#}
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/layer/layer.js"></script>
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/common.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap-4.0.0-alpha.5-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon.ico">
+    <style>
+        textarea {
+            width: 100%;
+            padding: 15px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        h2 {
+            font-family: Times, serif;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 style="padding-top: 20px;">Sentiment Analysis</h2>
+    <textarea name="text" rows="10"></textarea>
+    <button class="btn btn-primary btn-block" onclick="sentiment()"><i class="fa fa-cogs" aria-hidden="true"></i>Analyze
+    </button>
+    <div id="main" style="width:100%;height:600px;">
+    </div>
+</div>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+            tooltip: {
+                formatter: "{a} <br/>{c} {b}"
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            series: [
+                {
+                    min: 0.0,
+                    max: 1.0,
+                    name: 'Sentiment',
+                    type: "gauge",
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.2, '#ff4500'], [0.8, '#1e90ff'], [1, '#91c7ae']]
+                        }
+                    },
+                    title: {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'normal',
+                            fontSize: 15
+                        }
+                    },
+                    center: ['50%', '50%'],    // 默认全局居中
+                    radius: '70%',
+                    detail:
+                        {
+                            formatter: '{value}'
+                        },
+                    data: [{value: 50, name: 'Positive'}]
+                },
+            ]
+        }
+    ;
+
+    function sentiment() {
+        var val = $("textarea").val();
+        if (val.trim() !== "") {
+            var index = layer.load(0, {shade: [0.3, "rgba(0,0,0,0.5)"]});
+            $.ajax({
+                url: "/nlp/sentiment",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                data: {
+                    "sentence": $("textarea").val(),
+                    "csrfmiddlewaretoken": $("#csrfmiddlewaretoken").val()
+                },    //参数值
+                type: "GET"   //请求方式
+            }).done(function (data) {
+                layer.close(index);
+
+                var type = data.data.type;
+                var score = data.data.score.toFixed(3);
+
+                console.log(type);
+                console.log(score);
+
+                option.series[0].title.textStyle.fontWeight = 'bolder';
+                option.series[0].title.textStyle.fontSize = '20';
+                option.series[0].data[0].name = type;
+                option.series[0].data[0].value = score;
+
+                myChart.setOption(option, true);
+            });
+        } else {
+            layer.msg("Invalid input text", {icon: 2, shift: 6})
+        }
+    }
+</script>
+<div align="center">
+    <div class="amz-toolbar" id="amz-toolbar" style="right: 10px;">
+        <a title="Back to Top" class="am-icon-btn am-active" id="amz-go-top"><i class="fa fa-arrow-up"></i></a>
+        <a href="/cv/index" title="Back to Home" class="am-icon-btn am-icon-faq am-icon-question-circle"><i
+                class="fa fa-home"></i></a>
+    </div>
+    <footer>Copyright &copy; 2019 <a href="/cv/index" style="text-decoration: none">XCloud</a></footer>
+</div>
+</body>
+</html>

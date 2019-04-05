@@ -1,3 +1,4 @@
+import time
 import json
 from collections import OrderedDict
 
@@ -5,6 +6,7 @@ import jieba as jieba
 import jieba.analyse
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 USER_DICT = './userdict.txt'
 STOPWORDS_FILE = './stopwords.txt'
@@ -61,6 +63,7 @@ def word_seg(request):
     return HttpResponse(json_result)
 
 
+@csrf_exempt
 def sentiment(request):
     """
     calculate sentiment of a specific sentence
@@ -70,6 +73,8 @@ def sentiment(request):
     """
     sentence = request.GET.get('sentence')
     result = OrderedDict()
+
+    tik = time.time()
 
     if sentence is None:
         result['code'] = 1
@@ -96,6 +101,12 @@ def sentiment(request):
             'score': senti_score
         }
 
+    result['elapse'] = time.time() - tik
+
     json_result = json.dumps(result, ensure_ascii=False)
 
     return HttpResponse(json_result)
+
+
+def sentiment_view(request):
+    return render(request, 'sentiment.html')
