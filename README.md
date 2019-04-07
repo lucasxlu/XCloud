@@ -7,7 +7,7 @@ __XCloud__ is an open-source AI platform which provides common AI services
 with RESTful APIs. The platform is developed and maintained by [@LucasX](https://github.com/lucasxlu) based on [Django](https://www.djangoproject.com/) and [PyTorch](https://pytorch.org/).
 
 ## Features
-* [Computer  Vision](./cv)
+* [Computer Vision](./cv)
     * Face Analysis
         - [x] Face  Comparison
         - [x] Facial Beauty Prediction
@@ -17,7 +17,9 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Facial Expression Recognition
     * Image Recognition
         - [x] Scene Recognition
+        - [x] Food Recognition
         - [x] Flower Recognition
+        - [x] Plant Disease Recognition
         - [x] Pornography Image Recognition
 * [NLP](./nlp)
     - [x] Text Similarity Comparison
@@ -33,7 +35,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 * [Research](./research)    
     - [x] Age Estimation 
     - [x] Facial Beauty Prediction (ShuffleNet V2 as backbone)
-    - [x] NSFW
+    - [x] Medical Image Analysis (Skin Lesion Analysis)
     
 ## Deployment
 1. create a virtual enviroment named ```pyWeb``` follow [this tutorial](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
@@ -41,7 +43,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 3. install all dependent libraries: ```pip3 install -r requirements.txt```
 4. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
 5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
-6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/cv/index```
+6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/index```
 
 ![index](index.png)
 
