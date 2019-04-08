@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Food Recognition</title>
+    {#    {% load static %}#}
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link rel="stylesheet"
+          href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon.ico">
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
+    <style>
+        pre code {
+            background-color: #eee;
+            border: 1px solid #999;
+            display: block;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2 align="center" style="font-family: 'Times New Roman'">Food Recognition</h2>
+
+<div align="center">
+    <form enctype="multipart/form-data" style="width: 30%">{% csrf_token %}
+        <div class="am-form-group am-form-file">
+            <button type="button" class="am-btn am-btn-danger am-btn-block">
+                <i class="am-icon-cloud-upload"></i> Choose Image
+                <input type="file" placeholder="upload image" name="image">
+                {#                <input id="doc-form-file" type="file" multiple>#}
+            </button>
+        </div>
+
+        <input type="button" value="Detect" id='upload-btn'
+               class="am-btn am-btn-success am-btn-block" onclick="upload()">
+    </form>
+    <img class="am-img-responsive" alt="" src="" style="max-height: 320px;
+    margin-top: 5px"/>
+</div>
+
+<div align="center">
+    <p>The food is <span id="desc" style="color:
+    red"></span>, AI takes
+        <span id="time" style="color: red">0</span> seconds!
+    </p>
+</div>
+
+<pre>
+  <code>
+  </code>
+</pre>
+
+<footer style="text-align: center">
+    Powered by <a href="index" target="_blank">XCloud</a>
+    Supported by <a href="https://www.zhihu.com/people/xulu-0620/activities"
+                    target="_blank">LucasX</a>
+</footer>
+
+<script>
+    function upload() {
+        var src = $("input[name='image']").val();
+        var imgName = src.split("\\")[src.split('\\').length - 1];
+        var data = new FormData($('form').get(0));
+
+        $.ajax({
+            url: 'food',
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log('success');
+                var result = eval('(' + data + ')');
+                $('#desc').text(result.results[0].name);
+                $('#time').text(result.elapse);
+                $('img').attr('src', '../../../static/FoodUpload/' + imgName);
+                $('code').text(JSON.stringify(result, null, 4));
+            }
+        });
+
+        return false;
+    }
+</script>
+</body>
+</html>

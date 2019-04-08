@@ -52,12 +52,14 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 * [@reallinfo](https://github.com/reallinfo): logo design
 
 ## Note
-XCloud is **free for researchers**. For commercial use, please email me AT 
+* XCloud is **free for researchers**. For commercial use, please email me AT 
 **xulu0620@gmail.com** for more details. 
 
-More features will be added in the next future!
+* More features will be added in the next future!
 For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to 
-[CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
+[CVLH](https://github.com/lucasxlu/CVLH.git) for more details!
+
+* Please ensure that your machine has a strong GPU equipment, otherwise your will feel like presenting PPT.  
 
 ## License
 [MIT](./LICENSE)

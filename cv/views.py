@@ -42,6 +42,15 @@ def fbp(request):
     return controllers.upload_and_rec_beauty(request)
 
 
+def food_view(request):
+    return render(request, 'food.html')
+
+
+def food(request):
+    from cv import controllers
+    return controllers.upload_and_rec_food(request)
+
+
 def plant_view(request):
     return render(request, 'plant.html')
 
