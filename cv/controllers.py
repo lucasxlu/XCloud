@@ -290,6 +290,7 @@ class PlantRecognizer:
 
         model = model.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+        model.to(device)
 
         if torch.cuda.device_count() > 1:
             print("We are running on", torch.cuda.device_count(), "GPUs!")
@@ -303,7 +304,6 @@ class PlantRecognizer:
                 name = k[7:]  # remove `module.`
                 new_state_dict[name] = v
 
-        model.to(device)
         model.eval()
 
         df = pd.read_csv('cv/label.csv')
@@ -425,6 +425,7 @@ class PlantDiseaseRecognizer:
 
         model = model.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+        model.to(device)
 
         # model = nn.DataParallel(model)
         # model.load_state_dict(torch.load(pretrained_model_path))
@@ -442,7 +443,6 @@ class PlantDiseaseRecognizer:
                 new_state_dict[name] = v
             model.load_state_dict(new_state_dict)
 
-        model.to(device)
         model.eval()
 
         self.device = device
@@ -564,6 +564,7 @@ class FoodRecognizer:
 
         model = model.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+        model.to(device)
 
         # model = nn.DataParallel(model)
         model.load_state_dict(torch.load(pretrained_model_path))
@@ -582,7 +583,6 @@ class FoodRecognizer:
         #
         #     model.load_state_dict(new_state_dict)
 
-        model.to(device)
         model.eval()
 
         self.device = device
