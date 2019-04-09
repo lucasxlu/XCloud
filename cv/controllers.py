@@ -71,7 +71,6 @@ class BeautyRecognizer:
         # model.load_state_dict(torch.load(pretrained_model))
         model.load_state_dict(torch.load(pretrained_model, map_location=lambda storage, loc: storage))
 
-        model.to(device)
         model.eval()
         self.model = model
         self.device = device
@@ -129,12 +128,11 @@ class SkinDiseaseRecognizer:
 
         model = densenet121.float()
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-        # model = model.to(device)
+        model = model.to(device)
 
         model.load_state_dict(torch.load(pretrained_model))
         # model.load_state_dict(torch.load(pretrained_model, map_location=lambda storage, loc: storage))
 
-        model.to(device)
         model.eval()
         self.model = model
         self.device = device
@@ -229,10 +227,9 @@ class NSFWEstimator:
         model.classifier = nn.Linear(num_ftrs, self.num_cls)
 
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-
+        model.to(device)
         model.load_state_dict(torch.load(pretrained_model_path))
 
-        model.to(device)
         model.eval()
 
         self.device = device
