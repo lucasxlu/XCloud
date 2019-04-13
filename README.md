@@ -10,7 +10,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 * [Computer Vision](./cv)
     * Face Analysis
         - [x] Face  Comparison
-        - [x] Facial Beauty Prediction
+        - [x] Facial Beauty Prediction (ShuffleNet V2 as backbone)
         - [x] Gender Recognition
         - [x] Race Recognition
         - [x] Age Estimation
@@ -21,6 +21,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Flower Recognition
         - [x] Plant Disease Recognition
         - [x] Pornography Image Recognition
+        - [x] Skin Disease Recognition
 * [NLP](./nlp)
     - [x] Text Similarity Comparison
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
@@ -34,7 +35,6 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Weather History
 * [Research](./research)    
     - [x] Age Estimation 
-    - [x] Facial Beauty Prediction (ShuffleNet V2 as backbone)
     - [x] Medical Image Analysis (Skin Lesion Analysis)
     
 ## Deployment

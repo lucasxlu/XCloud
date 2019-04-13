@@ -130,7 +130,8 @@ class SkinDiseaseRecognizer:
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         model = model.to(device)
 
-        model.load_state_dict(torch.load(pretrained_model))
+        model.load_state_dict(torch.load(pretrained_model, map_location=torch.device(
+            'cuda:0') if torch.cuda.is_available() else torch.device('cpu')))
         # model.load_state_dict(torch.load(pretrained_model, map_location=lambda storage, loc: storage))
 
         model.eval()
@@ -228,7 +229,8 @@ class NSFWEstimator:
 
         device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         model.to(device)
-        model.load_state_dict(torch.load(pretrained_model_path))
+        model.load_state_dict(torch.load(pretrained_model_path, map_location=torch.device(
+            'cuda:0') if torch.cuda.is_available() else torch.device('cpu')))
 
         model.eval()
 
@@ -297,7 +299,8 @@ class PlantRecognizer:
             model = nn.DataParallel(model)
             model.load_state_dict(torch.load(pretrained_model_path))
         else:
-            state_dict = torch.load(pretrained_model_path)
+            state_dict = torch.load(pretrained_model_path, map_location=torch.device(
+                'cuda:0') if torch.cuda.is_available() else torch.device('cpu'))
             from collections import OrderedDict
             new_state_dict = OrderedDict()
             for k, v in state_dict.items():
@@ -433,7 +436,8 @@ class PlantDiseaseRecognizer:
         if torch.cuda.device_count() > 1:
             print("We are running on", torch.cuda.device_count(), "GPUs!")
             model = nn.DataParallel(model)
-            model.load_state_dict(torch.load(pretrained_model_path))
+            model.load_state_dict(torch.load(pretrained_model_path, map_location=torch.device(
+                'cuda:0') if torch.cuda.is_available() else torch.device('cpu')))
         else:
             state_dict = torch.load(pretrained_model_path)
             from collections import OrderedDict
@@ -567,7 +571,8 @@ class FoodRecognizer:
         model.to(device)
 
         # model = nn.DataParallel(model)
-        model.load_state_dict(torch.load(pretrained_model_path))
+        model.load_state_dict(torch.load(pretrained_model_path, map_location=torch.device(
+            'cuda:0') if torch.cuda.is_available() else torch.device('cpu')))
 
         # if torch.cuda.device_count() > 1:
         #     print("We are running on", torch.cuda.device_count(), "GPUs!")
