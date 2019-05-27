@@ -6,3 +6,8 @@ snownlp==0.12.3
 tensorflow-gpu==1.13.0
 requests==2.22.0
 pymysql==0.9.3
+pandas==0.24.2
+Pillow==6.0.0
+scikit-image==0.15.0
+scikit_learn==0.21.2
+dlib==19.17.0
