@@ -122,8 +122,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     'D:/Users/LucasX/PycharmProjects/XCloud/cv/static',
     '/root/Project/XCloud/cv/static',
+    '/home/xulu/Project/XCloud/cv/static',
     'D:/Users/29140/PycharmProjects/XCloud/cv/static',
     'D:/Users/LucasX/PycharmProjects/XCloud/nlp/static',
     '/root/Project/XCloud/nlp/static',
+    '/home/xulu/Project/XCloud/nlp/static',
     'D:/Users/29140/PycharmProjects/XCloud/nlp/static',
 )
