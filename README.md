@@ -1,6 +1,6 @@
 <p align="left"><img src="logo/horizontal.svg" alt="XCloud" height="120px"></p>
 
-# XCloud (EXplore Cloud)
+# XCloud (EXtensive Cloud)
 ## Introduction
 __XCloud__ is an open-source AI platform which provides common AI services 
 (computer vision, NLP, data mining and etc.)
@@ -55,11 +55,23 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 * XCloud is **free for researchers**. For commercial use, please email me AT 
 **xulu0620@gmail.com** for more details. 
 
+* **Please ensure that your machine has a strong GPU equipment**.
+
 * More features will be added in the next future!
 For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to 
-[CVLH](https://github.com/lucasxlu/CVLH.git) for more details!
+[CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 
-* Please ensure that your machine has a strong GPU equipment, otherwise your will feel like presenting PPT.  
+
+If you use our codebase or models in your research, please cite this project. We will release a paper or technical report later.
+```
+@misc{xu2019xcloud,
+  author =       {Lu Xu and Jinhai Xiang and Yating Wang and Xueying Zhang},
+  title =        {XCloud: Design and Implementation of AI Cloud Platform with RESTful API Service},
+  howpublished = {\url{https://github.com/lucasxlu/XCloud.git}},
+  year =         {2019}
+}
+```
+
 
 ## License
 [MIT](./LICENSE)
