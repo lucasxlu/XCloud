@@ -83,6 +83,15 @@ def pdr(request):
     return controllers.upload_and_rec_plant_disease(request)
 
 
+def face_search_view(request):
+    return render(request, 'facesearch.html')
+
+
+def face_search(request):
+    from cv import controllers
+    return None
+
+
 def detect_face(request):
     """
     face detection
