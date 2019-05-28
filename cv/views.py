@@ -12,6 +12,8 @@ from mtcnn.mtcnn import MTCNN
 sys.path.append('../')
 from cv import db_utils
 
+USE_MYSQL = False
+
 
 # Create your views here.
 
@@ -134,16 +136,14 @@ def rec_skin(request):
     #
     # return HttpResponse(json_result)
 
-    conn = db_utils.connect_mysql_db()
-
     from cv import controllers
     skin_disease_result = controllers.upload_and_rec_skin_disease(request)
-
     skin_disease_result_json = json.loads(skin_disease_result.content.decode('utf-8'))
 
     print(skin_disease_result_json)
 
-    if skin_disease_result_json['code'] == 0:
+    if USE_MYSQL and skin_disease_result_json['code'] == 0:
+        conn = db_utils.connect_mysql_db()
         db_utils.insert_to_api(conn, 'LucasX', 'cv/mcloud/skin', skin_disease_result_json['elapse'],
                                datetime.time(), 0, skin_disease_result_json['imgpath'],
                                skin_disease_result_json['results'][0]['disease'])
