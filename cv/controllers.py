@@ -18,6 +18,7 @@ from torchvision import models
 from torchvision.transforms import transforms
 
 from cv import features
+from cv.feat_extractor import ext_feats
 from cv.shufflenet_v2 import ShuffleNetV2
 from cv.cfg import cfg
 
@@ -1052,6 +1053,58 @@ def upload_and_rec_food(request):
             result['msg'] = 'success'
             result['imgpath'] = imagepath
             result['results'] = plant_result['results']
+            result['elapse'] = round(time.time() - tik, 2)
+
+            json_str = json.dumps(result, ensure_ascii=False)
+
+            return HttpResponse(json_str)
+    else:
+        result['code'] = 3
+        result['msg'] = 'Invalid HTTP Method'
+        result['data'] = None
+
+        json_result = json.dumps(result, ensure_ascii=False)
+
+        return HttpResponse(json_result)
+
+
+def upload_and_ext_face_feats(request):
+    """
+    upload and extract face features
+    :param request:
+    :return:
+    """
+    image_dir = 'cv/static/FaceUpload'
+    if not os.path.exists(image_dir):
+        os.makedirs(image_dir)
+
+    result = {}
+
+    if request.method == "POST":
+        image = request.FILES.get("image", None)
+        if not image:
+            result['code'] = 3
+            result['msg'] = 'Invalid Path for Image'
+            result['results'] = None
+
+            json_result = json.dumps(result, ensure_ascii=False)
+
+            return HttpResponse(json_result)
+        else:
+            destination = open(os.path.join(image_dir, image.name), 'wb+')
+            for chunk in image.chunks():
+                destination.write(chunk)
+            destination.close()
+
+            tik = time.time()
+            imagepath = URL_PORT + '/static/FaceUpload/' + image.name
+
+            face_feats_result = ext_feats(os.path.join(image_dir, image.name))
+
+            result['code'] = 0
+            result['msg'] = 'success'
+            result['imgpath'] = imagepath
+            result['results'] = face_feats_result['feature']
             result['elapse'] = round(time.time() - tik, 2)
 
             json_str = json.dumps(result, ensure_ascii=False)

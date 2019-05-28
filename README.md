@@ -15,6 +15,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Race Recognition
         - [x] Age Estimation
         - [x] Facial Expression Recognition
+        - [ ] Face Search (TODO)
     * Image Recognition
         - [x] Scene Recognition
         - [x] Food Recognition
