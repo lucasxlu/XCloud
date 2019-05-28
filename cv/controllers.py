@@ -168,7 +168,7 @@ class SkinDiseaseRecognizer:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        if prob[0] >= cfg['thresholds']['skin_disease_recognition']:
+        if prob[0][0] >= cfg['thresholds']['skin_disease_recognition']:
             return {
                 "status": 0,
                 "message": "success",
@@ -217,7 +217,7 @@ class SkinDiseaseRecognizer:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        if prob[0] >= cfg['thresholds']['skin_disease_recognition']:
+        if prob[0][0] >= cfg['thresholds']['skin_disease_recognition']:
             return {
                 "status": 0,
                 "message": "success",
@@ -372,7 +372,7 @@ class PlantRecognizer:
 
         tok = time.time()
 
-        if prob[0] >= cfg['thresholds']['plant_recognition']:
+        if prob[0][0] >= cfg['thresholds']['plant_recognition']:
             return {
                 'status': 0,
                 'message': 'success',
@@ -441,7 +441,7 @@ class PlantRecognizer:
 
             tok = time.time()
 
-            if prob[0] >= cfg['thresholds']['plant_recognition']:
+            if prob[0][0] >= cfg['thresholds']['plant_recognition']:
                 return {
                     'status': 0,
                     'message': 'success',
@@ -595,7 +595,7 @@ class PlantDiseaseRecognizer:
         _, predicted = torch.max(outputs.data, 1)
         tok = time.time()
 
-        if prob[0] >= cfg['thresholds']['plant_disease_recognition']:
+        if prob[0][0] >= cfg['thresholds']['plant_disease_recognition']:
             return {
                 'status': 0,
                 'message': 'success',
@@ -691,7 +691,7 @@ class FoodRecognizer:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        if prob[0] >= cfg['thresholds']['food_recognition']:
+        if prob[0][0] >= cfg['thresholds']['food_recognition']:
             return {
                 'status': 0,
                 'message': 'success',
