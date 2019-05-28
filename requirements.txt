@@ -11,3 +11,4 @@ Pillow==6.0.0
 scikit-image==0.15.0
 scikit_learn==0.21.2
 dlib==19.17.0
+easydict==1.9

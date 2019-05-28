@@ -11,8 +11,7 @@ from mtcnn.mtcnn import MTCNN
 
 sys.path.append('../')
 from cv import db_utils
-
-USE_MYSQL = False
+from cv.cfg import cfg
 
 
 # Create your views here.
@@ -142,7 +141,7 @@ def rec_skin(request):
 
     print(skin_disease_result_json)
 
-    if USE_MYSQL and skin_disease_result_json['code'] == 0:
+    if cfg['use_mysql'] and skin_disease_result_json['code'] == 0:
         conn = db_utils.connect_mysql_db()
         db_utils.insert_to_api(conn, 'LucasX', 'cv/mcloud/skin', skin_disease_result_json['elapse'],
                                datetime.time(), 0, skin_disease_result_json['imgpath'],

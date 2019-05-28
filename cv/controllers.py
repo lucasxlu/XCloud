@@ -19,6 +19,7 @@ from torchvision.transforms import transforms
 
 from cv import features
 from cv.shufflenet_v2 import ShuffleNetV2
+from cv.cfg import cfg
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROB_THRESH = 0.3
@@ -167,16 +168,28 @@ class SkinDiseaseRecognizer:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        return {
-            "status": 0,
-            "message": "success",
-            "results": [
-                {
-                    "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
-                    "probability": round(prob[0][i], 4),
-                } for i in range(self.topK)
-            ]
-        }
+        if topK_prob[0] >= cfg['thresholds']['skin_disease_recognition']:
+            return {
+                "status": 0,
+                "message": "success",
+                "results": [
+                    {
+                        "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
+                        "probability": round(prob[0][i], 4),
+                    } for i in range(self.topK)
+                ]
+            }
+        else:
+            return {
+                "status": 0,
+                "message": "success",
+                "results": [
+                    {
+                        "disease": "Unknown",
+                        "probability": round(prob[0][0], 4),
+                    }
+                ]
+            }
 
     def infer_from_img(self, img):
         import io
@@ -204,16 +217,28 @@ class SkinDiseaseRecognizer:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        return {
-            "status": 0,
-            "message": "success",
-            "results": [
-                {
-                    "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
-                    "probability": round(prob[0][i], 4),
-                } for i in range(self.topK)
-            ]
-        }
+        if topK_prob[0] >= cfg['thresholds']['skin_disease_recognition']:
+            return {
+                "status": 0,
+                "message": "success",
+                "results": [
+                    {
+                        "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
+                        "probability": round(prob[0][i], 4),
+                    } for i in range(self.topK)
+                ]
+            }
+        else:
+            return {
+                "status": 0,
+                "message": "success",
+                "results": [
+                    {
+                        "disease": "Unknown",
+                        "probability": round(prob[0][0], 4),
+                    }
+                ]
+            }
 
 
 class NSFWEstimator:
@@ -347,18 +372,32 @@ class PlantRecognizer:
 
         tok = time.time()
 
-        return {
-            'status': 0,
-            'message': 'success',
-            'elapse': tok - tik,
-            'results': [
-                {
-                    'name': self.key_type[int(topK_label[0][i].to("cpu"))],
-                    'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
-                    'prob': round(prob[0][i], 4)
-                } for i in range(self.topK)
-            ]
-        }
+        if topK_prob[0] >= cfg['thresholds']['plant_recognition']:
+            return {
+                'status': 0,
+                'message': 'success',
+                'elapse': tok - tik,
+                'results': [
+                    {
+                        'name': self.key_type[int(topK_label[0][i].to("cpu"))],
+                        'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
+                        'prob': round(prob[0][i], 4)
+                    } for i in range(self.topK)
+                ]
+            }
+        else:
+            return {
+                'status': 0,
+                'message': 'success',
+                'elapse': tok - tik,
+                'results': [
+                    {
+                        'name': "Unknown",
+                        'category_id': -1,
+                        'prob': round(prob[0][0], 4)
+                    }
+                ]
+            }
 
     def infer_from_img_url(self, img_url):
         tik = time.time()
@@ -402,18 +441,32 @@ class PlantRecognizer:
 
             tok = time.time()
 
-            return {
-                'status': 0,
-                'message': 'success',
-                'elapse': tok - tik,
-                'results': [
-                    {
-                        'name': self.key_type[int(topK_label[0][i].to("cpu"))],
-                        'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
-                        'prob': round(prob[0][i], 4)
-                    } for i in range(self.topK)
-                ]
-            }
+            if topK_prob[0] >= cfg['thresholds']['plant_recognition']:
+                return {
+                    'status': 0,
+                    'message': 'success',
+                    'elapse': tok - tik,
+                    'results': [
+                        {
+                            'name': self.key_type[int(topK_label[0][i].to("cpu"))],
+                            'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
+                            'prob': round(prob[0][i], 4)
+                        } for i in range(self.topK)
+                    ]
+                }
+            else:
+                return {
+                    'status': 0,
+                    'message': 'success',
+                    'elapse': tok - tik,
+                    'results': [
+                        {
+                            'name': "Unknown",
+                            'category_id': -1,
+                            'prob': round(prob[0][0], 4)
+                        }
+                    ]
+                }
 
 
 class PlantDiseaseRecognizer:
@@ -542,18 +595,32 @@ class PlantDiseaseRecognizer:
         _, predicted = torch.max(outputs.data, 1)
         tok = time.time()
 
-        return {
-            'status': 0,
-            'message': 'success',
-            'elapse': tok - tik,
-            'results': [
-                {
-                    'name': self.key_type[int(topK_label[0][i].to("cpu"))],
-                    'disease': int(topK_label[0][i].data.to("cpu").numpy()),
-                    'prob': round(prob[0][i], 4)
-                } for i in range(self.topK)
-            ]
-        }
+        if topK_prob[0] >= cfg['thresholds']['plant_disease_recognition']:
+            return {
+                'status': 0,
+                'message': 'success',
+                'elapse': tok - tik,
+                'results': [
+                    {
+                        'name': self.key_type[int(topK_label[0][i].to("cpu"))],
+                        'disease': int(topK_label[0][i].data.to("cpu").numpy()),
+                        'prob': round(prob[0][i], 4)
+                    } for i in range(self.topK)
+                ]
+            }
+        else:
+            return {
+                'status': 0,
+                'message': 'success',
+                'elapse': tok - tik,
+                'results': [
+                    {
+                        'name': "Unknown",
+                        'disease': -1,
+                        'prob': round(prob[0][0], 4)
+                    }
+                ]
+            }
 
 
 class FoodRecognizer:
@@ -624,18 +691,31 @@ class FoodRecognizer:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        return {
-            'status': 0,
-            'message': 'success',
-            'results': [
-                {
-                    'name': self.key_type[int(topK_label[0][i].to("cpu"))] if int(
-                        topK_label[0][i].to("cpu")) in self.key_type.keys() else 'Unknown',
-                    'category': int(topK_label[0][i].data.to("cpu").numpy()),
-                    'prob': round(prob[0][i], 4)
-                } for i in range(self.topK)
-            ]
-        }
+        if topK_prob[0] >= cfg['thresholds']['food_recognition']:
+            return {
+                'status': 0,
+                'message': 'success',
+                'results': [
+                    {
+                        'name': self.key_type[int(topK_label[0][i].to("cpu"))] if int(
+                            topK_label[0][i].to("cpu")) in self.key_type.keys() else 'Unknown',
+                        'category': int(topK_label[0][i].data.to("cpu").numpy()),
+                        'prob': round(prob[0][i], 4)
+                    } for i in range(self.topK)
+                ]
+            }
+        else:
+            return {
+                'status': 0,
+                'message': 'success',
+                'results': [
+                    {
+                        'name': 'Unknown',
+                        'category': -1,
+                        'prob': round(prob[0][0], 4)
+                    }
+                ]
+            }
 
 
 beauty_recognizer = BeautyRecognizer()
