@@ -1,3 +1,5 @@
+import pickle
+import os
 import cv2
 import numpy as np
 import torch
@@ -78,5 +80,31 @@ def ext_feats(sphere_face, img_path, pretrained_model='model/sphere20a.pth'):
         }
 
 
+def batch_ext_feats(hzau_base_dir='/home/xulu/DataSet/HZAU'):
+    """
+    batch extract features
+    :return:
+    """
+    hzau_master_face_features = []
+    sphere_face = SphereFaceNet(feature=True)
+    for year in os.listdir(hzau_base_dir):
+        for college_id in os.listdir(os.path.join(hzau_base_dir, year)):
+            for img in os.listdir(os.path.join(hzau_base_dir, year, college_id)):
+                res = ext_feats(sphere_face=sphere_face, img_path=os.path.join(hzau_base_dir, year, college_id, img))
+                print('extract facial features for {0}...'.format(img))
+                if res['feature'] is not None:
+                    student = {
+                        'year': year,
+                        'college': college_id,
+                        'studentid': img.split('.')[0],
+                        'feature': res['feature'],
+                    }
+                    hzau_master_face_features.append(student)
+
+    with open('./hzau_master_face_features.pkl', mode='wb') as f:
+        pickle.dump(hzau_master_face_features, f)
+
+
 if __name__ == "__main__":
-    print(ext_feats(sphere_face=SphereFaceNet(feature=True), img_path="C:/Users/29140/Desktop/SCUT-FBP-1.jpg"))
+    # print(ext_feats(sphere_face=SphereFaceNet(feature=True), img_path="C:/Users/29140/Desktop/SCUT-FBP-1.jpg"))
+    batch_ext_feats()
