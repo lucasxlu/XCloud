@@ -10,14 +10,15 @@ from torchvision.transforms import transforms
 from cv.net_sphere import SphereFaceNet
 
 
-def detect_face(img_path):
+def detect_face(img_path, detector=MTCNN()):
     """
     detect face with MTCNN
     :param img_path:
     :return:
     """
     img = cv2.imread(img_path)
-    detector = MTCNN()
+    if detector is None:
+        detector = MTCNN()
     mtcnn_result = detector.detect_faces(img)
 
     return mtcnn_result
