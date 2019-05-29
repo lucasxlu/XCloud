@@ -88,7 +88,8 @@ class BeautyRecognizer:
             face_region = img[bbox[0] - margin_pixel: bbox[0] + bbox[2] + margin_pixel,
                           bbox[1] - margin_pixel: bbox[1] + bbox[3] + margin_pixel]
 
-            cv2.rectangle(img, (bbox[0] - margin_pixel, bbox[1] - margin_pixel), (bbox[0] + bbox[2] + margin_pixel, bbox[1] + bbox[3] + margin_pixel))
+            cv2.rectangle(img, (bbox[0] - margin_pixel, bbox[1] - margin_pixel),
+                          (bbox[0] + bbox[2] + margin_pixel, bbox[1] + bbox[3] + margin_pixel), (0, 255, 0), 1)
             cv2.imwrite(img_path, img)
 
             ratio = max(face_region.shape[0], face_region.shape[1]) / min(face_region.shape[0], face_region.shape[1])
