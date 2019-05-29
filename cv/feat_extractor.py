@@ -1,3 +1,4 @@
+import sys
 import pickle
 import os
 import cv2
@@ -7,6 +8,7 @@ from PIL import Image
 from mtcnn.mtcnn import MTCNN
 from torchvision.transforms import transforms
 
+sys.path.append('../')
 from cv.net_sphere import SphereFaceNet
 
 
