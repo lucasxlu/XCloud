@@ -80,9 +80,9 @@
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/FaceUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));
-                $('#bbox').attr('style', 'position: absolute;outline: rgb(74, 171, 232) solid 2px;z-index: 1;width: ' +
+                {% comment %}$('#bbox').attr('style', 'position: absolute;outline: rgb(74, 171, 232) solid 2px;z-index: 1;width: ' +
                     result.data.detection.box[2] + 'px; height: ' + result.data.detection.box[3] + 'px; left: ' +
-                    result.data.detection.box[0] + 'px; top: ' + result.data.detection.box[1] + 'px;');
+                    result.data.detection.box[0] + 'px; top: ' + result.data.detection.box[1] + 'px;');{% endcomment %}
             }
         });
 
