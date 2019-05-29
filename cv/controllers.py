@@ -90,9 +90,9 @@ class BeautyRecognizer:
             face_region = img[bbox[0] - margin_pixel: bbox[0] + bbox[2] + margin_pixel,
                           bbox[1] - margin_pixel: bbox[1] + bbox[3] + margin_pixel]
 
-            cv2.rectangle(img, (bbox[0] - margin_pixel, bbox[1] - margin_pixel),
-                          (bbox[0] + bbox[2] + margin_pixel, bbox[1] + bbox[3] + margin_pixel), (0, 255, 0), 2)
-            cv2.imwrite(img_path, img)
+            # cv2.rectangle(img, (bbox[0] - margin_pixel, bbox[1] - margin_pixel),
+            #               (bbox[0] + bbox[2] + margin_pixel, bbox[1] + bbox[3] + margin_pixel), (0, 255, 0), 2)
+            # cv2.imwrite(img_path, img)
 
             ratio = max(face_region.shape[0], face_region.shape[1]) / min(face_region.shape[0], face_region.shape[1])
             if face_region.shape[0] < face_region.shape[1]:
@@ -115,7 +115,7 @@ class BeautyRecognizer:
             face_region.unsqueeze_(0)
             face_region = face_region.to(self.device)
 
-            return float(self.model.forward(face_region).data.to("cpu").numpy())
+            return {"beauty": float(self.model.forward(face_region).data.to("cpu").numpy()), "mtcnn": mtcnn_result[0]}
         else:
             return None
 
@@ -762,14 +762,15 @@ def upload_and_rec_beauty(request):
             tik = time.time()
             imagepath = URL_PORT + '/static/FaceUpload/' + image.name
 
-            beauty = beauty_recognizer.infer(os.path.join(image_dir, image.name))
+            res = beauty_recognizer.infer(os.path.join(image_dir, image.name))
 
-            if beauty is not None:
+            if res is not None:
                 result['code'] = 0
                 result['msg'] = 'success'
                 result['data'] = {
                     'imgpath': imagepath,
-                    'beauty': round(beauty, 2)
+                    'beauty': round(res['beauty'], 2),
+                    'detection': res['mtcnn']
                 }
                 result['elapse'] = round(time.time() - tik, 2)
             else:

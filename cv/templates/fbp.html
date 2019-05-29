@@ -37,6 +37,8 @@
     </form>
     <img class="am-img-responsive" alt="" src="" style="max-height: 320px;
     margin-top: 5px"/>
+
+    <div></div>
 </div>
 
 <div align="center">
@@ -77,6 +79,9 @@
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/FaceUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));
+                $('#bbox').attr('style', 'position: absolute;outline: rgb(74, 171, 232) solid 2px;z-index: 1;width: ' +
+                    result.detection[2] + 'px; height: ' + result.detection[3] + 'px; left: ' + result.detection[0] +
+                    'px; top: ' + result.detection[1] + 'px;');
             }
         });
 
