@@ -35,10 +35,11 @@ class BeautyRecognizerML:
     def __init__(self, pretrained_model='cv/model/GradientBoostingRegressor.pkl'):
         gbr = joblib.load(pretrained_model)
         self.model = gbr
+        self.detector = MTCNN()
 
     def infer(self, img_path):
         img = cv2.imread(img_path)
-        mtcnn_result = detect_face(img_path)
+        mtcnn_result = detect_face(self.detector, img_path)
         bbox = mtcnn_result[0]['box']
 
         margin_pixel = 10
@@ -76,10 +77,11 @@ class BeautyRecognizer:
         model.eval()
         self.model = model
         self.device = device
+        self.detector = MTCNN()
 
     def infer(self, img_path):
         img = cv2.imread(img_path)
-        mtcnn_result = detect_face(img_path)
+        mtcnn_result = detect_face(self.detector, img_path)
 
         if len(mtcnn_result) > 0:
             bbox = mtcnn_result[0]['box']
@@ -789,14 +791,15 @@ def upload_and_rec_beauty(request):
         return HttpResponse(json_result)
 
 
-def detect_face(img_path):
+def detect_face(detector, img_path):
     """
     detect face with MTCNN
     :param img_path:
     :return:
     """
     img = cv2.imread(img_path)
-    detector = MTCNN()
+    if detector is None:
+        detector = MTCNN()
     mtcnn_result = detector.detect_faces(img)
 
     return mtcnn_result
