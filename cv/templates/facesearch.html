@@ -76,7 +76,8 @@
                 var htmlContent = '<div class=\"card\">';
                 for (var i = 0; i < results.length; i++) {
                     var res = results[i];
-                    htmlContent += '<img src=\../../../static/HZAU/"' + res[0] + '.jpg\" alt=\"' + res[0] + '\"/> + <p>' + res[1] + '</p>';
+                    htmlContent += '<img src=\../../../static/HZAU/' + res[0].slice(0, 4) + '/' + res[0].slice(4, 7) +
+                        '/' + res[0] + '.jpg alt=\"' + res[0] + '\"/> + <p>' + res[1] + '</p>';
                 }
                 htmlContent += '</div>';
                 $("#faceArea").html(htmlContent);
