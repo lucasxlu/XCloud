@@ -740,7 +740,8 @@ class FaceSearcher:
         self.sphere_face = SphereFaceNet(feature=True)
 
     def search(self, img_file):
-        face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
+        # face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
+        face_feat = ext_feats(self.sphere_face, img_path=img_file, pretrained_model='cv/model/sphere20a.pth')
 
         compare_result = {}
         for face_obj in self.face_feats_list:
