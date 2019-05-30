@@ -30,6 +30,14 @@ PROB_THRESH = 0.3
 URL_PORT = 'http://localhost:8000'
 
 
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray) or isinstance(obj, np.float32):
+            return obj.tolist()
+
+        return json.JSONEncoder.default(self, obj)
+
+
 class BeautyRecognizerML:
     """
     non-deep learning based facial beauty predictor
@@ -1200,7 +1208,7 @@ def upload_and_search_face(request):
             result['results'] = face_searcher.search(os.path.join(image_dir, image.name))['results']
             result['elapse'] = round(time.time() - tik, 2)
 
-            json_str = json.dumps(result, ensure_ascii=False)
+            json_str = json.dumps(result, ensure_ascii=False, cls=NumpyEncoder)
 
             return HttpResponse(json_str)
     else:
