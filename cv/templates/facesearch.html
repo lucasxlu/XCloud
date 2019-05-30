@@ -66,12 +66,19 @@
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log(data);
                 var result = eval('(' + data + ')');
-                $('#desc').text(result.data.beauty);
+                results = result.data.results
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/FaceUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));
+
+                var htmlContent = '<div class=\"card\">';
+                for (var i = 0; i < results.length; i++) {
+                    var res = results[i];
+                    htmlContent += '<img src=\../../../static/HZAU/"' + res[0] + '.jpg\" alt=\"' + res[0] + '\"/> + <p>' + res[1] + '</p>';
+                }
+                htmlContent += '</div>';
+                $("#faceArea").html(htmlContent);
             }
         });
 
