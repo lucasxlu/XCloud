@@ -740,8 +740,7 @@ class FaceSearcher:
         self.sphere_face = SphereFaceNet(feature=True)
 
     def search(self, img_file):
-        # face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
-        face_feat = ext_feats(self.sphere_face, img_path=img_file, pretrained_model='cv/model/sphere20a.pth')
+        face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
 
         compare_result = {}
         for face_obj in self.face_feats_list:
@@ -1192,6 +1191,8 @@ def upload_and_search_face(request):
 
             tik = time.time()
             imagepath = URL_PORT + '/static/FaceUpload/' + image.name
+
+            print(imagepath)
 
             result['code'] = 0
             result['msg'] = 'success'
