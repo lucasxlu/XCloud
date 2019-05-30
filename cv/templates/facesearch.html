@@ -56,6 +56,7 @@
 
 <script>
     function search() {
+        $('#upload-btn').attr("disabled", "disabled");
         var src = $("input[name='image']").val();
         var imgName = src.split("\\")[src.split('\\').length - 1];
         var data = new FormData($('form').get(0));
@@ -68,6 +69,7 @@
             processData: false,
             contentType: false,
             success: function (data) {
+                $('#upload-btn').removeAttr('disabled');
                 var result = eval('(' + data + ')');
                 results = result.results;
                 $('#time').text(result.elapse);
