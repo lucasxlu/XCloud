@@ -1197,7 +1197,7 @@ def upload_and_search_face(request):
             result['code'] = 0
             result['msg'] = 'success'
             result['imgpath'] = imagepath
-            result['results'] = face_searcher.search(imagepath)
+            result['results'] = face_searcher.search(os.path.join(image_dir, image.name))
             result['elapse'] = round(time.time() - tik, 2)
 
             json_str = json.dumps(result, ensure_ascii=False)
