@@ -57,33 +57,25 @@
         var src = $("input[name='image']").val();
         var imgName = src.split("\\")[src.split('\\').length - 1];
         var data = new FormData($('form').get(0));
-        var searchUrl = "facesearch";
 
         $.ajax({
-            url: searchUrl,
-            type: "POST",
+            url: 'fbp',
+            type: 'POST',
             data: data,
             cache: false,
             processData: false,
             contentType: false,
-        })
-            .done(function (json) {
-                    var faceList = json.data;
-                    var htmlContent = '<div class=\"card\">';
-                    for (var i = 0; i < faceList.length; i++) {
-                        var face = faceList[i];
-                        htmlContent += '<img src=\"' + face.avatarpath + '\" alt=\"' + face.idnumber + '\"/>';
-                    }
-                    htmlContent += '</div>';
-                    $("#faceArea").html(htmlContent);
-                }
-            )
-            .fail(function (xhr, status, errorThrown) {
-                $('#myModal').modal(options);
-                console.log("Error: " + errorThrown);
-                console.log("Status: " + status);
-                console.dir(xhr);
-            });
+            success: function (data) {
+                console.log(data);
+                var result = eval('(' + data + ')');
+                $('#desc').text(result.data.beauty);
+                $('#time').text(result.elapse);
+                $('img').attr('src', '../../../static/FaceUpload/' + imgName);
+                $('code').text(JSON.stringify(result, null, 4));
+            }
+        });
+
+        return false;
     }
 </script>
 
