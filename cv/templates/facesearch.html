@@ -44,7 +44,7 @@
         <img class="am-img-responsive" alt="" src="" style="max-height: 320px;
     margin-top: 5px"/>
     </div>
-    <h2 align="center">The people who look most similar to you</h2>
+    <h2 align="center" style="font-family: 'Times New Roman'">The people who look most similar to you</h2>
     <div id="faceArea"></div>
 </div>
 
@@ -78,8 +78,7 @@
                 for (var i = 0; i < results.length; i++) {
                     var res = results[i];
                     htmlContent += '<img src=\../../../static/HZAU/' + res[0].slice(0, 4) + '/' + res[0].slice(4, 7) +
-                        '/' + res[0] + '.jpg alt=\"' + res[0] + '\"/>' + '<p style="color: red">' + Math.floor(res[1] * 100)
-                        / 100 + '%</p>';
+                        '/' + res[0] + '.jpg alt=\"' + res[0] + '\"/>' + '<p style="color: red">' + res[1].toFixed(4) * 100 + '%</p>';
                 }
                 htmlContent += '</div>';
                 $("#faceArea").html(htmlContent);
