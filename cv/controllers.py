@@ -737,21 +737,23 @@ class FaceSearcher:
 
         self.topK = 10
         self.face_feats_list = face_feats_list
+        self.sphere_face = SphereFaceNet(feature=True)
 
     def search(self, img_file):
         face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
 
         compare_result = {}
         for face_obj in self.face_feats_list:
-            cos_sim = np.dot(face_feat, face_obj['feature']) / (norm(face_feat) * norm(face_obj['feature']))
-            compare_result[face_feat['studentid']] = cos_sim
+            cos_sim = np.dot(face_feat['feature'], face_obj['feature']) / \
+                      (norm(face_feat['feature']) * norm(face_obj['feature']))
+            compare_result[face_obj['studentid']] = cos_sim
 
-        sorted_compare_result = sorted(compare_result.items(), key=lambda kv: kv[1])
+        sorted_compare_result = sorted(compare_result.items(), key=lambda kv: kv[1], reverse=True)
 
         return {
             'status': 0,
             'message': 'success',
-            'results': sorted_compare_result[self.topK]
+            'results': sorted_compare_result[0: self.topK]
         }
 
 
