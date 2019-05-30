@@ -24,6 +24,7 @@
 <body>
 
 <h2 align="center" style="font-family: 'Times New Roman'">Face Search</h2>
+
 <div align="center" style="border: 2px pink;">
     <h5 align="center" style="font-family: 'Times New Roman'">Upload your portrait image and search Top-10 MS students
         who are most similar to you</h5>
@@ -67,7 +68,7 @@
             contentType: false,
             success: function (data) {
                 var result = eval('(' + data + ')');
-                results = result.data.results
+                results = result.results;
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/FaceUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));
