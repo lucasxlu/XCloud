@@ -2,11 +2,13 @@ import json
 import os
 import requests
 import time
+import pickle
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from numpy.linalg import norm
 import pandas as pd
 import cv2
 from PIL import Image
@@ -19,6 +21,7 @@ from torchvision.transforms import transforms
 
 from cv import features
 from cv.feat_extractor import ext_feats
+from cv.net_sphere import SphereFaceNet
 from cv.shufflenet_v2 import ShuffleNetV2
 from cv.cfg import cfg
 
@@ -723,12 +726,42 @@ class FoodRecognizer:
             }
 
 
+class FaceSearcher:
+    """
+    Face Search Class Wrapper
+    """
+
+    def __init__(self, face_feats_path="cv/model/hzau_master_face_features.pkl"):
+        with open(face_feats_path, mode='rb') as f:
+            face_feats_list = pickle.load(f)
+
+        self.topK = 10
+        self.face_feats_list = face_feats_list
+
+    def search(self, img_file):
+        face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
+
+        compare_result = {}
+        for face_obj in self.face_feats_list:
+            cos_sim = np.dot(face_feat, face_obj['feature']) / (norm(face_feat) * norm(face_obj['feature']))
+            compare_result[face_feat['studentid']] = cos_sim
+
+        sorted_compare_result = sorted(compare_result.items(), key=lambda kv: kv[1])
+
+        return {
+            'status': 0,
+            'message': 'success',
+            'results': sorted_compare_result[self.topK]
+        }
+
+
 beauty_recognizer = BeautyRecognizer()
 skin_disease_recognizer = SkinDiseaseRecognizer(num_cls=198)
 nsfw_estimator = NSFWEstimator(num_cls=5)
 plant_recognizer = PlantRecognizer(num_cls=998)
 pdr = PlantDiseaseRecognizer(num_cls=61)
 food_recognizer = FoodRecognizer(num_cls=251)
+face_searcher = FaceSearcher()
 
 
 def upload_and_rec_beauty(request):
@@ -1111,6 +1144,56 @@ def upload_and_ext_face_feats(request):
             result['msg'] = 'success'
             result['imgpath'] = imagepath
             result['results'] = face_feats_result['feature']
+            result['elapse'] = round(time.time() - tik, 2)
+
+            json_str = json.dumps(result, ensure_ascii=False)
+
+            return HttpResponse(json_str)
+    else:
+        result['code'] = 3
+        result['msg'] = 'Invalid HTTP Method'
+        result['data'] = None
+
+        json_result = json.dumps(result, ensure_ascii=False)
+
+        return HttpResponse(json_result)
+
+
+def upload_and_search_face(request):
+    """
+    upload and search face
+    :param request:
+    :return:
+    """
+    image_dir = 'cv/static/FaceUpload'
+    if not os.path.exists(image_dir):
+        os.makedirs(image_dir)
+
+    result = {}
+
+    if request.method == "POST":
+        image = request.FILES.get("image", None)
+        if not image:
+            result['code'] = 3
+            result['msg'] = 'Invalid Path for Image'
+            result['results'] = None
+
+            json_result = json.dumps(result, ensure_ascii=False)
+
+            return HttpResponse(json_result)
+        else:
+            destination = open(os.path.join(image_dir, image.name), 'wb+')
+            for chunk in image.chunks():
+                destination.write(chunk)
+            destination.close()
+
+            tik = time.time()
+            imagepath = URL_PORT + '/static/FaceUpload/' + image.name
+
+            result['code'] = 0
+            result['msg'] = 'success'
+            result['imgpath'] = imagepath
+            result['results'] = face_searcher.search(imagepath)
             result['elapse'] = round(time.time() - tik, 2)
 
             json_str = json.dumps(result, ensure_ascii=False)

@@ -89,7 +89,7 @@ def face_search_view(request):
 
 def face_search(request):
     from cv import controllers
-    return None
+    return controllers.upload_and_search_face(request)
 
 
 def detect_face(request):
