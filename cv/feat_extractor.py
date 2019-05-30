@@ -26,7 +26,7 @@ def detect_face(img_path, detector=MTCNN()):
     return mtcnn_result
 
 
-def ext_feats(sphere_face, img_path, pretrained_model='model/sphere20a.pth'):
+def ext_feats(sphere_face, img_path, pretrained_model='cv/model/sphere20a.pth'):
     if sphere_face is None:
         sphere_face = SphereFaceNet()
 
