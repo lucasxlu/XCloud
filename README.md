@@ -62,6 +62,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to 
 [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 
+* Technical details can be read from our [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf). 
 
 If you use our codebase or models in your research, please cite this project. We will release a paper or technical report later.
 ```
