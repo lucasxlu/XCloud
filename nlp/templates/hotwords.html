@@ -39,6 +39,7 @@
 <script type="text/javascript">
 
     function showKeywords() {
+        $('button').attr("disabled", "disabled");
         var index = layer.load(0, {shade: false});
         var urlPrefix = "/nlp/hotwords";
         var myChart = echarts.init(document.getElementById('keywords'));
@@ -51,6 +52,7 @@
             type: "GET"
         }).done(function (data) {
             console.log(data);
+            $('button').removeAttr('disabled');
 
             for (var i = 0; i < data.data.length; i++) {
                 var item = data.data[i];

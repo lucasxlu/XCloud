@@ -78,6 +78,7 @@
     ;
 
     function sentiment() {
+        $('button').attr("disabled", "disabled");
         var val = $("textarea").val();
         if (val.trim() !== "") {
             var index = layer.load(0, {shade: [0.3, "rgba(0,0,0,0.5)"]});
@@ -97,6 +98,8 @@
 
                 console.log(type);
                 console.log(score);
+
+                $('button').removeAttr('disabled');
 
                 option.series[0].title.textStyle.fontWeight = 'bolder';
                 option.series[0].title.textStyle.fontSize = '20';
