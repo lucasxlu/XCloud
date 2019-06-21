@@ -75,11 +75,12 @@ def ext_feats(sphere_face, img_path, pretrained_model='cv/model/sphere20a.pth'):
 
         x = face_region.to(device)
         x = sphere_face.forward(x)
+        x = x.to("cpu").detach().numpy().flatten()
 
         return {
             'status': 0,
             'message': 'extracted feature',
-            'feature': x.to("cpu").detach().numpy().flatten()
+            'feature': x / np.linalg.norm(x)
         }
 
     else:

@@ -752,8 +752,11 @@ class FaceSearcher:
 
         compare_result = {}
         for face_obj in self.face_feats_list:
-            cos_sim = np.dot(face_feat['feature'], face_obj['feature']) / \
-                      (norm(face_feat['feature']) * norm(face_obj['feature']))
+            norm_face_feature = face_feat['feature'] / np.linalg.norm(face_feat['feature'])
+            norm_face_obj_feature = face_obj['feature'] / np.linalg.norm(face_obj['feature'])
+
+            cos_sim = np.dot(norm_face_feature, norm_face_obj_feature) / \
+                      (norm(norm_face_feature) * norm(norm_face_obj_feature))
             compare_result[face_obj['studentid']] = cos_sim
 
         sorted_compare_result = sorted(compare_result.items(), key=lambda kv: kv[1], reverse=True)
