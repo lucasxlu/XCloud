@@ -1,5 +1,5 @@
 """
-train and eval Deep Model for Image Censorship
+train and eval Deep Model for Insect Pets Recognition
 Author: LucasX
 """
 import os
