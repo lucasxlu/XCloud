@@ -48,7 +48,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     dataset_sizes = {x: dataloaders[x].__len__() for x in ['train', 'val', 'test']}
 
     for _ in dataset_sizes.keys():
-        print('Dataset size of {0} is {1}...'.format(_, dataloaders[_].__len__()))
+        print('Dataset size of {0} is {1}...'.format(_, dataloaders[_].__len__() * cfg['batch_size']))
 
     if not inference:
         print('Start training %s...' % model_name)
