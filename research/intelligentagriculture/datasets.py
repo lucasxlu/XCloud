@@ -24,7 +24,7 @@ class IP102Dataset(Dataset):
                   encoding='utf-8') \
                 as f:
             for _ in f.readlines():
-                self.filelist.append(os.path.join(cfg['ip102_classification_root'], _.split(' ')[0]))
+                self.filelist.append(os.path.join(cfg['ip102_classification_root'], 'Images', _.split(' ')[0]))
                 self.typelist.append(int(_.split(' ')[-1]))
 
         self.transform = transform
