@@ -67,7 +67,7 @@ For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to
 If you use our codebase or models in your research, please cite this project. We will release a paper or technical report later.
 ```
 @misc{xu2019xcloud,
-  author =       {Lu Xu and Yating Wang and Xueying Zhang and Tao Hu and Yudi He and Cheng Yang and Ying Liu and Jinhai Xiang},
+  author =       {Lu Xu and Yating Wang},
   title =        {XCloud: Design and Implementation of AI Cloud Platform with RESTful API Service},
   howpublished = {\url{https://github.com/lucasxlu/XCloud.git}},
   year =         {2019}
