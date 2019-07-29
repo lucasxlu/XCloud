@@ -35,7 +35,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     :param inference:
     :return:
     """
+    print(model)
     model = model.float()
+    model_name = model.__class__.__name__
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     if torch.cuda.device_count() > 1:
@@ -49,7 +51,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
         print('Dataset size of {0} is {1}...'.format(_, dataloaders[_].__len__()))
 
     if not inference:
-        print('Start training %s...' % model.__class__.__name__)
+        print('Start training %s...' % model_name)
         since = time.time()
 
         best_model_wts = copy.deepcopy(model.state_dict())
@@ -152,7 +154,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     model_path_dir = './model'
                     mkdirs_if_not_exist(model_path_dir)
                     torch.save(model.state_dict(),
-                               './model/{0}_best_epoch-{1}.pth'.format(model.__class__.__name__, epoch))
+                               './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
 
         time_elapsed = time.time() - since
         print('Training complete in {:.0f}m {:.0f}s'.format(
@@ -163,11 +165,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
         model.load_state_dict(best_model_wts)
         model_path_dir = './model'
         mkdirs_if_not_exist(model_path_dir)
-        torch.save(model.state_dict(), './model/%s.pth' % model.__class__.__name__)
+        torch.save(model.state_dict(), './model/%s.pth' % model_name)
 
     else:
-        print('Start testing %s...' % model.__class__.__name__)
-        model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model.__class__.__name__)))
+        print('Start testing %s...' % model_name)
+        model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model_name)))
 
     model.eval()
 
@@ -199,9 +201,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
             y_true += types.to("cpu").detach().numpy().tolist()
             filenames += filename
 
-    print('Accuracy of {0} on test set: {1}% '.format(model.__class__.__name__, 100 * correct / total))
+    print('Accuracy of {0} on test set: {1}% '.format(model_name, 100 * correct / total))
     print(
-        'Confusion Matrix of {0} on test set: '.format(model.__class__.__name__))
+        'Confusion Matrix of {0} on test set: '.format(model_name))
 
     cm = confusion_matrix(y_true, y_pred)
     print(cm)
@@ -219,16 +221,15 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print('Recall List: ')
     print(recalls)
 
-    print("Precision of {0} on val set = {1}".format(model.__class__.__name__,
-                                                     sum(precisions) / len(precisions)))
+    print("Precision of {0} on val set = {1}".format(model_name, sum(precisions) / len(precisions)))
     print(
-        "Recall of {0} on val set = {1}".format(model.__class__.__name__, sum(recalls) / len(recalls)))
+        "Recall of {0} on val set = {1}".format(model_name, sum(recalls) / len(recalls)))
 
     print('Output CSV...')
     col = ['filename', 'gt', 'pred', 'prob']
     df = pd.DataFrame([[filenames[i], y_true[i], y_pred[i], probs[i][0]] for i in range(len(filenames))],
                       columns=col)
-    df.to_csv("./output-%s.csv" % model.__class__.__name__, index=False)
+    df.to_csv("./output-%s.csv" % model_name, index=False)
     print('CSV has been generated...')
 
 
@@ -245,7 +246,7 @@ def train_ip102(model, epoch):
 
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=cfg['lr_decay_step'], gamma=0.1)
 
-    print('start loading NSFWDataset...')
+    print('start loading IP102Dataset...')
     trainloader, valloader, testloader = data_loader.load_ip102_classification_data()
 
     dataloaders = {
@@ -273,7 +274,7 @@ def batch_inference(model, inferencedataloader):
         model = nn.DataParallel(model)
     model = model.to(device)
     print('Start testing %s...' % model.__class__.__name__)
-    model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model.__class__.__name__)))
+    model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model_name)))
     model.eval()
 
     y_pred = []
