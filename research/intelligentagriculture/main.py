@@ -246,7 +246,7 @@ def train_ip102(model, epoch):
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=cfg['lr_decay_step'], gamma=0.1)
 
     print('start loading NSFWDataset...')
-    trainloader, valloader, testloader = data_loader.load_nsfw_data()
+    trainloader, valloader, testloader = data_loader.load_ip102_classification_data()
 
     dataloaders = {
         'train': trainloader,
