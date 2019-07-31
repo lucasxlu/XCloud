@@ -12,7 +12,7 @@ Adopt machine learning techniques to solve the problems in intelligent agricultu
 #### Evaluation on IP102 Dataset
 | Methods | Acc |
 | :---: | :---: |
-| Ours (DenseNet121 as backbone) | **61.06%** |
+| **Ours (DenseNet121 as backbone)** | **61.06%** |
 | Wu et al. (ResNet as backbone) | 49.4% |
 | Wu et al. (VGG as backbone)  | 48.2% |
 | Wu et al. (GoogLeNet as backbone) | 43.5% |
