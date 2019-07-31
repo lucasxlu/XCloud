@@ -129,7 +129,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
 
                     tmp_acc = tmp_correct / tmp_total
 
-                    print('Confusion Matrix of {0} on val set: '.format(model.__class__.__name__))
+                    print('Confusion Matrix of {0} on val set: '.format(model_name))
                     cm = confusion_matrix(tmp_y_true, tmp_y_pred)
                     print(cm)
                     cm = np.array(cm)
@@ -142,10 +142,10 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                         precisions.append(cm[i][i] / sum(cm[:, i].tolist()))
                         recalls.append(cm[i][i] / sum(cm[i, :].tolist()))
 
-                    print("Precision of {0} on val set = {1}".format(model.__class__.__name__,
+                    print("Precision of {0} on val set = {1}".format(model_name,
                                                                      sum(precisions) / len(precisions)))
                     print(
-                        "Recall of {0} on val set = {1}".format(model.__class__.__name__, sum(recalls) / len(recalls)))
+                        "Recall of {0} on val set = {1}".format(model_name, sum(recalls) / len(recalls)))
 
                     best_acc = epoch_acc
                     best_model_wts = copy.deepcopy(model.state_dict())
