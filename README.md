@@ -64,15 +64,9 @@ In order to construct a more efficient inference engine, it is highly recommende
 * [@reallinfo](https://github.com/reallinfo): logo design
 
 ## Note
-* XCloud is **free for researchers**. For commercial use, please email me AT 
-**xulu0620@gmail.com** for more details. 
-
+* XCloud is **free for researchers**. For commercial use, please email me AT **xulu0620@gmail.com** for more details. 
 * **Please ensure that your machine has a strong GPU equipment**.
-
-* More features will be added in the next future!
-For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to 
-[CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
-
+* For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 * Technical details can be read from our [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf). 
 
 If you use our codebase or models in your research, please cite this project. **We have release a [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about this project**.
