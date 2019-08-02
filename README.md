@@ -54,6 +54,7 @@ In order to construct a more efficient inference engine, it is highly recommende
 3. Install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
 4. unzip ``.tar.gz`` file, and modify your environment by adding: ``export LD_LIBRARY_PATH=/data/lucasxu/Software/TensorRT-5.1.5.0/lib:$LD_LIBRARY_PATH``
 5. Install TensorRT Python wheel: ``pip3 install ~/Software/TensorRT-5.1.5.0/python/tensorrt-5.1.5.0-cp37-none-linux_x86_64.whl``
+6. Install [torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt.git)
 
 ![index](index.png)
 
