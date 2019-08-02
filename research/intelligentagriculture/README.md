@@ -2,6 +2,7 @@
 ## Introduction
 Adopt machine learning techniques to solve the problems in intelligent agriculture, such as plant diseases recognition, insect pets recognition, etc. This repository achieves state-of-the-art performance on IP102 dataset with an improvement of **10.6%**!
 
+The pretrained model can be download from [Google Drive](https://drive.google.com/open?id=1yqSDfVm32Kjn_uNMeANuApPcdGsbijXQ).
 
 ## Features
 - [x] Plant Disease Recognition
