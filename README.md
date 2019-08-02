@@ -49,9 +49,11 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/index```
 
 In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). The installation is listed as follows:  
-1. Download installation package from NVIDIA official websites. I use ``.deb`` in this project.
+1. Download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project.
 2. Add nvcc to you PATH: ``export PATH=/usr/local/cuda/bin/nvcc:$PATH``
 3. Install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
+4. unzip ``.tar.gz`` file, and modify your environment by adding: ``export LD_LIBRARY_PATH=/data/lucasxu/Software/TensorRT-5.1.5.0/lib:$LD_LIBRARY_PATH``
+5. Install TensorRT Python wheel: ``pip3 install ~/Software/TensorRT-5.1.5.0/python/tensorrt-5.1.5.0-cp37-none-linux_x86_64.whl``
 
 ![index](index.png)
 
