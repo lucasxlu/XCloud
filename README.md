@@ -21,6 +21,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
         - [x] Food Recognition
         - [x] Flower Recognition
         - [x] Plant Disease Recognition
+        - [x] Pet Insects Detection & Recognition
         - [x] Pornography Image Recognition
         - [x] Skin Disease Recognition
 * [NLP](./nlp)
@@ -37,6 +38,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 * [Research](./research)    
     - [x] Age Estimation 
     - [x] Medical Image Analysis (Skin Lesion Analysis)
+    - [x] Cround Counting
     
 ## Deployment
 1. create a virtual enviroment named ```pyWeb``` follow [this tutorial](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
@@ -45,6 +47,11 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 4. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
 5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
 6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/index```
+
+In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). The installation is listed as follows:  
+1. Download installation package from NVIDIA official websites. I use ``.deb`` in this project.
+2. Add nvcc to you PATH: ``export PATH=/usr/local/cuda/bin/nvcc:$PATH``
+3. Install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
 
 ![index](index.png)
 
@@ -64,7 +71,7 @@ For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to
 
 * Technical details can be read from our [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf). 
 
-If you use our codebase or models in your research, please cite this project. We will release a paper or technical report later.
+If you use our codebase or models in your research, please cite this project. **We have release a [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about this project**.
 ```
 @misc{xu2019xcloud,
   author =       {Lu Xu and Yating Wang},
