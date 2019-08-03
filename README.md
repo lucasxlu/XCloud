@@ -9,7 +9,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 ## Features
 * [Computer Vision](./cv)
     * Face Analysis
-        - [x] Face  Comparison
+        - [x] Face Comparison
         - [x] Facial Beauty Prediction (ShuffleNet V2 as backbone)
         - [x] Gender Recognition
         - [x] Race Recognition
@@ -60,7 +60,7 @@ In order to construct a more efficient inference engine, it is highly recommende
 ![index](index.png)
 
 ## Contributor
-* [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment
+* [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment/report
 * [@reallinfo](https://github.com/reallinfo): logo design
 
 ## Note
@@ -69,7 +69,7 @@ In order to construct a more efficient inference engine, it is highly recommende
 * For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 * Technical details can be read from our [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf). 
 
-If you use our codebase or models in your research, please cite this project. **We have release a [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about this project**.
+If you use our codebase or models in your research, please cite this project. **We have released a [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about this project**.
 ```
 @misc{xu2019xcloud,
   author =       {Lu Xu and Yating Wang},
