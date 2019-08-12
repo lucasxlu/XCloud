@@ -1,4 +1,4 @@
-# Image Sitching
+# Image Stitching
 
 
 ## Introduction
