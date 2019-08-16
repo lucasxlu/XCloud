@@ -22,12 +22,13 @@ class GarbageDataset(Dataset):
         lbs = []
 
         for txt in os.listdir(cfg['garbage_classification_root']):
-            with open(os.path.join(cfg['garbage_classification_root'], 'train_data', txt), mode='rt') as f:
-                files.append(os.path.join(cfg['garbage_classification_root'], 'train_data',
-                                          ''.join(f.readlines()).split(',')[0].strip()))
-                lbs.append(int(''.join(f.readlines()).split(',')[1].strip()))
+            if txt.endswith('.txt'):
+                with open(os.path.join(cfg['garbage_classification_root'], 'train_data', txt), mode='rt') as f:
+                    files.append(os.path.join(cfg['garbage_classification_root'], 'train_data',
+                                              ''.join(f.readlines()).split(',')[0].strip()))
+                    lbs.append(int(''.join(f.readlines()).split(',')[1].strip()))
 
-        X_train, X_test, y_train, y_test = train_test_split(files, lbs, test_size=0.2, stratify=lbs)
+        X_train, X_test, y_train, y_test = train_test_split(files, lbs, test_size=0.2)
         if type == 'train':
             self.filelist = X_train
             self.typelist = y_train

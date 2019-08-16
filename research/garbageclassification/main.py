@@ -233,9 +233,9 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print('CSV has been generated...')
 
 
-def train_ip102(model, epoch):
+def train_garbage_classification(model, epoch):
     """
-    train deep models on IP102
+    train deep models on garbage classification
     :param model:
     :param epoch:
     :return:
@@ -246,8 +246,8 @@ def train_ip102(model, epoch):
 
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=cfg['lr_decay_step'], gamma=0.1)
 
-    print('start loading IP102Dataset...')
-    trainloader, valloader, testloader = data_loader.load_ip102_classification_data()
+    print('start loading GarbageDataset...')
+    trainloader, valloader, testloader = data_loader.load_garbage_classification_data()
 
     dataloaders = {
         'train': trainloader,
@@ -312,4 +312,4 @@ if __name__ == '__main__':
     num_ftrs = densenet.classifier.in_features
     densenet.classifier = nn.Linear(num_ftrs, cfg['out_num'])
 
-    train_ip102(model=densenet, epoch=cfg['epoch'])
+    train_garbage_classification(model=densenet, epoch=cfg['epoch'])
