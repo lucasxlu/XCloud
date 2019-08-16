@@ -11,7 +11,7 @@ from skimage import io
 from torch.utils.data import Dataset
 
 sys.path.append('../')
-from fbp.cfg import cfg
+from research.fbp.cfg import cfg
 
 
 class SCUTFBP5500Dataset(Dataset):
