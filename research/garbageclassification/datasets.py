@@ -21,18 +21,19 @@ class GarbageDataset(Dataset):
         files = []
         lbs = []
 
-        for txt in os.listdir(cfg['garbage_classification_root']):
+        for txt in os.listdir(os.path.join(cfg['garbage_classification_root'], 'train_data')):
             if txt.endswith('.txt'):
                 with open(os.path.join(cfg['garbage_classification_root'], 'train_data', txt), mode='rt') as f:
-                    files.append(os.path.join(cfg['garbage_classification_root'], 'train_data',
-                                              ''.join(f.readlines()).split(',')[0].strip()))
-                    lbs.append(int(''.join(f.readlines()).split(',')[1].strip()))
+                    l = ''.join(f.readlines()).split(',')
+                    print(l)
+                    files.append(os.path.join(cfg['garbage_classification_root'], 'train_data', l[0].strip()))
+                    lbs.append(int(l[1].strip()))
 
-        X_train, X_test, y_train, y_test = train_test_split(files, lbs, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(files, lbs, test_size=0.2, random_state=42)
         if type == 'train':
             self.filelist = X_train
             self.typelist = y_train
-        else:
+        elif type in ['val', 'test']:
             self.filelist = X_test
             self.typelist = y_test
 
