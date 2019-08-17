@@ -1,7 +1,7 @@
 import datetime
+import json
 import sys
 import time
-import json
 from collections import OrderedDict
 
 import cv2
@@ -10,8 +10,15 @@ from django.shortcuts import render
 from mtcnn.mtcnn import MTCNN
 
 sys.path.append('../')
-from cv import db_utils
+from cv.controllers.face_search_controller import upload_and_search_face
+from cv.controllers.food_controller import upload_and_rec_food
+from cv.controllers.nswf_controller import upload_and_rec_porn
+from cv.controllers.plant_controller import upload_and_rec_plant
+from cv.controllers.plant_disease_controller import upload_and_rec_plant_disease
+from cv.controllers.fbp_controller import upload_and_rec_beauty
+from cv.controllers.skin_disease_controller import upload_and_rec_skin_disease
 from cv.cfg import cfg
+from cv import db_utils
 
 
 # Create your views here.
@@ -39,8 +46,7 @@ def fbp_view(request):
 
 
 def fbp(request):
-    from cv import controllers
-    return controllers.upload_and_rec_beauty(request)
+    return upload_and_rec_beauty(request)
 
 
 def food_view(request):
@@ -48,8 +54,7 @@ def food_view(request):
 
 
 def food(request):
-    from cv import controllers
-    return controllers.upload_and_rec_food(request)
+    return upload_and_rec_food(request)
 
 
 def plant_view(request):
@@ -57,8 +62,7 @@ def plant_view(request):
 
 
 def plant(request):
-    from cv import controllers
-    return controllers.upload_and_rec_plant(request)
+    return upload_and_rec_plant(request)
 
 
 def skin_view(request):
@@ -70,8 +74,7 @@ def nsfw_view(request):
 
 
 def nsfw(request):
-    from cv import controllers
-    return controllers.upload_and_rec_porn(request)
+    return upload_and_rec_porn(request)
 
 
 def pdr_view(request):
@@ -79,8 +82,7 @@ def pdr_view(request):
 
 
 def pdr(request):
-    from cv import controllers
-    return controllers.upload_and_rec_plant_disease(request)
+    return upload_and_rec_plant_disease(request)
 
 
 def face_search_view(request):
@@ -88,8 +90,7 @@ def face_search_view(request):
 
 
 def face_search(request):
-    from cv import controllers
-    return controllers.upload_and_search_face(request)
+    return upload_and_search_face(request)
 
 
 def detect_face(request):
@@ -144,8 +145,7 @@ def rec_skin(request):
     #
     # return HttpResponse(json_result)
 
-    from cv import controllers
-    skin_disease_result = controllers.upload_and_rec_skin_disease(request)
+    skin_disease_result = upload_and_rec_skin_disease(request)
     skin_disease_result_json = json.loads(skin_disease_result.content.decode('utf-8'))
 
     print(skin_disease_result_json)

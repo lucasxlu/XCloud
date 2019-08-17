@@ -25,11 +25,10 @@ class GarbageDataset(Dataset):
             if txt.endswith('.txt'):
                 with open(os.path.join(cfg['garbage_classification_root'], 'train_data', txt), mode='rt') as f:
                     l = ''.join(f.readlines()).split(',')
-                    print(l)
                     files.append(os.path.join(cfg['garbage_classification_root'], 'train_data', l[0].strip()))
                     lbs.append(int(l[1].strip()))
 
-        X_train, X_test, y_train, y_test = train_test_split(files, lbs, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(files, lbs, test_size=0.2, random_state=42, stratify=lbs)
         if type == 'train':
             self.filelist = X_train
             self.typelist = y_train
