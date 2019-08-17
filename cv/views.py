@@ -17,6 +17,7 @@ from cv.controllers.plant_controller import upload_and_rec_plant
 from cv.controllers.plant_disease_controller import upload_and_rec_plant_disease
 from cv.controllers.fbp_controller import upload_and_rec_beauty
 from cv.controllers.skin_disease_controller import upload_and_rec_skin_disease
+from cv.controllers.cbir_controller import upload_and_search
 from cv.cfg import cfg
 from cv import db_utils
 
@@ -125,26 +126,6 @@ def rec_skin(request):
     :param request:
     :return:
     """
-    # skin_img_path = request.GET.get('skinImagePath')
-    # tik = time.time()
-    #
-    # result = OrderedDict()
-    # result['code'] = 0
-    # result['msg'] = 'success'
-    # result['results'] = [
-    #     {'disease': 'Median_Nail_Dystrophy', 'probability': 0.96},
-    #     {'disease': 'Acute_Eczema', 'probability': 0.01},
-    #     {'disease': 'Keloid', 'probability': 0.01},
-    #     {'disease': 'Lipoma', 'probability': 0.01},
-    #     {'disease': 'Myxoid_Cyst', 'probability': 0.1},
-    # ]
-    # tok = time.time()
-    # result['elapse'] = tok - tik
-    #
-    # json_result = json.dumps(result, ensure_ascii=False)
-    #
-    # return HttpResponse(json_result)
-
     skin_disease_result = upload_and_rec_skin_disease(request)
     skin_disease_result_json = json.loads(skin_disease_result.content.decode('utf-8'))
 
@@ -180,3 +161,11 @@ def stat_skin(request):
     json_result = json.dumps(result, ensure_ascii=False)
 
     return HttpResponse(json_result)
+
+
+def cbir_view(request):
+    return render(request, 'cbir.html')
+
+
+def cbir(request):
+    return upload_and_search(request)

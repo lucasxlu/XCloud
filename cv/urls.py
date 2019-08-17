@@ -25,4 +25,6 @@ urlpatterns = [
     url('mcloud/skin', views.rec_skin, name='recskin'),
     url('detectface', views.detect_face, name='detectface'),
     url('mcloud/statskin', views.stat_skin, name='statskin'),
+    url('cbirview', views.cbir_view, name='cbirview'),
+    url('cbir', views.cbir, name='cbir'),
 ]
