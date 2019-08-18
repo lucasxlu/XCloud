@@ -20,6 +20,8 @@ def load_garbage_classification_data():
                                        transforms.Resize(224),
                                        transforms.RandomCrop(224),
                                        transforms.ColorJitter(),
+                                       transforms.RandomHorizontalFlip(),
+                                       transforms.RandomVerticalFlip(),
                                        transforms.RandomRotation(30),
                                        transforms.ToTensor(),
                                        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])

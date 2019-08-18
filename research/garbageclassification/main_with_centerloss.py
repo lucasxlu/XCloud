@@ -113,7 +113,7 @@ def train_model(model, dataloaders, criterion_xent, criterion_cent, optimizer_mo
                     running_corrects += torch.sum(preds == labels.data)
 
                 epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
-                epoch_acc = running_corrects.double() / (dataset_sizes[phase] * cfg['batch_size'])
+                epoch_acc = running_corrects.double() / (dataset_sizes[phase])
 
                 print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
 
@@ -254,7 +254,7 @@ def main_with_centerloss(model, epoch):
     """
 
     criterion_xent = nn.CrossEntropyLoss()
-    criterion_cent = CenterLoss(num_classes=198, feat_dim=1024)
+    criterion_cent = CenterLoss(num_classes=40, feat_dim=1024)
     optimizer_model = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
     optimizer_centloss = optim.SGD(criterion_cent.parameters(), lr=0.5)
 
