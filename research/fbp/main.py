@@ -14,11 +14,10 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 from torch.optim import lr_scheduler
 
 sys.path.append('../')
-from fbp.losses import CRLoss
-from fbp.models import CRNet, SCUTNet
-from fbp.utils import mkdirs_if_not_exist
-from fbp import data_loader, cfg
-from fbp.shufflenet_v2 import ShuffleNetV2
+from research.fbp.losses import CRLoss
+from research.fbp.utils import mkdirs_if_not_exist
+from research.fbp import data_loader
+from research.fbp.shufflenet_v2 import ShuffleNetV2
 
 
 def train_model(model, train_dataloader, test_dataloader, criterion, optimizer, scheduler, num_epochs,

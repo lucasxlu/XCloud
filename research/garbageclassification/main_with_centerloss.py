@@ -1,6 +1,6 @@
 """
-train and eval Deep Model for garbage classification
-Author: LucasX
+train and test with CenterLoss
+Author: XuLu
 """
 import os
 import sys
@@ -18,34 +18,38 @@ from torch.optim import lr_scheduler
 from torchvision import models
 
 sys.path.append('../../')
+from research.garbageclassification.losses import CenterLoss
 from research.garbageclassification import data_loader
 from research.garbageclassification.utils import mkdirs_if_not_exist
 from research.garbageclassification.cfg import cfg
 
 
-def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs, inference=False):
+def train_model(model, dataloaders, criterion_xent, criterion_cent, optimizer_model, optimizer_centloss, scheduler,
+                num_epochs, inference=False):
     """
     train model
+    :param optimizer_centloss:
+    :param optimizer_model:
+    :param criterion_cent:
+    :param criterion_xent:
     :param model:
     :param dataloaders:
-    :param criterion:
-    :param optimizer:
     :param scheduler:
     :param num_epochs:
     :param inference:
     :return:
     """
     print(model)
-    model = model.float()
     model_name = model.__class__.__name__
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = model.float()
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         model = nn.DataParallel(model)
     model = model.to(device)
 
-    dataset_sizes = {x: dataloaders[x].__len__() for x in ['train', 'val', 'test']}
+    dataset_sizes = {x: dataloaders[x].__len__() * cfg['batch_size'] for x in ['train', 'val', 'test']}
 
     for _ in dataset_sizes.keys():
         print('Dataset size of {0} is {1}...'.format(_, dataloaders[_].__len__() * cfg['batch_size']))
@@ -73,37 +77,45 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                 running_corrects = 0
 
                 # Iterate over data.
-                # for inputs, labels, filenames in dataloaders[phase]:
+                # for data in dataloaders[phase]:
                 for i, data in enumerate(dataloaders[phase], 0):
 
-                    inputs, types = data['image'], data['type']
+                    inputs, labels = data['image'], data['type']
                     inputs = inputs.to(device)
-                    types = types.to(device)
+                    labels = labels.to(device)
 
                     # zero the parameter gradients
-                    optimizer.zero_grad()
+                    optimizer_model.zero_grad()
+                    optimizer_centloss.zero_grad()
 
                     # forward
                     # track history if only in train
                     with torch.set_grad_enabled(phase == 'train'):
-                        outputs = model(inputs)
+                        feats, outputs = model(inputs)
                         _, preds = torch.max(outputs, 1)
-                        loss = criterion(outputs, types)
+
+                        xent_loss = criterion_xent(outputs, labels)
+
+                        loss = criterion_cent(feats, labels) * 0.001 + xent_loss
 
                         # backward + optimize only if in training phase
                         if phase == 'train':
                             loss.backward()
-                            optimizer.step()
+                            optimizer_model.step()
+
+                            # multiple (1./alpha) in order to remove the effect of alpha on updating centers
+                            for param in criterion_cent.parameters():
+                                param.grad.data *= (1. / 1.)
+                            optimizer_centloss.step()
 
                     # statistics
                     running_loss += loss.item() * inputs.size(0)
-                    running_corrects += torch.sum(preds == types.data)
+                    running_corrects += torch.sum(preds == labels.data)
 
                 epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
                 epoch_acc = running_corrects.double() / (dataset_sizes[phase] * cfg['batch_size'])
 
-                print('{} Loss: {:.4f} Acc: {:.4f}'.format(
-                    phase, epoch_loss, epoch_acc))
+                print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
 
                 # deep copy the model
                 if phase == 'val' and epoch_acc > best_acc:
@@ -114,17 +126,17 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     tmp_filenames = []
 
                     for data in dataloaders['val']:
-                        images, types, filename = data['image'], data['type'], data['filename']
+                        images, labels, filename = data['image'], data['type'], data['filename']
                         images = images.to(device)
-                        types = types.to(device)
+                        labels = labels.to(device)
 
-                        outputs = model(images)
+                        feats, outputs = model(images)
                         _, predicted = torch.max(outputs.data, 1)
-                        tmp_total += types.size(0)
-                        tmp_correct += (predicted == types).sum().item()
+                        tmp_total += labels.size(0)
+                        tmp_correct += (predicted == labels).sum().item()
 
                         tmp_y_pred += predicted.to("cpu").detach().numpy().tolist()
-                        tmp_y_true += types.to("cpu").detach().numpy().tolist()
+                        tmp_y_true += labels.to("cpu").detach().numpy().tolist()
                         tmp_filenames += filename
 
                     tmp_acc = tmp_correct / tmp_total
@@ -142,10 +154,8 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                         precisions.append(cm[i][i] / sum(cm[:, i].tolist()))
                         recalls.append(cm[i][i] / sum(cm[i, :].tolist()))
 
-                    print("Precision of {0} on val set = {1}".format(model_name,
-                                                                     sum(precisions) / len(precisions)))
-                    print(
-                        "Recall of {0} on val set = {1}".format(model_name, sum(recalls) / len(recalls)))
+                    print("Precision of {0} on val set = {1}".format(model_name, sum(precisions) / len(precisions)))
+                    print("Recall of {0} on val set = {1}".format(model_name, sum(recalls) / len(recalls)))
 
                     best_acc = epoch_acc
                     best_model_wts = copy.deepcopy(model.state_dict())
@@ -168,7 +178,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
         torch.save(model.state_dict(), './model/%s.pth' % model_name)
 
     else:
-        print('Start testing %s...' % model_name)
+        print('Start testing %s...' % model.__class__.__name__)
         model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model_name)))
 
     model.eval()
@@ -182,11 +192,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
 
     with torch.no_grad():
         for data in dataloaders['test']:
-            images, types, filename = data['image'], data['type'], data['filename']
+            images, labels, filename = data['image'], data['label'], data['filename']
             images = images.to(device)
-            types = types.to(device)
+            labels = labels.to(device)
 
-            outputs = model(images)
+            feats, outputs = model(images)
 
             outputs = F.softmax(outputs)
             # get TOP-K output labels and corresponding probabilities
@@ -194,11 +204,11 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
             probs += topK_prob.to("cpu").detach().numpy().tolist()
 
             _, predicted = torch.max(outputs.data, 1)
-            total += types.size(0)
-            correct += (predicted == types).sum().item()
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
 
             y_pred += predicted.to("cpu").detach().numpy().tolist()
-            y_true += types.to("cpu").detach().numpy().tolist()
+            y_true += labels.to("cpu").detach().numpy().tolist()
             filenames += filename
 
     print('Accuracy of {0} on test set: {1}% '.format(model_name, 100 * correct / total))
@@ -221,7 +231,8 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print('Recall List: ')
     print(recalls)
 
-    print("Precision of {0} on val set = {1}".format(model_name, sum(precisions) / len(precisions)))
+    print("Precision of {0} on val set = {1}".format(model_name,
+                                                     sum(precisions) / len(precisions)))
     print(
         "Recall of {0} on val set = {1}".format(model_name, sum(recalls) / len(recalls)))
 
@@ -233,20 +244,22 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print('CSV has been generated...')
 
 
-def train_garbage_classification(model, epoch):
+def main_with_centerloss(model, epoch):
     """
-    train deep models on garbage classification
+    train model
     :param model:
     :param epoch:
+    :param data_name: ISIC/SD198
     :return:
     """
-    criterion = nn.CrossEntropyLoss()
 
-    optimizer_ft = optim.SGD(model.parameters(), lr=cfg['init_lr'], momentum=0.9, weight_decay=cfg['weight_decay'])
+    criterion_xent = nn.CrossEntropyLoss()
+    criterion_cent = CenterLoss(num_classes=198, feat_dim=1024)
+    optimizer_model = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
+    optimizer_centloss = optim.SGD(criterion_cent.parameters(), lr=0.5)
 
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=cfg['lr_decay_step'], gamma=0.1)
+    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_model, step_size=50, gamma=0.1)
 
-    print('start loading GarbageDataset...')
     trainloader, valloader, testloader = data_loader.load_garbage_classification_data()
 
     dataloaders = {
@@ -255,65 +268,83 @@ def train_garbage_classification(model, epoch):
         'test': testloader,
     }
 
-    train_model(model=model, dataloaders=dataloaders, criterion=criterion, optimizer=optimizer_ft,
-                scheduler=exp_lr_scheduler, num_epochs=epoch, inference=False)
+    train_model(model=model, dataloaders=dataloaders, criterion_xent=criterion_xent, criterion_cent=criterion_cent,
+                optimizer_model=optimizer_model, optimizer_centloss=optimizer_centloss, scheduler=exp_lr_scheduler,
+                num_epochs=epoch, inference=False)
 
 
-def batch_inference(model, inferencedataloader):
+class DenseNet121(nn.Module):
     """
-    Inference in Batch Mode
-    :param inferencedataloader:
-    :param model:
-    :return:
+    DenseNet with features, constructed for CenterLoss
     """
-    model_name = model.__class__.__name__
-    model = model.float()
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    if torch.cuda.device_count() > 1:
-        print("Let's use", torch.cuda.device_count(), "GPUs!")
-        model = nn.DataParallel(model)
-    model = model.to(device)
-    print('Start testing %s...' % model.__class__.__name__)
-    model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model_name)))
-    model.eval()
+    def __init__(self, num_cls=40):
+        super(DenseNet121, self).__init__()
+        self.__class__.__name__ = 'DenseNet121'
+        densenet121 = models.densenet121(pretrained=True)
+        num_ftrs = densenet121.classifier.in_features
+        densenet121.classifier = nn.Linear(num_ftrs, num_cls)
+        self.model = densenet121
 
-    y_pred = []
-    filenames = []
-    probs = []
+    def forward(self, x):
+        for name, module in self.model.named_children():
+            if name == 'features':
+                feats = module(x)
+                feats = F.relu(feats, inplace=True)
+                feats = F.avg_pool2d(feats, kernel_size=7, stride=1).view(feats.size(0), -1)
+            elif name == 'classifier':
+                out = module(feats)
 
-    with torch.no_grad():
-        for data in inferencedataloader:
-            images, filename = data['image'], data['filename']
-            images = images.to(device)
+        return feats, out
 
-            outputs = model(images)
+    def num_flat_features(self, x):
+        size = x.size()[1:]  # all dimensions except the batch dimension
+        num_features = 1
+        for s in size:
+            num_features *= s
 
-            outputs = F.softmax(outputs)
-            # get TOP-K output labels and corresponding probabilities
-            topK_prob, topK_label = torch.topk(outputs, 2)
-            probs += topK_prob.to("cpu").detach().numpy().tolist()
+        return num_features
 
-            _, predicted = torch.max(outputs.data, 1)
 
-            y_pred += predicted.to("cpu").detach().numpy().tolist()
-            filenames += filename
+class DenseNet169(nn.Module):
+    """
+    DenseNet with features, constructed for CenterLoss
+    """
 
-    print('Output CSV...')
-    col = ['filename', 'pred', 'prob']
-    df = pd.DataFrame([[filenames[i], y_pred[i], probs[i][0]] for i in range(len(filenames))],
-                      columns=col)
-    df.to_csv("./submission.csv", index=False)
-    print('CSV has been generated...')
+    def __init__(self, num_cls=40):
+        super(DenseNet169, self).__init__()
+        self.__class__.__name__ = 'DenseNet169'
+        densenet169 = models.densenet169(pretrained=True)
+        num_ftrs = densenet169.classifier.in_features
+        densenet169.classifier = nn.Linear(num_ftrs, num_cls)
+        self.model = densenet169
+
+    def forward(self, x):
+        for name, module in self.model.named_children():
+            if name == 'features':
+                feats = module(x)
+                feats = F.relu(feats, inplace=True)
+                feats = F.avg_pool2d(feats, kernel_size=7, stride=1).view(feats.size(0), -1)
+            elif name == 'classifier':
+                out = module(feats)
+
+        return feats, out
+
+    def num_flat_features(self, x):
+        size = x.size()[1:]  # all dimensions except the batch dimension
+        num_features = 1
+        for s in size:
+            num_features *= s
+
+        return num_features
 
 
 if __name__ == '__main__':
-    # densenet = models.densenet169(pretrained=True)
-    # num_ftrs = densenet.classifier.in_features
-    # densenet.classifier = nn.Linear(num_ftrs, cfg['out_num'])
+    # densenet121 = models.densenet121(pretrained=True)
+    # num_ftrs = densenet121.classifier.in_features
+    # densenet121.classifier = nn.Linear(num_ftrs, 40)
 
-    resnet = models.resnet152(pretrained=True)
-    num_ftrs = resnet.fc.in_features
-    resnet.fc = nn.Linear(num_ftrs, cfg['out_num'])
+    # densenet121 = DenseNet(num_classes=40)
 
-    train_garbage_classification(model=resnet, epoch=cfg['epoch'])
+    densenet = DenseNet169(num_cls=40)
+    main_with_centerloss(model=densenet, epoch=cfg['epoch'])
