@@ -258,7 +258,7 @@ def main_with_centerloss(model, epoch):
     optimizer_model = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
     optimizer_centloss = optim.SGD(criterion_cent.parameters(), lr=0.5)
 
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_model, step_size=50, gamma=0.1)
+    exp_lr_scheduler = lr_scheduler.StepLR(optimizer_model, step_size=80, gamma=0.1)
 
     trainloader, valloader, testloader = data_loader.load_garbage_classification_data()
 
@@ -346,5 +346,5 @@ if __name__ == '__main__':
 
     # densenet121 = DenseNet(num_classes=40)
 
-    densenet = DenseNet169(num_cls=40)
+    densenet = DenseNet121(num_cls=40)
     main_with_centerloss(model=densenet, epoch=cfg['epoch'])
