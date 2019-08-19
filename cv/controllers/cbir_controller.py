@@ -24,6 +24,7 @@ from cv.net_sphere import SphereFaceNet
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL_PORT = 'http://localhost:8000'
+USE_GPU = True
 
 
 def build_faiss_index(nd_feats_array, mode):
