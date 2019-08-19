@@ -11,3 +11,4 @@ original dataset as ``testset``, and the remaining images as ``training set``.
 | :---: | :---: |
 | DenseNet161 + Softmax | 88.79 |
 | DenseNet169 + Softmax | 88.89 |
+| ResNet152 + Softmax | 90.01 |
