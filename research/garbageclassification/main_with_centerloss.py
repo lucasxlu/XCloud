@@ -192,7 +192,7 @@ def train_model(model, dataloaders, criterion_xent, criterion_cent, optimizer_mo
 
     with torch.no_grad():
         for data in dataloaders['test']:
-            images, labels, filename = data['image'], data['label'], data['filename']
+            images, labels, filename = data['image'], data['type'], data['filename']
             images = images.to(device)
             labels = labels.to(device)
 
