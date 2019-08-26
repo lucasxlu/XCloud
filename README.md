@@ -50,7 +50,9 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
 6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/index```
 
-In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). The installation is listed as follows:  
+In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **97.63** FPS on two 2080TI GPUs, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
+
+The installation is listed as follows:  
 1. Download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project.
 2. Add nvcc to you PATH: ``export PATH=/usr/local/cuda/bin/nvcc:$PATH``
 3. Install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
