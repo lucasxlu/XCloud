@@ -6,8 +6,9 @@ This branch holds several state-of-the-art ``Semantic/Instance Segmentation``
  
 ## Data Preparation
 You can use [labelme](https://github.com/wkentaro/labelme.git) to draw ROI 
-polygons, and then use [mask_generator.py]() to
- generate segmentation mask. You may also need [cvt_32bitpng_to_8bitpng.m](cvt_32bitpng_to_8bitpng.m) to convert 32bit PNG to 8bit PNG.
+polygons, and then use [mask_generator.py](mask_generator.py) to
+ generate segmentation mask. You may also need [cvt_24_or_32bitpng_to_8bitpng.m](cvt_24_or_32bitpng_to_8bitpng.m)
+  to convert 32bit PNG to 8bit PNG.
  
  After finishing previous steps, you will get the following generated mask in
   **8-bit** PNG like:
