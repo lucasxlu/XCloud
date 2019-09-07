@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : hzau
+Source Server         : xcloud
 Source Server Version : 50715
 Source Host           : localhost:3306
 Source Database       : xcloud
@@ -57,5 +57,4 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('LucasX', '2019-03-21 17:56:13', '0', 'Huazhong Agricultural University, College of Informatics', 'xulu0620@gmail.com', 'lucasx', '123456a');
 INSERT INTO `users` VALUES ('SmallBear', '0000-00-00 00:00:00', '0', 'Tsinghua University', 'smallbear@thu.edu.cn', 'smallbear', '66666a');
