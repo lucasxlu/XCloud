@@ -41,6 +41,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Crowd Counting
     - [x] Intelligent Agriculture
     - [x] Content-based Image Retrieval
+    - [x] Image Segmentation
     
 ## Deployment
 1. create a virtual enviroment named ```pyWeb``` follow [this tutorial](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
