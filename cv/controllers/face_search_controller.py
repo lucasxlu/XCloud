@@ -1,9 +1,13 @@
+import base64
+import io
 import json
 import os
 import pickle
 import time
 
 import numpy as np
+import requests
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponse
 from numpy.linalg import norm
 
@@ -125,6 +129,17 @@ def upload_and_search_face(request):
 
     if request.method == "POST":
         image = request.FILES.get("image", None)
+        if not isinstance(image, InMemoryUploadedFile):
+            imgstr = request.POST.get("image", None)
+            if 'http' in imgstr:
+                response = requests.get(imgstr)
+                image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())),
+                                             field_name="image", content_type="image/jpeg", size=1347415, charset=None)
+            else:
+                image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
+                                             name="{}.jpg".format(str(time.time())), field_name="image",
+                                             content_type="image/jpeg", size=1347415, charset=None)
+
         if not image:
             result['code'] = 3
             result['msg'] = 'Invalid Path for Image'

@@ -1,7 +1,10 @@
 import json
 import os
+import io
+import base64
 import time
 
+import requests
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -9,6 +12,7 @@ from PIL import Image
 from django.http import HttpResponse
 from torchvision import models
 from torchvision.transforms import transforms
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from cv.cfg import cfg
 
@@ -129,6 +133,17 @@ def upload_and_rec_food(request):
 
     if request.method == "POST":
         image = request.FILES.get("image", None)
+        if not isinstance(image, InMemoryUploadedFile):
+            imgstr = request.POST.get("image", None)
+            if 'http' in imgstr:
+                response = requests.get(imgstr)
+                image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())),
+                                             field_name="image", content_type="image/jpeg", size=1347415, charset=None)
+            else:
+                image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
+                                             name="{}.jpg".format(str(time.time())), field_name="image",
+                                             content_type="image/jpeg", size=1347415, charset=None)
+
         if not image:
             result['code'] = 3
             result['msg'] = 'Invalid Path for Image'

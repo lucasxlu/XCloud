@@ -1,26 +1,22 @@
+import base64
+import io
 import json
 import os
 import pickle
 import time
 
+import requests
 import faiss
 import numpy as np
-from django.http import HttpResponse
-from numpy.linalg import norm
-
-from PIL import Image
-import numpy as np
-from skimage import io
-
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
+from PIL import Image
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.http import HttpResponse
+from skimage import io
 from skimage.color import gray2rgb, rgba2rgb
 from torchvision import models
 from torchvision.transforms import transforms
-
-from cv.feat_extractor import ext_feats
-from cv.net_sphere import SphereFaceNet
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL_PORT = 'http://localhost:8000'
@@ -187,6 +183,17 @@ def upload_and_search(request):
 
     if request.method == "POST":
         image = request.FILES.get("image", None)
+        if not isinstance(image, InMemoryUploadedFile):
+            imgstr = request.POST.get("image", None)
+            if 'http' in imgstr:
+                response = requests.get(imgstr)
+                image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())),
+                                             field_name="image", content_type="image/jpeg", size=1347415, charset=None)
+            else:
+                image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
+                                             name="{}.jpg".format(str(time.time())), field_name="image",
+                                             content_type="image/jpeg", size=1347415, charset=None)
+
         if not image:
             result['code'] = 1
             result['msg'] = 'Invalid Image'

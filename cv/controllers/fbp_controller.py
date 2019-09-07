@@ -1,7 +1,10 @@
+import base64
 import json
 import os
+import io
 import time
 
+import requests
 import cv2
 import numpy as np
 import torch
@@ -10,6 +13,7 @@ from django.http import HttpResponse
 from mtcnn.mtcnn import MTCNN
 from sklearn.externals import joblib
 from torchvision.transforms import transforms
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from cv import features
 from cv.shufflenet_v2 import ShuffleNetV2
@@ -151,6 +155,17 @@ def upload_and_rec_beauty(request):
 
     if request.method == "POST":
         image = request.FILES.get("image", None)
+        if not isinstance(image, InMemoryUploadedFile):
+            imgstr = request.POST.get("image", None)
+            if 'http' in imgstr:
+                response = requests.get(imgstr)
+                image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())),
+                                             field_name="image", content_type="image/jpeg", size=1347415, charset=None)
+            else:
+                image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
+                                             name="{}.jpg".format(str(time.time())), field_name="image",
+                                             content_type="image/jpeg", size=1347415, charset=None)
+
         if not image:
             result['code'] = 1
             result['msg'] = 'Invalid Path for Face Image'
