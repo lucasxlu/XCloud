@@ -57,26 +57,26 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **97.63** FPS on two 2080TI GPUs, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
 
 The installation is listed as follows:  
-1. Download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project
-2. Add nvcc to you PATH: ``export PATH=/usr/local/cuda/bin/nvcc:$PATH``
-3. Install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
+1. download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project
+2. add nvcc to you PATH: ``export PATH=/usr/local/cuda/bin/nvcc:$PATH``
+3. install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
 4. unzip ``.tar.gz`` file, and modify your environment by adding: ``export LD_LIBRARY_PATH=/data/lucasxu/Software/TensorRT-5.1.5.0/lib:$LD_LIBRARY_PATH``
-5. Install TensorRT Python wheel: ``pip3 install ~/Software/TensorRT-5.1.5.0/python/tensorrt-5.1.5.0-cp37-none-linux_x86_64.whl``
-6. Install [torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt.git)
-7. Then you can use [model_converter.py](https://github.com/lucasxlu/XCloud/blob/master/cv/model_converter.py) to convert a PyTorch model to TensorRT model
+5. install TensorRT Python wheel: ``pip3 install ~/Software/TensorRT-5.1.5.0/python/tensorrt-5.1.5.0-cp37-none-linux_x86_64.whl``
+6. install [torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt.git)
+7. then you can use [model_converter.py](https://github.com/lucasxlu/XCloud/blob/master/cv/model_converter.py) to convert a PyTorch model to TensorRT model
 
 
 ### Upgrade Django Built-in Server
 #### With Gunicorn
-1. Install Gunicorn: ``pip3 install gunicorn``
-2. Run your server: ``gunicorn XCloud.wsgi``
+1. install Gunicorn: ``pip3 install gunicorn``
+2. run your server: ``gunicorn XCloud.wsgi -b YOUR_IP:8001``
+3. open your browser and visit welcome page: ```http://YOUR_IP:8001/index```
 
 
 #### With Nginx
-1. Install Nginx: ``sudo apt-get install nginx``
-2. Install UWSGI: ``sudo pip3 install uwsgi``
-3. Edit ``/etc/nginx/nginx.conf``
-
+1. install Nginx: ``sudo apt-get install nginx``
+2. install uwsgi: ``sudo pip3 install uwsgi``
+3. edit ``/etc/nginx/nginx.conf``
 
 
 
