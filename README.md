@@ -44,6 +44,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Image Segmentation
     
 ## Deployment
+### Basic Environment Preparation
 1. create a virtual enviroment named ```pyWeb``` follow [this tutorial](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000)
 2. install [Django](https://docs.djangoproject.com/en/2.1/intro/install/) and [PyTorch](https://pytorch.org/)
 3. install all dependent libraries: ```pip3 install -r requirements.txt```
@@ -51,16 +52,33 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
 6. open your browser and visit welcome page: ```http://www.lucasx.top:8001/index```
 
+
+### TensorRT Preparation
 In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **97.63** FPS on two 2080TI GPUs, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
 
 The installation is listed as follows:  
-1. Download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project.
+1. Download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project
 2. Add nvcc to you PATH: ``export PATH=/usr/local/cuda/bin/nvcc:$PATH``
 3. Install pyCUDA: ``pip3 install 'pycuda>=2017.1.1'``
 4. unzip ``.tar.gz`` file, and modify your environment by adding: ``export LD_LIBRARY_PATH=/data/lucasxu/Software/TensorRT-5.1.5.0/lib:$LD_LIBRARY_PATH``
 5. Install TensorRT Python wheel: ``pip3 install ~/Software/TensorRT-5.1.5.0/python/tensorrt-5.1.5.0-cp37-none-linux_x86_64.whl``
 6. Install [torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt.git)
 7. Then you can use [model_converter.py](https://github.com/lucasxlu/XCloud/blob/master/cv/model_converter.py) to convert a PyTorch model to TensorRT model
+
+
+### Upgrade Django Built-in Server
+#### With Gunicorn
+1. Install Gunicorn: ``pip3 install gunicorn``
+2. Run your server: ``gunicorn XCloud.wsgi``
+
+
+#### With Nginx
+1. Install Nginx: ``sudo apt-get install nginx``
+2. Install UWSGI: ``sudo pip3 install uwsgi``
+3. Edit ``/etc/nginx/nginx.conf``
+
+
+
 
 ![index](index.png)
 
