@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from cv import views
 
@@ -26,3 +27,5 @@ urlpatterns = [
     path('nlp/', include('nlp.urls')),
     url('index', views.index, name='index'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
