@@ -69,8 +69,8 @@ The installation is listed as follows:
 ### Upgrade Django Built-in Server
 #### With Gunicorn
 1. install Gunicorn: ``pip3 install gunicorn``
-2. run your server: ``gunicorn XCloud.wsgi -b YOUR_IP:8001``
-3. open your browser and visit welcome page: ```http://YOUR_IP:8001/index```
+2. run your server: ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001``
+3. open your browser and visit welcome page: ```http://YOUR_MACHINE_IP:8001/index```
 
 
 #### With Nginx
