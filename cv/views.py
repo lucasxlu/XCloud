@@ -7,6 +7,7 @@ from collections import OrderedDict
 import cv2
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from mtcnn.mtcnn import MTCNN
 
 sys.path.append('../')
@@ -46,6 +47,7 @@ def fbp_view(request):
     return render(request, 'fbp.html')
 
 
+@csrf_exempt
 def fbp(request):
     return upload_and_rec_beauty(request)
 
@@ -54,6 +56,7 @@ def food_view(request):
     return render(request, 'food.html')
 
 
+@csrf_exempt
 def food(request):
     return upload_and_rec_food(request)
 
@@ -62,6 +65,7 @@ def plant_view(request):
     return render(request, 'plant.html')
 
 
+@csrf_exempt
 def plant(request):
     return upload_and_rec_plant(request)
 
@@ -74,6 +78,7 @@ def nsfw_view(request):
     return render(request, 'nsfw.html')
 
 
+@csrf_exempt
 def nsfw(request):
     return upload_and_rec_porn(request)
 
@@ -82,6 +87,7 @@ def pdr_view(request):
     return render(request, 'pdr.html')
 
 
+@csrf_exempt
 def pdr(request):
     return upload_and_rec_plant_disease(request)
 
@@ -90,10 +96,12 @@ def face_search_view(request):
     return render(request, 'facesearch.html')
 
 
+@csrf_exempt
 def face_search(request):
     return upload_and_search_face(request)
 
 
+@csrf_exempt
 def detect_face(request):
     """
     face detection
@@ -120,6 +128,7 @@ def detect_face(request):
     return HttpResponse(json_result)
 
 
+@csrf_exempt
 def rec_skin(request):
     """
     recognize 198 skin disease
@@ -140,6 +149,7 @@ def rec_skin(request):
     return skin_disease_result
 
 
+@csrf_exempt
 def stat_skin(request):
     """
     skin API statistics
@@ -167,5 +177,6 @@ def cbir_view(request):
     return render(request, 'cbir.html')
 
 
+@csrf_exempt
 def cbir(request):
     return upload_and_search(request)
