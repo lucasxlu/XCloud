@@ -22,10 +22,10 @@ To test special configurations for a given image, for example, to test the image
 
 ## Examples
 * Original image:
-![Original image](../img/test.jpg)
+![Original image](./img/test.jpg)
 
 * After dehazing:
-![After dehazing](../result/test.jpg)
+![After dehazing](./result/test.jpg)
 
 
 ## Naming convetion of the results

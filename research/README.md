@@ -8,3 +8,4 @@ This module holds the partial source code for my **Research in AI**.
 * [NSFW](./imgcensor)
 * [Intelligent Agriculture](./intelligentagriculture)
 * [Content-based Image Retrieval](./cbir)
+- [Image Dehazing](./imagedehazing)

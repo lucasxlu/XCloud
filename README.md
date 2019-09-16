@@ -42,6 +42,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Intelligent Agriculture
     - [x] Content-based Image Retrieval
     - [x] Image Segmentation
+    - [x] Image Dehazing
     
 ## Deployment
 ### Basic Environment Preparation
