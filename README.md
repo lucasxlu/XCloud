@@ -83,9 +83,15 @@ The installation is listed as follows:
 
 ![index](index.png)
 
+
+## Stress Testing
+For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WITH_JMETER.md) for more details!
+ 
+
 ## Contributor
 * [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment/report
 * [@reallinfo](https://github.com/reallinfo): logo design
+
 
 ## Note
 * XCloud is **free for researchers**. For commercial use, please email me AT **xulu0620@gmail.com** for more details. 
