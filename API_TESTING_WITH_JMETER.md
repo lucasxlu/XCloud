@@ -19,7 +19,7 @@ Author: [@LucasX](https://github.com/lucasxlu)
 3. Modify the default settings:  
 There are mainly `3` key params:
 * `Number of Threads (users)` means `how many QPS you will create to hit your API`, since JMeter utilize `Thread` to mock user visit
-* `Ramp-Up Period (in seconds)` means how long your threads will be executed done. Take the following image setting as an example, it denotes that `800 threads` will be executed done within `10 seconds`. Namely, the highest QPS is about `80/s`.
+* `Ramp-Up Period (in seconds)` means how long your threads will be executed done. Take the following image setting as an example, it denotes that `800 threads` will be executed done within `10 seconds`. Namely, the average QPS is about `80/s`.
 * `Loop Count` means the loop times will the thread group will be executed
 
 ![Thread Group Setting](./api_testing/thread_group_setting.png)
