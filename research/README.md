@@ -9,3 +9,4 @@ This module holds the partial source code for my **Research in AI**.
 * [Intelligent Agriculture](./intelligentagriculture)
 * [Content-based Image Retrieval](./cbir)
 * [Image Dehazing](./imagedehazing)
+* [Image Quality Assessment](./iqa)

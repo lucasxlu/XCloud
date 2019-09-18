@@ -43,6 +43,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
     - [x] Content-based Image Retrieval
     - [x] Image Segmentation
     - [x] Image Dehazing
+    - [x] Image Quality Assessment
     
 ## Deployment
 ### Basic Environment Preparation
