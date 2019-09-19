@@ -76,9 +76,11 @@ The installation is listed as follows:
 
 
 #### With Nginx
+Note: [this tutorial](https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html) gives more details about Nginx and Django
+
 1. install Nginx: ``sudo apt-get install nginx``
 2. install uwsgi: ``sudo pip3 install uwsgi``
-3. edit ``/etc/nginx/nginx.conf``
+3. start Nginx: ``sudo /etc/init.d/nginx start``, open your browser and visit ``YOUR_IP_ADDRESS:80``, if you see nginx welcome page, then you have installed Nginx successfully
 
 
 
