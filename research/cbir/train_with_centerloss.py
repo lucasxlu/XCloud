@@ -159,8 +159,8 @@ def train_model(model, dataloaders, criterion_xent, criterion_cent, optimizer_mo
                     running_loss += loss.item() * inputs.size(0)
                     running_corrects += torch.sum(preds == labels.data)
 
-                epoch_loss = running_loss / (dataset_sizes[phase] * cfg['batch_size'])
-                epoch_acc = running_corrects.double() / (dataset_sizes[phase] * cfg['batch_size'])
+                epoch_loss = running_loss / dataset_sizes[phase]
+                epoch_acc = running_corrects.double() / dataset_sizes[phase]
 
                 print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
 
