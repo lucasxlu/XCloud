@@ -8,3 +8,4 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
 - [x] [Blurry Detection](./blur_detector.py)
 - [x] [Reflection Detection](./reflection_detector.py)
 - [x] [Lean Detection](./lean_detector.py)
+- [ ] CNN based IQANet [TODO]
