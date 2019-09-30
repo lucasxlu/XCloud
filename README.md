@@ -69,6 +69,8 @@ The installation is listed as follows:
 
 
 ### Upgrade Django Built-in Server
+As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-admin/#runserver-port-or-address-port), **DO NOT USE THIS SERVER IN A PRODUCTION SETTING**, it may bring you potential security risk and performance problems. Henceforth, you'd better upgrade Django built-in server to a stronger one, such as [Nginx](http://nginx.org/en/docs/).
+
 #### With Gunicorn (pure Python)
 1. install [Gunicorn](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/gunicorn/): ``pip3 install gunicorn``
 2. run your server: ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001``
