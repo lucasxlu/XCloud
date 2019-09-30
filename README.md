@@ -69,14 +69,32 @@ The installation is listed as follows:
 
 
 ### Upgrade Django Built-in Server
-#### With Gunicorn
-1. install Gunicorn: ``pip3 install gunicorn``
+#### With Gunicorn (pure Python)
+1. install [Gunicorn](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/gunicorn/): ``pip3 install gunicorn``
 2. run your server: ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001``
 3. open your browser and visit welcome page: ```http://YOUR_MACHINE_IP:8001/index```
 
+#### With uWSGI (pure C)
+1. install [uWSGI](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/uwsgi/): ``pip3 install uwsgi``. Try ``conda install -c conda-forge uwsgi`` if you prefer [Anaconda](https://www.anaconda.com/)
+2. start your uWSGI server:
+   ```
+   uwsgi --chdir=/path/to/your/project \
+       --module=mysite.wsgi:application \
+       --env DJANGO_SETTINGS_MODULE=mysite.settings \
+       --master --pidfile=/tmp/project-master.pid \
+       --socket=127.0.0.1:49152 \      # can also be a file
+       --processes=5 \                 # number of worker processes
+       --uid=1000 --gid=2000 \         # if root, uwsgi can drop privileges
+       --harakiri=20 \                 # respawn processes taking more than 20 seconds
+       --max-requests=5000 \           # respawn processes after serving 5000 requests
+       --vacuum \                      # clear environment on exit
+       --home=/path/to/virtual/env \   # optional path to a virtualenv
+       --daemonize=/var/log/uwsgi/yourproject.log      # background the process
+   ```
+
 
 #### With Nginx
-Note: [this tutorial](https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html) gives more details about Nginx and Django
+Note: [this tutorial](https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html) gives more details about Nginx and Django
 
 1. install Nginx following [official tutorial](http://nginx.org/en/linux_packages.html)
 2. install uwsgi: ``sudo pip3 install uwsgi``
