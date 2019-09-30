@@ -78,21 +78,9 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 
 #### With uWSGI (pure C)
 1. install [uWSGI](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/uwsgi/): ``pip3 install uwsgi``. Try ``conda install -c conda-forge uwsgi`` if you prefer [Anaconda](https://www.anaconda.com/)
-2. start your uWSGI server:
-   ```
-   uwsgi --chdir=/path/to/your/project \
-       --module=mysite.wsgi:application \
-       --env DJANGO_SETTINGS_MODULE=mysite.settings \
-       --master --pidfile=/tmp/project-master.pid \
-       --socket=127.0.0.1:49152 \      # can also be a file
-       --processes=5 \                 # number of worker processes
-       --uid=1000 --gid=2000 \         # if root, uwsgi can drop privileges
-       --harakiri=20 \                 # respawn processes taking more than 20 seconds
-       --max-requests=5000 \           # respawn processes after serving 5000 requests
-       --vacuum \                      # clear environment on exit
-       --home=/path/to/virtual/env \   # optional path to a virtualenv
-       --daemonize=/var/log/uwsgi/yourproject.log      # background the process
-   ```
+2. start your uWSGI server: ``uwsgi --http :8001 --chdir /data/lucasxu/Projects/XCloud -w XCloud.wsgi``
+3. you can specify more configuration in [uwsgi.ini](./uwsgi.ini), and start uWSGI by: ``uwsgi --ini uwsgi.ini``
+4. open your browser and visit welcome page: ```http://YOUR_MACHINE_IP:8001/index```
 
 
 #### With Nginx
