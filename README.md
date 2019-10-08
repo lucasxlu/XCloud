@@ -90,7 +90,8 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 2. install uwsgi: ``sudo pip3 install uwsgi``
 3. start Nginx: ``sudo /etc/init.d/nginx start``. Type ``ps -ef |grep -i nginx`` to see whether Nginx has started successfully
 4. open your browser and visit ``YOUR_IP_ADDRESS:80``, if you see nginx welcome page, then you have installed Nginx successfully
-
+5. modify [XCloud_nginx.conf](./XCloud_nginx.conf) if needed, then copy [XCloud_nginx.conf](./XCloud_nginx.conf) to ``/etc/nginx/conf.d`` directory
+6. restart Nginx: ``sudo /etc/init.d/nginx restart``
 
 
 ![index](index.png)
