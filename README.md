@@ -84,11 +84,12 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 
 
 #### With Nginx
-Note: [this tutorial](https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html) gives more details about Nginx and Django
+**Note**: [this tutorial](https://uwsgi.readthedocs.io/en/latest/tutorials/Django_and_nginx.html) gives more details about Nginx and Django
 
-1. install Nginx following [official tutorial](http://nginx.org/en/linux_packages.html)
+1. install Nginx: ``sudo apt-get install nginx``
 2. install uwsgi: ``sudo pip3 install uwsgi``
-3. start Nginx: ``sudo /etc/init.d/nginx start``, open your browser and visit ``YOUR_IP_ADDRESS:80``, if you see nginx welcome page, then you have installed Nginx successfully
+3. start Nginx: ``sudo /etc/init.d/nginx start``. Type ``ps -ef |grep -i nginx`` to see whether Nginx has started successfully
+4. open your browser and visit ``YOUR_IP_ADDRESS:80``, if you see nginx welcome page, then you have installed Nginx successfully
 
 
 
