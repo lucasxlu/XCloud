@@ -73,7 +73,7 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 
 #### With Gunicorn (pure Python)
 1. install [Gunicorn](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/gunicorn/): ``pip3 install gunicorn``
-2. run your server: ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001``
+2. run your server (with multi threads support): ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001 --threads THREADS_NUM``
 3. open your browser and visit welcome page: ```http://YOUR_MACHINE_IP:8001/index```
 
 #### With uWSGI (pure C)
@@ -92,6 +92,10 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 4. open your browser and visit ``YOUR_IP_ADDRESS:80``, if you see nginx welcome page, then you have installed Nginx successfully
 5. modify [XCloud_nginx.conf](./XCloud_nginx.conf) if needed, then copy [XCloud_nginx.conf](./XCloud_nginx.conf) to ``/etc/nginx/conf.d`` directory
 6. restart Nginx: ``sudo /etc/init.d/nginx restart``
+
+
+#### More
+In the near future, I will explore more methods in `Machine Leanring in Production` fields, and share related articles on this repository or [my blog](https://lucasxlu.github.io/blog/).
 
 
 ![index](index.png)
