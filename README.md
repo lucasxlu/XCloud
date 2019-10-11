@@ -92,6 +92,72 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 4. open your browser and visit ``YOUR_IP_ADDRESS:80``, if you see nginx welcome page, then you have installed Nginx successfully
 5. modify [XCloud_nginx.conf](./XCloud_nginx.conf) if needed, then copy [XCloud_nginx.conf](./XCloud_nginx.conf) to ``/etc/nginx/conf.d`` directory
 6. restart Nginx: ``sudo /etc/init.d/nginx restart``
+7. config your Nginx: ``sudo vim /etc/nginx/nginx.conf`` as follows:
+   ```
+   user  nginx;
+   worker_processes  1;
+
+   error_log  /var/log/nginx/error.log warn;
+   pid        /var/run/nginx.pid;
+
+
+   events {
+       worker_connections  1024;
+   }
+
+
+   http {
+       include       /etc/nginx/mime.types;
+       default_type  application/octet-stream;
+
+       log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                         '$status $body_bytes_sent "$http_referer" '
+                         '"$http_user_agent" "$http_x_forwarded_for"';
+
+       access_log  /var/log/nginx/access.log  main;
+
+       sendfile        on;
+       #tcp_nopush     on;
+
+       keepalive_timeout  65;
+
+       gzip  on;
+
+       include /etc/nginx/conf.d/*.conf;
+       upstream backend {
+           server YOUR_MACHINE_IP:8001;
+           server YOUR_MACHINE_IP:8002;
+           server YOUR_MACHINE_IP:8003;
+           server YOUR_MACHINE_IP:8004;
+       }
+
+       server {
+           listen 8008;
+           server_name YOUR_MACHINE_IP;
+           access_log  /var/log/nginx/access.log  main;
+           charset  utf-8;
+           gzip on;
+           gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php application/json text/json image/jpeg image/gif image/png application/octet-stream;
+
+           # set project uwsgi path
+           location / {
+               include uwsgi_params;  # import an Nginx module to communicate with uWSGI
+               uwsgi_connect_timeout 30;
+               uwsgi_pass unix:/opt/project_teacher/script/uwsgi.sock;  # set uwsgi's sock file, so all dynamical requests will be sent to uwsgi_pass
+               proxy_pass http://backend;
+           }
+
+           location /static/ {
+               alias  /data/lucasxu/Projects/XCloud/cv/static/;
+               index  index.html index.htm;
+           }
+       }
+   }
+   ```
+
+> Note: suppose you start **4** deep learning services with ports from 8001 to 8004, on CUDA_VISIBLE_DEVICES from 0 to 3, respectively. The above configuration indicates that **all concurrent requests will be proxied to YOUR_MACHINE_IP:8008**. So it's easy to solve concurrent requests from clients.
+
+8. restart Nginx: ``sudo /etc/init.d/nginx restart``, then **enjoy it!**
 
 
 #### More
