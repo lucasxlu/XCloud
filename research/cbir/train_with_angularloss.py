@@ -281,6 +281,12 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
             outputs = outputs[0]  # 0=cos_theta 1=phi_theta
 
             _, predicted = torch.max(outputs.data, 1)
+
+            outputs = F.softmax(outputs)
+            # get TOP-K output labels and corresponding probabilities
+            topK_prob, topK_label = torch.topk(outputs, 1)
+            probs += topK_prob.to("cpu").detach().numpy().tolist()
+
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
 
