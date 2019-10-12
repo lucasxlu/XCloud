@@ -161,7 +161,7 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 
 
 #### More
-In the near future, I will explore more methods in `Machine Leanring in Production` fields, and share related articles on this repository or [my blog](https://lucasxlu.github.io/blog/).
+In the near future, I will explore more methods in `Machine Leanring in Production` fields, and share related articles on [ML_IN_PRODUCTION.md](ML_IN_PRODUCTION.md) or [my blog](https://lucasxlu.github.io/blog/).
 
 
 ![index](index.png)
