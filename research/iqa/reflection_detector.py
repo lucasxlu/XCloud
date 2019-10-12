@@ -76,7 +76,7 @@ if __name__ == '__main__':
         import time
 
         tik = time.time()
-        img_dir = 'D:/BianLifeng/ShelfLaminateMask/ShelfLaminateSegDataset/JPEGImages/'
+        img_dir = ''
         for _ in os.listdir(img_dir):
             print(blur_detector.cal_light_region_num(img_dir + _))
 
