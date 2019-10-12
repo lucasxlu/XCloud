@@ -1,8 +1,14 @@
 # Image Censorship
 ## Introduction
-This module holds the source code for _image censorship_, namely, _pornography_ and _political figures_ recognition.
+This module holds the source code for **image censorship**, namely, 
+**pornography and political figures** recognition.
 
-Note: The dataset for pornography recognition is downloaded from [nsfw_data_scrapper](https://github.com/alexkimxyz/nsfw_data_scrapper.git). 
+### Note
+1. The dataset for pornography recognition is downloaded from [nsfw_data_scrapper](https://github.com/alexkimxyz/nsfw_data_scrapper.git). 
+2. This repository provides both [deep learning-based methods](./main.py), 
+[non-deep models and skin models](./porn_img_rec_ml.py) for pornography image
+ recognition.
+
 
 ## Data Statistics
 | Type | Capacity |
