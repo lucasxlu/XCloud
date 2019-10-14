@@ -101,6 +101,7 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 
 
    events {
+       use   epoll;
        worker_connections  1024;
    }
 
@@ -139,10 +140,13 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
            gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php application/json text/json image/jpeg image/gif image/png application/octet-stream;
 
            # set project uwsgi path
-           location / {
+           location /cv/ {
                include uwsgi_params;  # import an Nginx module to communicate with uWSGI
                uwsgi_connect_timeout 30;
                uwsgi_pass unix:/opt/project_teacher/script/uwsgi.sock;  # set uwsgi's sock file, so all dynamical requests will be sent to uwsgi_pass
+               proxy_connect_timeout 300;
+               proxy_buffering off;
+
                proxy_pass http://backend;
            }
 
@@ -154,7 +158,7 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
    }
    ```
 
-> Note: suppose you start **4** deep learning services with ports from 8001 to 8004, on CUDA_VISIBLE_DEVICES from 0 to 3, respectively. The above configuration indicates that **all concurrent requests will be proxied to YOUR_MACHINE_IP:8008**. So it's easy to solve concurrent requests from clients.
+> Note: suppose you start **4** deep learning services with ports from 8001 to 8004, on CUDA_VISIBLE_DEVICES from 0 to 3, respectively. The above configuration indicates that **all concurrent requests will be proxied to YOUR_MACHINE_IP:8008/cv/**. So it's easy to solve concurrent requests from clients.
 
 8. restart Nginx: ``sudo /etc/init.d/nginx restart``, then **enjoy it!**
 
