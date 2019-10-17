@@ -73,7 +73,7 @@ As suggested in [Django doc](https://docs.djangoproject.com/en/dev/ref/django-ad
 
 #### With Gunicorn (pure Python)
 1. install [Gunicorn](https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/gunicorn/): ``pip3 install gunicorn``
-2. run your server (with multi threads support): ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001 --threads THREADS_NUM``
+2. run your server (with multi threads support): ``gunicorn XCloud.wsgi -b YOUR_MACHINE_IP:8001 --threads THREADS_NUM --timeout=200``
 3. open your browser and visit welcome page: ```http://YOUR_MACHINE_IP:8001/index```
 
 #### With uWSGI (pure C)
