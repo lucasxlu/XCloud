@@ -7,8 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
-from skimage import io
-from skimage.color import gray2rgb, rgba2rgb
+from PIL import Image
 from torchvision import models
 
 sys.path.append('../')
@@ -51,14 +50,11 @@ class NSFWEstimator:
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
         
-        image = io.imread(img_file)
-
-        if len(list(image.shape)) < 3:
-            image = gray2rgb(image)
-        elif len(list(image.shape)) > 3:
-            image = rgba2rgb(image)
-
-        img = preprocess(image)
+        img = Image.open(img_file)
+        if img.mode == 'RGBA':
+            img = img.convert('RGB')
+        
+        img = preprocess(img)
         img.unsqueeze_(0)
 
         img = img.to(self.device)
