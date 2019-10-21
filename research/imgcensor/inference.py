@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
-from PIL import Image
+from skimage.color import gray2rgb, rgba2rgb
 from torchvision import models
 
 sys.path.append('../')
@@ -20,7 +20,7 @@ class NSFWEstimator:
     """
 
     def __init__(self, pretrained_model_path):
-        model = models.densenet121(pretrained=True)
+        model = models.densenet121(pretrained=False)
         num_ftrs = model.classifier.in_features
         model.classifier = nn.Linear(num_ftrs, cfg['out_num'])
 
@@ -43,16 +43,21 @@ class NSFWEstimator:
         }
 
     def infer(self, img_file):
-        img = Image.open(img_file)
-
         preprocess = transforms.Compose([
             transforms.Resize(224),
             transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
+        
+        image = io.imread(img_file)
 
-        img = preprocess(img)
+        if len(list(image.shape)) < 3:
+            image = gray2rgb(image)
+        elif len(list(image.shape)) > 3:
+            image = rgba2rgb(image)
+
+        img = preprocess(image)
         img.unsqueeze_(0)
 
         img = img.to(self.device)
