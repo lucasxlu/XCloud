@@ -7,6 +7,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
+from skimage import io
 from skimage.color import gray2rgb, rgba2rgb
 from torchvision import models
 
