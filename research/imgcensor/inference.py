@@ -51,7 +51,7 @@ class NSFWEstimator:
         ])
         
         img = Image.open(img_file)
-        if img.mode == 'RGBA':
+        if img.mode != 'RGB':  # handle gray-scale & RGBA images
             img = img.convert('RGB')
         
         img = preprocess(img)
