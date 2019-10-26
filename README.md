@@ -185,6 +185,18 @@ For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WIT
 * For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 * Technical details can be read from our [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf). 
 
+
+## Organizations using XCloud
+* [Blibee](https://bianlifeng.com/)
+* [DiDi](https://www.didiglobal.com/)
+* [XiaoMi](https://www.mi.com/)
+* [Yingzi](https://www.yingzi.com/)
+* [Green Pine Capital](http://www.pinevc.com.cn/)
+* [ZLFInfo](http://zlfinfo.com.cn/)
+* [MissPan](http://www.misspan.cn/)
+
+
+## Citation
 If you use our codebase or models in your research, please cite this project. **We have released a [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about this project**.
 ```
 @misc{xu2019xcloud,
