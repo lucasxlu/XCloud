@@ -53,10 +53,10 @@ class TissuePhysiologyDataset(Dataset):
 
         image = io.imread(img_name)
 
-        if len(list(image.shape)) < 3:
-            image = gray2rgb(image)
-        elif len(list(image.shape)) > 3:
+        if image.shape[-1] == 4:
             image = rgba2rgb(image)
+        elif image.shape[-1] == 1:
+            image = gray2rgb(image)
 
         sample = {'image': image, "type": self.typelist[idx], 'filename': img_name}
 

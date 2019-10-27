@@ -8,6 +8,7 @@ import sys
 import numpy as np
 from PIL import Image
 from skimage import io
+from skimage.color import rgba2rgb, gray2rgb
 from torch.utils.data import Dataset
 
 sys.path.append('../')
@@ -54,6 +55,10 @@ class SCUTFBP5500Dataset(Dataset):
 
     def __getitem__(self, idx):
         image = io.imread(self.img_files[idx])
+        if image.shape[-1] == 4:
+            image = rgba2rgb(image)
+        elif image.shape[-1] == 1:
+            image = gray2rgb(image)
         label = self.labels[idx]
 
         sample = {'image': image, 'label': label, 'class': round(label) - 1, 'filename': self.img_files[idx]}

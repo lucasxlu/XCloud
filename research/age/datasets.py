@@ -4,6 +4,7 @@ import sys
 import numpy as np
 from PIL import Image
 from skimage import io
+from skimage.color import rgba2rgb, gray2rgb
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset
 
@@ -53,6 +54,10 @@ class UTKFaceDataset(Dataset):
         img_name = os.path.join(cfg['root'], 'UTKFace', self.filelist[idx])
 
         image = io.imread(img_name)
+        if image.shape[-1] == 4:
+            image = rgba2rgb(image)
+        elif image.shape[-1] == 1:
+            image = gray2rgb(image)
         sample = {'image': image, 'age': self.agelist[idx], "gender": self.genderlist[idx],
                   "race": self.racelist[idx], 'filename': img_name}
 
