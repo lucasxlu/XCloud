@@ -56,8 +56,9 @@ class UTKFaceDataset(Dataset):
         image = io.imread(img_name)
         if image.shape[-1] == 4:
             image = rgba2rgb(image)
-        elif image.shape[-1] == 1:
+        elif image.shape[-1] == 1 or len(list(image.shape)) < 3:
             image = gray2rgb(image)
+
         sample = {'image': image, 'age': self.agelist[idx], "gender": self.genderlist[idx],
                   "race": self.racelist[idx], 'filename': img_name}
 

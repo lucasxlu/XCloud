@@ -57,8 +57,9 @@ class SCUTFBP5500Dataset(Dataset):
         image = io.imread(self.img_files[idx])
         if image.shape[-1] == 4:
             image = rgba2rgb(image)
-        elif image.shape[-1] == 1:
+        elif image.shape[-1] == 1 or len(list(image.shape)) < 3:
             image = gray2rgb(image)
+
         label = self.labels[idx]
 
         sample = {'image': image, 'label': label, 'class': round(label) - 1, 'filename': self.img_files[idx]}
