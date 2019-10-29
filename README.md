@@ -56,7 +56,7 @@ with RESTful APIs. The platform is developed and maintained by [@LucasX](https:/
 
 
 ### TensorRT Preparation
-In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **97.63** FPS on two 2080TI GPUs, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
+In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **147.23** FPS on two 2080TI GPUs without performance drop, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
 
 The installation is listed as follows:  
 1. download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project
@@ -66,6 +66,22 @@ The installation is listed as follows:
 5. install TensorRT Python wheel: ``pip3 install ~/Software/TensorRT-5.1.5.0/python/tensorrt-5.1.5.0-cp37-none-linux_x86_64.whl``
 6. install [torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt.git)
 7. then you can use [model_converter.py](https://github.com/lucasxlu/XCloud/blob/master/cv/model_converter.py) to convert a PyTorch model to TensorRT model
+
+
+### ONNX & ONNX-Runtime Preparation
+[ONNX Runtime](https://github.com/microsoft/onnxruntime.git) is a performance-focused engine for [ONNX](https://onnx.ai) models, which inferences efficiently across multiple platforms and hardware (Windows, Linux, and Mac and on both CPUs and GPUs). We also provide a easy-to-use script [model_converter.py](https://github.com/lucasxlu/XCloud/blob/master/cv/model_converter.py) to allow you to easily convert a PyTorch model to ONNX model with ONNX-Runtime inference engine. 
+
+Before use [model_converter.py](https://github.com/lucasxlu/XCloud/blob/master/cv/model_converter.py), make sure you have installed ``PyTorch, ONNX, and ONNX-Runtime``. If not, just try:
+```python
+pip3 install onnx onnxruntime-gpu
+```
+
+| Inference Engine | FPS |
+| :---: | :---: |
+| PyTorch | 29.45 |
+| TensorRT | 147.23 |
+| ONNX (CPU) | 6.93 |
+| ONNX (GPU) |  |
 
 
 ### Upgrade Django Built-in Server
