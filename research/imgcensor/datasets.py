@@ -3,7 +3,7 @@ import sys
 
 import numpy as np
 from PIL import Image
-from skimage import io
+from skimage import io, img_as_ubyte
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Dataset
 from skimage.color import gray2rgb, rgba2rgb
@@ -71,6 +71,6 @@ class NSFWDataset(Dataset):
         sample = {'image': image, "type": self.typelist[idx], 'filename': img_name}
 
         if self.transform:
-            sample['image'] = self.transform(Image.fromarray(sample['image'].astype(np.uint8)))
+            sample['image'] = self.transform(Image.fromarray(img_as_ubyte(sample['image'])))
 
         return sample
