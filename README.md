@@ -4,7 +4,7 @@
 ## Introduction
 __XCloud__ is an open-source AI platform which provides common AI services (computer vision, NLP, data mining and etc.) with RESTful APIs. It allows you to serve your machine learning models with few lines of code. The platform is developed and maintained by [@LucasX](https://github.com/lucasxlu) based on [Django](https://www.djangoproject.com/) and [PyTorch](https://pytorch.org/).
 
-The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/dm/data`` module, [research branch](./research) holds the training/testing scripts and several research idea prototype implementations.
+The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./dm)/data module, [research branch](./research) holds the training/testing scripts and several research idea prototype implementations.
 
 
 ## Features
@@ -82,7 +82,7 @@ pip3 install onnx onnxruntime-gpu
 | PyTorch | 29.45 |
 | TensorRT | 147.23 |
 | ONNX (CPU) | 6.93 |
-| ONNX (GPU) |  |
+| ONNX (GPU) | [TODO] |
 
 
 ### Upgrade Django Built-in Server
