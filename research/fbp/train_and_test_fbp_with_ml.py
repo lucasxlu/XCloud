@@ -10,9 +10,10 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.externals import joblib
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
+import cv2
 
 sys.path.append('../')
-from cv.features import *
+from research.fbp.features import *
 
 SCUT5500_DIR = "E:\DataSet\Face\SCUT-FBP5500\Images"
 SCUT5500_CROP_DIR = "E:\DataSet\Face\SCUT-FBP5500\Crop"

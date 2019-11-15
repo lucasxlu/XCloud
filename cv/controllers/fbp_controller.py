@@ -15,8 +15,8 @@ from sklearn.externals import joblib
 from torchvision.transforms import transforms
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from cv import features
-from cv.shufflenet_v2 import ShuffleNetV2
+from research.fbp import features
+from cv.models.shufflenet_v2 import ShuffleNetV2
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROB_THRESH = 0.3

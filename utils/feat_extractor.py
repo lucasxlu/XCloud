@@ -9,7 +9,7 @@ from mtcnn.mtcnn import MTCNN
 from torchvision.transforms import transforms
 
 sys.path.append('../')
-from cv.net_sphere import SphereFaceNet
+from cv.models.net_sphere import SphereFaceNet
 
 
 def detect_face(img_path, detector=MTCNN()):
@@ -91,17 +91,17 @@ def ext_feats(sphere_face, img_path, pretrained_model='cv/model/sphere20a.pth'):
         }
 
 
-def batch_ext_feats(hzau_base_dir='/home/xulu/DataSet/HZAU'):
+def batch_ext_feats(img_base_dir):
     """
     batch extract features
     :return:
     """
     hzau_master_face_features = []
     sphere_face = SphereFaceNet(feature=True)
-    for year in os.listdir(hzau_base_dir):
-        for college_id in os.listdir(os.path.join(hzau_base_dir, year)):
-            for img in os.listdir(os.path.join(hzau_base_dir, year, college_id)):
-                res = ext_feats(sphere_face=sphere_face, img_path=os.path.join(hzau_base_dir, year, college_id, img))
+    for year in os.listdir(img_base_dir):
+        for college_id in os.listdir(os.path.join(img_base_dir, year)):
+            for img in os.listdir(os.path.join(img_base_dir, year, college_id)):
+                res = ext_feats(sphere_face=sphere_face, img_path=os.path.join(img_base_dir, year, college_id, img))
                 print('extract facial features for {0}...'.format(img))
                 if res['feature'] is not None:
                     student = {

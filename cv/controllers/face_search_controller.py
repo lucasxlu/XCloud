@@ -11,8 +11,8 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponse
 from numpy.linalg import norm
 
-from cv.feat_extractor import ext_feats
-from cv.net_sphere import SphereFaceNet
+from utils.feat_extractor import ext_feats
+from cv.models.net_sphere import SphereFaceNet
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL_PORT = 'http://localhost:8000'

@@ -18,6 +18,8 @@ from skimage.color import gray2rgb, rgba2rgb
 from torchvision import models
 from torchvision.transforms import transforms
 
+from cv.models.cbir_seacher import ImageSearcher
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL_PORT = 'http://localhost:8000'
 USE_GPU = True
@@ -117,55 +119,6 @@ def ext_deep_feat(model_with_weights, img_filepath):
     return feat.to('cpu').detach().numpy()
 
 
-class NumpyEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray) or isinstance(obj, np.float32):
-            return obj.tolist()
-
-        return json.JSONEncoder.default(self, obj)
-
-
-class ImageSearcher:
-    def __index__(self, index_filename_pkl='./filenames.pkl', feats_pkl='./feats.pkl'):
-        densenet121 = models.densenet121(pretrained=True)
-        densenet121.eval()
-
-        print('[INFO] loading gallery features')
-        with open(feats_pkl, mode='rb') as f:
-            nd_feats_array = pickle.load(f).astype('float32')
-        print(nd_feats_array.shape)
-        print('[INFO] finish loading gallery\n[INFO] building index...')
-        index = build_faiss_index(nd_feats_array, mode=0)
-        print('[INFO] finish building index...')
-
-        with open(index_filename_pkl, mode='rb') as f:
-            idx_filename = pickle.load(f)
-
-        self.index = index
-        self.idx_filename = idx_filename
-        self.model = densenet121
-
-    def search(self, query_img, topK=10):
-        """
-        search TopK results:
-        :param topK:
-        :return:
-        """
-        query_feat = ext_deep_feat(self.model, query_img)
-        xq = query_feat.astype('float32')
-        D, I = self.index.search(xq, topK)  # actual search
-        # print(D[:5])  # neighbors of the 5 first queries
-        # print(I[:5])  # neighbors of the 5 first queries
-
-        print(I)
-        print('-' * 100)
-        print(D)
-
-        returned_indices = I.ravel()
-
-        return [os.path.basename(self.idx_filename[idx]) for idx in returned_indices]
-
-
 image_searcher = ImageSearcher()
 
 
@@ -183,9 +136,16 @@ def upload_and_search(request):
 
     if request.method == "POST":
         image = request.FILES.get("image", None)
+        if not image:
+            result['code'] = 1
+            result['msg'] = 'Invalid Image'
+            result['data'] = None
+            json_result = json.dumps(result, ensure_ascii=False)
+
+            return HttpResponse(json_result)
         if not isinstance(image, InMemoryUploadedFile):
             imgstr = request.POST.get("image", None)
-            if 'http' in imgstr:
+            if 'http://' in imgstr or 'https://' in imgstr:
                 response = requests.get(imgstr)
                 image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())),
                                              field_name="image", content_type="image/jpeg", size=1347415, charset=None)
@@ -193,15 +153,6 @@ def upload_and_search(request):
                 image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
                                              name="{}.jpg".format(str(time.time())), field_name="image",
                                              content_type="image/jpeg", size=1347415, charset=None)
-
-        if not image:
-            result['code'] = 1
-            result['msg'] = 'Invalid Image'
-            result['data'] = None
-
-            json_result = json.dumps(result, ensure_ascii=False)
-
-            return HttpResponse(json_result)
         else:
             destination = open(os.path.join(image_dir, image.name), 'wb+')
             for chunk in image.chunks():

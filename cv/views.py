@@ -20,7 +20,7 @@ from cv.controllers.fbp_controller import upload_and_rec_beauty
 from cv.controllers.skin_disease_controller import upload_and_rec_skin_disease
 from cv.controllers.cbir_controller import upload_and_search
 from cv.cfg import cfg
-from cv import db_utils
+from utils import db_utils
 
 
 # Create your views here.
