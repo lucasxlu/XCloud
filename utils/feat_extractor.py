@@ -1,6 +1,6 @@
-import sys
-import pickle
 import os
+import pickle
+
 import cv2
 import numpy as np
 import torch
@@ -8,7 +8,7 @@ from PIL import Image
 from mtcnn.mtcnn import MTCNN
 from torchvision.transforms import transforms
 
-sys.path.append('../')
+from cv.cfg import cfg
 from cv.models.net_sphere import SphereFaceNet
 
 
@@ -26,14 +26,15 @@ def detect_face(img_path, detector=MTCNN()):
     return mtcnn_result
 
 
-def ext_feats(sphere_face, img_path, pretrained_model='cv/model/sphere20a.pth'):
+def ext_face_feats(sphere_face, img_path, pretrained_model=os.path.join(cfg['model_zoo_base'], 'sphere20a.pth')):
     """
-    extract features
+    extract face features
     :param sphere_face:
     :param img_path:
     :param pretrained_model:
     :return:
     """
+    assert os.path.exists(pretrained_model)
     if sphere_face is None:
         sphere_face = SphereFaceNet()
 
@@ -101,8 +102,9 @@ def batch_ext_feats(img_base_dir):
     for year in os.listdir(img_base_dir):
         for college_id in os.listdir(os.path.join(img_base_dir, year)):
             for img in os.listdir(os.path.join(img_base_dir, year, college_id)):
-                res = ext_feats(sphere_face=sphere_face, img_path=os.path.join(img_base_dir, year, college_id, img))
-                print('extract facial features for {0}...'.format(img))
+                res = ext_face_feats(sphere_face=sphere_face,
+                                     img_path=os.path.join(img_base_dir, year, college_id, img))
+                print('[INFO] extract facial features for {0}...'.format(img))
                 if res['feature'] is not None:
                     student = {
                         'year': year,
@@ -112,10 +114,10 @@ def batch_ext_feats(img_base_dir):
                     }
                     hzau_master_face_features.append(student)
 
-    with open('./hzau_master_face_features.pkl', mode='wb') as f:
+    with open('../cv/model/face_features_gallery.pkl', mode='wb') as f:
         pickle.dump(hzau_master_face_features, f)
 
 
 if __name__ == "__main__":
     # print(ext_feats(sphere_face=SphereFaceNet(feature=True), img_path="C:/Users/29140/Desktop/SCUT-FBP-1.jpg"))
-    batch_ext_feats()
+    batch_ext_feats("D:/HZAU")

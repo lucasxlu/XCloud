@@ -1,11 +1,10 @@
 """
 feature extractor
 """
-import cv2
 import dlib
 import numpy as np
-import skimage.color
 from skimage import io
+from skimage.color import rgb2gray
 from skimage.feature import hog, local_binary_pattern, corner_harris
 
 DLIB_MODEL = "E:\ModelZoo\shape_predictor_68_face_landmarks.dat"
@@ -21,7 +20,7 @@ def HOG(img_path):
     :version: 1.0
     """
     img = io.imread(img_path)
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
     feature = hog(img, orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), block_norm='L2-Hys')
 
@@ -35,7 +34,7 @@ def LBP(img_path):
     :return:
     """
     img = io.imread(img_path)
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
     feature = local_binary_pattern(img, P=8, R=0.2)
     # im = Image.fromarray(np.uint8(feature))
@@ -50,7 +49,7 @@ def LBP_from_cv(img):
     :param img:
     :return:
     """
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
     feature = local_binary_pattern(img, P=8, R=0.2)
     # im = Image.fromarray(np.uint8(feature))
@@ -67,7 +66,7 @@ def HARRIS(img_path):
     :Version:1.0
     """
     img = io.imread(img_path)
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
     feature = corner_harris(img, method='k', k=0.05, eps=1e-06, sigma=1)
 
@@ -76,14 +75,14 @@ def HARRIS(img_path):
 
 def RAW(img_path):
     img = io.imread(img_path)
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
 
     return img.reshape(img.shape[0] * img.shape[1])
 
 
 def RAW_from_cv(img):
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
 
     return img.reshape(img.shape[0] * img.shape[1])
@@ -96,7 +95,7 @@ def HOG_from_cv(img):
     :return:
     :Version:1.0
     """
-    img = skimage.color.rgb2gray(img)
+    img = rgb2gray(img)
     img = (img - np.mean(img)) / np.std(img)
 
     return hog(img, orientations=8, pixels_per_cell=(16, 16), cells_per_block=(1, 1), block_norm='L2-Hys')

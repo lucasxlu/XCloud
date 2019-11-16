@@ -11,19 +11,13 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponse
 from numpy.linalg import norm
 
-from utils.feat_extractor import ext_feats
+from cv.cfg import cfg
+from cv.models.numpy_encoder import NumpyEncoder
+from utils.feat_extractor import ext_face_feats
 from cv.models.net_sphere import SphereFaceNet
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-URL_PORT = 'http://localhost:8000'
-
-
-class NumpyEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray) or isinstance(obj, np.float32):
-            return obj.tolist()
-
-        return json.JSONEncoder.default(self, obj)
+URL_PORT = 'http://localhost:8001'
 
 
 class FaceSearcher:
@@ -31,7 +25,8 @@ class FaceSearcher:
     Face Search Class Wrapper
     """
 
-    def __init__(self, face_feats_path="cv/model/hzau_master_face_features.pkl"):
+    def __init__(self, face_feats_path=os.path.join(cfg['model_zoo_base'], 'face_features_gallery.pkl')):
+        assert os.path.exists(face_feats_path)
         with open(face_feats_path, mode='rb') as f:
             face_feats_list = pickle.load(f)
 
@@ -40,7 +35,7 @@ class FaceSearcher:
         self.sphere_face = SphereFaceNet(feature=True)
 
     def search(self, img_file):
-        face_feat = ext_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
+        face_feat = ext_face_feats(sphere_face=SphereFaceNet(feature=True), img_path=img_file)
 
         compare_result = {}
         for face_obj in self.face_feats_list:
@@ -55,7 +50,7 @@ class FaceSearcher:
 
         return {
             'status': 0,
-            'message': 'success',
+            'message': 'Success',
             'results': sorted_compare_result[0: self.topK]
         }
 
@@ -78,8 +73,8 @@ def upload_and_ext_face_feats(request):
     if request.method == "POST":
         image = request.FILES.get("image", None)
         if not image:
-            result['code'] = 3
-            result['msg'] = 'Invalid Path for Image'
+            result['code'] = 1
+            result['msg'] = 'Invalid Image'
             result['results'] = None
 
             json_result = json.dumps(result, ensure_ascii=False)
@@ -94,10 +89,10 @@ def upload_and_ext_face_feats(request):
             tik = time.time()
             imagepath = URL_PORT + '/static/FaceUpload/' + image.name
 
-            face_feats_result = ext_feats(os.path.join(image_dir, image.name))
+            face_feats_result = ext_face_feats(os.path.join(image_dir, image.name))
 
             result['code'] = 0
-            result['msg'] = 'success'
+            result['msg'] = 'Success'
             result['imgpath'] = imagepath
             result['results'] = face_feats_result['feature']
             result['elapse'] = round(time.time() - tik, 2)
@@ -106,7 +101,7 @@ def upload_and_ext_face_feats(request):
 
             return HttpResponse(json_str)
     else:
-        result['code'] = 3
+        result['code'] = 2
         result['msg'] = 'Invalid HTTP Method'
         result['data'] = None
 
@@ -125,10 +120,20 @@ def upload_and_search_face(request):
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
 
+    tik = time.time()
     result = {}
 
     if request.method == "POST":
         image = request.FILES.get("image", None)
+        if not image:
+            result['code'] = 1
+            result['msg'] = 'invalid image'
+            result['results'] = None
+
+            json_result = json.dumps(result, ensure_ascii=False)
+
+            return HttpResponse(json_result)
+
         if not isinstance(image, InMemoryUploadedFile):
             imgstr = request.POST.get("image", None)
             if 'http' in imgstr:
@@ -139,35 +144,20 @@ def upload_and_search_face(request):
                 image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
                                              name="{}.jpg".format(str(time.time())), field_name="image",
                                              content_type="image/jpeg", size=1347415, charset=None)
-
-        if not image:
-            result['code'] = 3
-            result['msg'] = 'Invalid Path for Image'
-            result['results'] = None
-
-            json_result = json.dumps(result, ensure_ascii=False)
-
-            return HttpResponse(json_result)
         else:
             destination = open(os.path.join(image_dir, image.name), 'wb+')
             for chunk in image.chunks():
                 destination.write(chunk)
             destination.close()
 
-            tik = time.time()
-            imagepath = URL_PORT + '/static/FaceUpload/' + image.name
+        result['code'] = 0
+        result['msg'] = 'Success'
+        result['results'] = face_searcher.search(os.path.join(image_dir, image.name))['results']
+        result['elapse'] = round(time.time() - tik, 2)
 
-            print(imagepath)
+        json_str = json.dumps(result, ensure_ascii=False, cls=NumpyEncoder)
 
-            result['code'] = 0
-            result['msg'] = 'success'
-            result['imgpath'] = imagepath
-            result['results'] = face_searcher.search(os.path.join(image_dir, image.name))['results']
-            result['elapse'] = round(time.time() - tik, 2)
-
-            json_str = json.dumps(result, ensure_ascii=False, cls=NumpyEncoder)
-
-            return HttpResponse(json_str)
+        return HttpResponse(json_str)
     else:
         result['code'] = 3
         result['msg'] = 'Invalid HTTP Method'
