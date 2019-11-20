@@ -46,7 +46,7 @@ def cvt_pytorch_model_to_trt_model(model, pretrained_pytorch_weights, save_to_tr
     data_placeholder = torch.randn((1, 3, 224, 224)).cuda()
     model_trt = torch2trt(model, [data_placeholder], fp16_mode=True)
     torch.save(model_trt.state_dict(), save_to_trt_weights)
-    print('done!')
+    print('[INFO] Finish converting PyTorch model to TensorRT model!')
 
 
 def cvt_pytorch_model_to_onnx_model(model, pretrained_pytorch_weights, save_to_onnx_weights):
@@ -82,7 +82,7 @@ def cvt_pytorch_model_to_onnx_model(model, pretrained_pytorch_weights, save_to_o
                       output_names=['output'],  # the model's output names
                       dynamic_axes={'input': {0: 'batch_size'},  # variable lenght axes
                                     'output': {0: 'batch_size'}})
-    print('done!')
+    print('[INFO] Finish converting PyTorch model to ONNX model!')
 
 
 def softmax(x):
