@@ -3,8 +3,6 @@
 ## Introduction
 Train deep model to recognize a person's beauty score from an given image.
 
-Maintainer: [LucasX](https://github.com/lucasxlu)
-
 
 ## Performance
 ### Results on SCUT-FBP5500
