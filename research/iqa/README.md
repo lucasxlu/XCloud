@@ -8,7 +8,7 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
 - [x] [Blurry Detection](./blur_detector.py)
 - [x] [Reflection Detection](./reflection_detector.py)
 - [x] [Lean Detection](./lean_detector.py)
-- [x] CNN based IQANet ([IQANet](./models.py) & [IQACNNPlusPlus](./models.py))
+- [x] CNN based IQA ([IQANet](./models.py) & [IQACNNPlusPlus](./models.py))
 
 ### Note
 For [IQANet](./models.py) and [IQACNNPlusPlus](./models.py), we set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
