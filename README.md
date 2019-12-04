@@ -45,6 +45,8 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
     - [x] Image Segmentation
     - [x] Image Dehazing
     - [x] Image Quality Assessment
+    - [x] Data Augmentation
+    
     
 ## Deployment
 ### Basic Environment Preparation
@@ -52,7 +54,12 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
 2. install [Django](https://docs.djangoproject.com/en/2.1/intro/install/) and [PyTorch](https://pytorch.org/)
 3. install all dependent libraries: ```pip3 install -r requirements.txt```
 4. activate Python Web environment: ```source ~/pyWeb/bin/activate pyWeb```
-5. start django server: ```python3 manage.py runserver 0.0.0.0:8001```
+5. start django server: 
+    - test with Django built-in server:
+    ```python3 manage.py runserver 0.0.0.0:8001```
+    
+    - start with gunicorn:
+    ```CUDA_VISIBLE_DEVICES=0,1,2,3 nohup gunicorn BCloud.wsgi -b YOUR_MACHINE_IP:8008 --timeout=500```
 6. open your browser and visit welcome page: ```YOUR_MACHINE_IP:8001/index```
 
 
