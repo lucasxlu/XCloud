@@ -8,7 +8,6 @@ Note: your image file structure should be:
     - category 3
     - ...
     - category N
-
 after running this code, you will get sample-paired images as:
 - SamplePairingImg
     - category 1
@@ -16,7 +15,6 @@ after running this code, you will get sample-paired images as:
     - category 3
     - ...
     - category N
-
 @Author: LucasX
 """
 import os
@@ -55,9 +53,9 @@ def do_sample_pairing(base_img_root, sample_number_of_each_category=50):
                 for _ in os.listdir(os.path.join(base_img_root, bg_dir)):
                     bg_imgs.append(os.path.join(base_img_root, bg_dir, _))
 
-            while number < sample_number_of_each_category:
+            while number < sample_number_of_each_category and len(bg_imgs) > 0:
                 random_fg = fg_imgs[random.randint(0, len(fg_imgs) - 1)]
-                random_bg = bg_imgs[random.randint(0, len(bg_imgs) - 1)]
+                random_bg = bg_imgs.pop(random.randint(0, len(bg_imgs) - 1))
 
                 if random_fg not in visited_label_img_set and random_bg not in visited_label_img_set:
                     mixed_img = mix_img(random_fg, random_bg)
@@ -93,4 +91,4 @@ def mix_img(img_a, img_b):
 
 
 if __name__ == '__main__':
-    do_sample_pairing("D:/Datasets/CERTH_ImageBlurDataset/TrainingSet", 10)
+    do_sample_pairing("D:/Datasets/CERTH_ImageBlurDataset/TrainingSet", 300)
