@@ -55,16 +55,19 @@ def do_sample_pairing(base_img_root, sample_number_of_each_category=50):
 
             while number < sample_number_of_each_category and len(bg_imgs) > 0:
                 random_fg = fg_imgs[random.randint(0, len(fg_imgs) - 1)]
-                random_bg = bg_imgs[random.randint(0, len(bg_imgs) - 1)]
+                random_bg = bg_imgs.pop(random.randint(0, len(bg_imgs) - 1))
 
-                if random_fg not in visited_label_img_set and random_bg not in visited_label_img_set:
-                    mixed_img = mix_img(random_fg, random_bg)
-                    cv2.imwrite(os.path.join(DATA_AUG_DIR, cat, 'SamplePairing_{}'.format(os.path.basename(random_fg))),
-                                mixed_img)
-                    visited_label_img_set.add(random_fg)
-                    visited_label_img_set.add(random_bg)
+                if random_bg not in visited_label_img_set:
+                    try:
+                        mixed_img = mix_img(random_fg, random_bg)
+                        cv2.imwrite(os.path.join(DATA_AUG_DIR, cat,
+                                                 'SamplePairing_{}_{}'.format(number, os.path.basename(random_fg))),
+                                    mixed_img)
+                        visited_label_img_set.add(random_bg)
 
-                    number += 1
+                        number += 1
+                    except:
+                        pass
 
     print('[INFO] processing done!')
 
@@ -91,4 +94,4 @@ def mix_img(img_a, img_b):
 
 
 if __name__ == '__main__':
-    do_sample_pairing("D:/Datasets/CERTH_ImageBlurDataset/TrainingSet", 300)
+    do_sample_pairing("D:/Datasets/CERTH_ImageBlurDataset/TrainingSet", 250)
