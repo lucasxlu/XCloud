@@ -55,7 +55,7 @@ def do_sample_pairing(base_img_root, sample_number_of_each_category=50):
 
             while number < sample_number_of_each_category and len(bg_imgs) > 0:
                 random_fg = fg_imgs[random.randint(0, len(fg_imgs) - 1)]
-                random_bg = bg_imgs.pop(random.randint(0, len(bg_imgs) - 1))
+                random_bg = bg_imgs[random.randint(0, len(bg_imgs) - 1)]
 
                 if random_fg not in visited_label_img_set and random_bg not in visited_label_img_set:
                     mixed_img = mix_img(random_fg, random_bg)
