@@ -53,11 +53,13 @@ class IQACNNPlusPlus(nn.Module):
     Simultaneous Estimation of Image Quality and Distortion via Multi-task Convolutional Neural Networks. ICIP'15
     Sampling a patch with 32*32*1 from a given image and train a simple CNN for quality score regression
     Input size: 32*32*1
+    Note: we replace the input channel as RGB instead of Gray-scale, since we find RGB input improves accuracy, 
+    we also add BatchNorm as a standard component as in SOTA CNN architecture 
     """
 
     def __init__(self, num_out):
         super(IQACNNPlusPlus, self).__init__()
-        self.conv1 = nn.Conv2d(1, 8, 3)  # 30*30*8
+        self.conv1 = nn.Conv2d(3, 8, 3)  # 30*30*8
         self.bn1 = nn.BatchNorm2d(8)
         self.maxpool1 = nn.MaxPool2d(2)  # 29*29*8
 
