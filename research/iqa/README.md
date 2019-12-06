@@ -11,9 +11,10 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
 - [x] CNN based IQA ([IQANet](./models.py) & [IQACNNPlusPlus](./models.py))
 
 ### Note
-For [IQANet](./models.py) and [IQACNNPlusPlus](./models.py), we set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
+- For [IQANet](./models.py) and [IQACNNPlusPlus](./models.py), we set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
 the deep models to satisfy our requirement. You can also set the last output neuron as 1, and train regression nets with ``MSE Loss``.
-   
+
+- We replace the input channel as RGB instead of Gray-scale, since we find RGB input improves accuracy, we also add BatchNorm as a standard component as in SOTA CNN architecture.
 
 ## References
 1. Kang L, Ye P, Li Y, et al. [Convolutional neural networks for no-reference image quality assessment](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf)[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2014: 1733-1740.
