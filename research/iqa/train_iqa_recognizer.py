@@ -270,7 +270,7 @@ if __name__ == '__main__':
 
     # resnet18 = models.resnet18(pretrained=True)
     # num_ftrs = resnet18.fc.in_features
-    # resnet18.fc = nn.Linear(num_ftrs, 6)
+    # resnet18.fc = nn.Linear(num_ftrs, cfg['out_num'])
 
     iqanet = IQANet(num_out=cfg['out_num'])
     # iqacnn_pp = IQACNNPlusPlus(num_out=cfg['out_num'])
