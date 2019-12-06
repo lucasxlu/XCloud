@@ -37,8 +37,8 @@ class ImageQualityDataset(Dataset):
         img_name = self.files[idx]
         image = io.imread(img_name)
 
-        if image.shape[-1] > 1:
-            image = rgb2gray(image)
+        #  if image.shape[-1] > 1:
+        #      image = rgb2gray(image)
 
         sample = {'image': image, "type": self.types[idx], 'filename': img_name}
 
