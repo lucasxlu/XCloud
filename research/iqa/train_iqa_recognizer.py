@@ -18,9 +18,9 @@ from torch.optim import lr_scheduler
 from torchvision import models
 
 sys.path.append('../')
-from iqa.models import IQANet, IQACNNPlusPlus
-from iqa import data_loader
-from iqa.cfg import cfg
+from research.iqa.models import IQANet, IQACNNPlusPlus
+from research.iqa import data_loader
+from research.iqa.cfg import cfg
 
 
 def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs, inference=False):

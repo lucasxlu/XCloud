@@ -8,7 +8,7 @@ from skimage.color import rgb2gray
 from torch.utils.data import Dataset
 
 sys.path.append('../')
-from iqa.cfg import cfg
+from research.iqa.cfg import cfg
 
 
 class ImageQualityDataset(Dataset):

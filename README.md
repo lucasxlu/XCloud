@@ -11,7 +11,7 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
 * [Computer Vision](./cv)
     * Face Analysis
         - [x] Face Comparison
-        - [x] Facial Beauty Prediction (ShuffleNet V2 as backbone)
+        - [x] Facial Beauty Prediction
         - [x] Gender Recognition
         - [x] Race Recognition
         - [x] Age Estimation

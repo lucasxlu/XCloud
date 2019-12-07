@@ -4,8 +4,8 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 
 sys.path.append('../')
-from iqa.cfg import cfg
-from iqa.datasets import ImageQualityDataset
+from research.iqa.cfg import cfg
+from research.iqa.datasets import ImageQualityDataset
 
 
 def load_image_quality_data():

@@ -4,7 +4,7 @@
 This module holds the source code for training & testing deep models.
 
 * [Age Estimation](./age)
-* [Facial Beauty Prediction](./fbp) (ShuffleNet V2 as backbone)
+* [Facial Beauty Prediction](./fbp)
 * [NSFW](./imgcensor)
 * [Intelligent Agriculture](./intelligentagriculture)
 * [Content-based Image Retrieval](./cbir)
