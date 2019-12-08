@@ -10,8 +10,8 @@ import torch.nn.functional as F
 class IQANet(nn.Module):
     """
     Convolutional Neural Networks for No-Reference Image Quality Assessment. CVPR'14
-    Sampling a patch with 32*32*1 from a given image and train a simple CNN for quality score regression
-    Input size: 32*32*1
+    Sampling a patch with 32*32*3 from a given image and train a simple CNN for quality score regression
+    Input size: 32*32*3
     """
 
     def __init__(self, num_out):
@@ -51,7 +51,7 @@ class IQANet(nn.Module):
 class IQACNNPlusPlus(nn.Module):
     """
     Simultaneous Estimation of Image Quality and Distortion via Multi-task Convolutional Neural Networks. ICIP'15
-    Sampling a patch with 32*32*1 from a given image and train a simple CNN for quality score regression
+    Sampling a patch with 32*32*3 from a given image and train a simple CNN for quality score regression/classification
     Input size: 32*32*3
     """
 

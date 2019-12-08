@@ -8,14 +8,31 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
 - [x] [Blurry Detection](./blur_detector.py)
 - [x] [Reflection Detection](./reflection_detector.py)
 - [x] [Lean Detection](./lean_detector.py)
-- [x] CNN based IQA ([IQANet](./models.py) & [IQACNNPlusPlus](./models.py))
+- [x] CNN based IQA ([IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) and [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/))
 
 ### Note
-- For [IQANet](./models.py) and [IQACNNPlusPlus](./models.py), we set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
-the deep models to satisfy our requirement. You can also set the last output neuron as 1, and train regression nets with ``MSE Loss``.
+- For [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) and [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/), I set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
+the deep models to satisfy our requirement. You can also set the last output neuron as 1, remove softmax layer, and train regression nets with ``MSE Loss``.
 
-- We replace the input channel as RGB instead of Gray-scale, since we find RGB input improves accuracy, we also add BatchNorm as a standard component as in SOTA CNN architecture.
+- I replace the input channel as RGB instead of Gray-scale, since I find RGB input improves accuracy, I also add BatchNorm as a standard component as in SOTA CNN architecture.
+
+## Performance Evaluation
+I adopt [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) for ``exposure/edge recognition`` in ``product recognition project`` to reject unqualified images. The performance is listed as follows, you can train your own model with the code provided within this module.
+
+### Over-exposure Recognition
+| Model | Acc | Precision | Recall |
+| :---: | :---: | :---: | :---: |
+| [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) | 90.89% | 91.09% | 90.20% |
+
+
+### Product Edge Recognition
+| Model | Acc | Precision | Recall |
+| :---: | :---: | :---: | :---: |
+| [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) | 89.19% | 87.19% | 80.91% |
+
+
 
 ## References
 1. Kang L, Ye P, Li Y, et al. [Convolutional neural networks for no-reference image quality assessment](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf)[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2014: 1733-1740.
 2. Kang L, Ye P, Li Y, et al. [Simultaneous estimation of image quality and distortion via multi-task convolutional neural networks](https://ieeexplore.ieee.org/abstract/document/7351311/)[C]//2015 IEEE international conference on image processing (ICIP). IEEE, 2015: 2791-2795.
+3. Talebi, Hossein, and Peyman Milanfar. ["Nima: Neural image assessment."](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823) IEEE Transactions on Image Processing 27.8 (2018): 3998-4011.
