@@ -8,7 +8,7 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
 - [x] [Blurry Detection](./blur_detector.py)
 - [x] [Reflection Detection](./reflection_detector.py)
 - [x] [Lean Detection](./lean_detector.py)
-- [x] CNN based IQA ([IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf), [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) and [NIMA](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823))
+- [x] CNN based IQA ([IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf), [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/), [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf), and [NIMA](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823))
 
 ### Note
 - For [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) and [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/), I set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
@@ -37,3 +37,4 @@ I adopt [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/)
 1. Kang L, Ye P, Li Y, et al. [Convolutional neural networks for no-reference image quality assessment](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf)[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2014: 1733-1740.
 2. Kang L, Ye P, Li Y, et al. [Simultaneous estimation of image quality and distortion via multi-task convolutional neural networks](https://ieeexplore.ieee.org/abstract/document/7351311/)[C]//2015 IEEE international conference on image processing (ICIP). IEEE, 2015: 2791-2795.
 3. Talebi, Hossein, and Peyman Milanfar. ["Nima: Neural image assessment."](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823) IEEE Transactions on Image Processing 27.8 (2018): 3998-4011.
+4. Bosse S, Maniry D, Wiegand T, et al. [A deep neural network for image quality assessment](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf)[C]//2016 IEEE International Conference on Image Processing (ICIP). IEEE, 2016: 3773-3777.
