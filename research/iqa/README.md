@@ -8,7 +8,11 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
 - [x] [Blurry Detection](./blur_detector.py)
 - [x] [Reflection Detection](./reflection_detector.py)
 - [x] [Lean Detection](./lean_detector.py)
-- [x] CNN based IQA ([IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf), [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/), [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf), and [NIMA](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823))
+- [x] CNN based IQA models
+    - [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) (CVPR'14)
+    - [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) (ICIP'15)
+    - [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf) (ICIP'16)
+    - [NIMA](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823) (TIP'18)
 
 ### Note
 - For [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) and [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/), I set the last output neuron as 2, and adopt ``Cross Entropy Loss`` to train
