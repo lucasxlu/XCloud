@@ -17,19 +17,20 @@ the deep models to satisfy our requirement. You can also set the last output neu
 - I replace the input channel as RGB instead of Gray-scale, since I find RGB input improves accuracy, I also add BatchNorm as a standard component as in SOTA CNN architecture.
 
 ## Performance Evaluation
-I adopt [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) for ``exposure/edge recognition`` in ``product recognition project`` to reject unqualified images. The performance is listed as follows, you can train your own model with the code provided within this module.
+I adopt [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) and [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) for ``exposure/edge recognition`` in ``product recognition project`` to reject unqualified images. The performance is listed as follows, you can train your own model with the code provided within this module.
 
 ### Over-exposure Recognition
 | Model | Acc | Precision | Recall |
 | :---: | :---: | :---: | :---: |
 | [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) | 90.89% | 91.09% | 90.20% |
+| [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) | 89.32% | 89.56% | 88.51% |
 
 
 ### Product Edge Recognition
 | Model | Acc | Precision | Recall |
 | :---: | :---: | :---: | :---: |
 | [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) | 89.19% | 87.19% | 80.91% |
-
+| [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) | 89.69% | 88.33% | 81.70% |
 
 
 ## References
