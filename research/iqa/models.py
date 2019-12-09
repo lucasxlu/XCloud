@@ -5,6 +5,7 @@ some paper re-implementations proposed in NR-IQA fields
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision import models
 
 
 class IQANet(nn.Module):
@@ -93,3 +94,51 @@ class IQACNNPlusPlus(nn.Module):
             num_features *= s
 
         return num_features
+
+
+class NIMA(nn.Module):
+    """
+    PyTorch implementation of <NIMA: Neural Image Assessment> published at TIP'18
+    Input size: 224*224*3
+    @Author: LucasX
+    """
+
+    def __init__(self, backbone, num_out):
+        super(NIMA, self).__init__()
+        if backbone.lower() == 'resnet':
+            resnet50 = models.resnet50(pretrained=True)
+            num_ftrs = resnet50.fc.in_features
+            resnet50.fc = nn.Sequential(nn.Linear(num_ftrs, num_out), nn.Softmax(dim=1))
+            print('[INFO] initialize NIMA with ResNet50 as backbone')
+            self.backbone = resnet50
+        elif backbone.lower() == 'densenet':
+            densenet169 = models.densenet169(pretrained=True)
+            num_ftrs = densenet169.classifier.in_features
+            densenet169.classifier = nn.Sequential(nn.Linear(num_ftrs, num_out), nn.Softmax(dim=1))
+            print('[INFO] initialize NIMA with DenseNet169 as backbone')
+            self.backbone = densenet169
+        else:
+            raise ValueError('Invalid backbone, it can only be [resnet/densenet]')
+
+    def forward(self, x):
+        return self.backbone(x)
+
+
+class EDMLoss(nn.Module):
+    """
+    EDMLoss used in conjunction with NIMA model
+    """
+
+    def __init__(self):
+        super(EDMLoss, self).__init__()
+
+    def forward(self, p_target: torch.Tensor, p_estimate: torch.Tensor):
+        assert p_target.shape == p_estimate.shape
+        # cdf for values [1, 2, ..., 10]
+        cdf_target = torch.cumsum(p_target, dim=1)
+        # cdf for values [1, 2, ..., 10]
+        cdf_estimate = torch.cumsum(p_estimate, dim=1)
+        cdf_diff = cdf_estimate - cdf_target
+        samplewise_emd = torch.sqrt(torch.mean(torch.pow(torch.abs(cdf_diff), 2)))
+
+        return samplewise_emd.mean()
