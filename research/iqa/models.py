@@ -2,10 +2,13 @@
 some paper re-implementations proposed in NR-IQA fields
 @Author: LucasX
 """
+import os
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
+from sklearn.externals import joblib
 
 
 class IQANet(nn.Module):
@@ -183,7 +186,32 @@ class DeepPatchCNN(nn.Module):
 
         return num_features
 
+    
+class DeepBIQ:
+    """
+    On the Use of Deep Learning for Blind Image Quality Assessment. Signal, Image and Video Processing 2018
+    extract deep features from a pretrained SOTA classification model (like VGG, Inception, ResNet, DenseNet),
+    and regress quality score with SVR. I use ResNet18 in this reimplementation.
+    Input size: 224*224*3
+    """
 
+    def __init__(self, pretrained_svr_model):
+        resnet18 = models.resnet18(pretrained=True)
+        mods = list(resnet18.modules())
+        mods.pop()
+        self.feature_extractor = nn.Sequential(*mods).eval()
+
+        if not os.path.exists(pretrained_svr_model):
+            raise ValueError('The pretrained SVR model does not exist, please train SVR first!')
+        self.svr = joblib.load(pretrained_svr_model)
+
+    def extract_deep_feature(self, x):
+        return self.extract_deep_feature(x).data.cpu().numpy()
+
+    def infer(self, x):
+        return self.svr.predict(self.extract_deep_feature(x))
+
+ 
 class NIMA(nn.Module):
     """
     PyTorch implementation of <NIMA: Neural Image Assessment> published at TIP'18
