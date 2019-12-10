@@ -64,7 +64,7 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
 
 
 ### TensorRT Preparation
-In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **147.23** FPS on two 2080TI GPUs without performance drop, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
+In order to construct a more efficient inference engine, it is highly recommended to use [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html). With the help of [TensorRT](https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/tensorrt-515/tensorrt-install-guide/index.html), we are able to achieve **147.23** FPS (DenseNet169 as backbone) on 2080TI GPU without performance drop, which is significantly faster than its counterpart PyTorch model (29.45 FPS).
 
 The installation is listed as follows:  
 1. download installation package from NVIDIA official websites. I use ``.tar.gz`` in this project

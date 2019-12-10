@@ -1,6 +1,6 @@
 # Image Quality Assessment
 ## Introduction
-This module provides some methods for `image quality assessment` in both conventional digital image processing and deep learning based approaches.
+This module provides reimplementation for `image quality assessment` in both conventional digital image processing and deep learning based approaches.
 
 If your research interests lie in IQA, please feel free to contact [@LucasX](https://github.com/lucasxlu) or send a Pull Request to this repository. 
 
@@ -12,6 +12,7 @@ If your research interests lie in IQA, please feel free to contact [@LucasX](htt
     - [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) (CVPR'14)
     - [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) (ICIP'15)
     - [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf) (ICIP'16)
+    - [DeepBIQ](https://arxiv.org/pdf/1602.05531.pdf) (Signal, Image and Video Processing'18)
     - [NIMA](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823) (TIP'18)
 
 ### Note
@@ -44,3 +45,4 @@ I adopt these models mentioned above for ``exposure/edge recognition`` in ``prod
 2. Kang L, Ye P, Li Y, et al. [Simultaneous estimation of image quality and distortion via multi-task convolutional neural networks](https://ieeexplore.ieee.org/abstract/document/7351311/)[C]//2015 IEEE international conference on image processing (ICIP). IEEE, 2015: 2791-2795.
 3. Talebi, Hossein, and Peyman Milanfar. ["Nima: Neural image assessment."](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823) IEEE Transactions on Image Processing 27.8 (2018): 3998-4011.
 4. Bosse S, Maniry D, Wiegand T, et al. [A deep neural network for image quality assessment](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf)[C]//2016 IEEE International Conference on Image Processing (ICIP). IEEE, 2016: 3773-3777.
+5. Bianco S, Celona L, Napoletano P, et al. [On the use of deep learning for blind image quality assessment](https://arxiv.org/pdf/1602.05531.pdf)[J]. Signal, Image and Video Processing, 2018, 12(2): 355-362.
