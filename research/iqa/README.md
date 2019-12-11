@@ -31,13 +31,19 @@ I adopt these models mentioned above for ``exposure/edge recognition`` in ``prod
 | [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) | 89.32% | 89.56% | 88.51% | 2.78M |
 | [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf) | 94.53% | 94.43% | 94.35% | 19M |
 
-
 ### Product Edge Recognition
 | Model | Acc | Precision | Recall | Model Size |
 | :---: | :---: | :---: | :---: | :---: |
 | [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) | 89.19% | 87.19% | 80.91% | 0.3M |
 | [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) | 89.69% | 88.33% | 81.70% | 2.78M |
 | [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf) | 93.44% | 91.33% | 90.16% | 19M |
+
+### Blur Recognition
+| Model | Acc | Precision | Recall | Model Size |
+| :---: | :---: | :---: | :---: | :---: |
+| [IQACNNPlusPlus](https://ieeexplore.ieee.org/abstract/document/7351311/) | 87.11% | 87.87% | 86.89% | 0.3M |
+| [IQANet](http://openaccess.thecvf.com/content_cvpr_2014/papers/Kang_Convolutional_Neural_Networks_2014_CVPR_paper.pdf) | 84.77% | 87.11% | 84.37% | 2.78M |
+| [DeepPatchCNN](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf) | 94.14% | 94.25% | 94.07% | 19M |
 
 
 ## References
