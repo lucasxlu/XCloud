@@ -6,6 +6,8 @@ __XCloud__ is an open-source AI platform which provides common AI services (comp
 
 The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./dm)/data module, [research branch](./research) holds the training/testing scripts and several research idea prototype implementations.
 
+![arch](arch.png)
+
 
 ## Features
 * [Computer Vision](./cv)
@@ -207,7 +209,7 @@ For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WIT
 * XCloud is **free for researchers**. For commercial use, please email me AT **xulu0620@gmail.com** for more details. 
 * **Please ensure that your machine has a strong GPU equipment**.
 * For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
-* Technical details can be read from our [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf). 
+* Technical details can be read from our [Technical Report](https://arxiv.org/abs/1912.10344). 
 
 
 ## Organizations using XCloud
