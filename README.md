@@ -222,8 +222,15 @@ For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WIT
 * [MissPan](http://www.misspan.cn/)
 
 
+## TODO List
+* Add [docker](https://www.docker.com/) support
+* Add new dev-branch to pre-process images with [NVIDIA DALI](https://developer.nvidia.com/DALI)
+* Add new dev-branch to train models with [NVIDIA Apex](https://github.com/NVIDIA/apex)
+* Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support for accelerating deep models
+
+
 ## Citation
-If you use our codebase or models in your research, please cite this project. **We have released a [Technical Report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about this project**.
+If you use our codebase or models in your research, please cite this project. **We have released a [Technical Report](https://arxiv.org/abs/1912.10344) about this project**.
 ```
 @misc{xu2019xcloud,
   author =       {Lu Xu and Yating Wang},
