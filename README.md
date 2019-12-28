@@ -232,11 +232,11 @@ For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WIT
 ## Citation
 If you use our codebase or models in your research, please cite this project. **We have released a [Technical Report](https://arxiv.org/abs/1912.10344) about this project**.
 ```
-@misc{xu2019xcloud,
-  author =       {Lu Xu and Yating Wang},
-  title =        {XCloud: Design and Implementation of AI Cloud Platform with RESTful API Service},
-  howpublished = {\url{https://github.com/lucasxlu/XCloud.git}},
-  year =         {2019}
+@article{xu2019xcloud,
+  title={XCloud: Design and Implementation of AI Cloud Platform with RESTful API Service},
+  author={Xu, Lu and Wang, Yating},
+  journal={arXiv preprint arXiv:1912.10344},
+  year={2019}
 }
 ```
 
