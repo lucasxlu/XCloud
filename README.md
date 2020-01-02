@@ -200,6 +200,34 @@ In the near future, I will explore more methods in `Machine Leanring in Producti
 For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WITH_JMETER.md) for more details!
  
 
+## API Usage
+We support **3 types** of request type in API, namely, ``web form uploaded file``, ``base64 image`` and ``image URL (such as Swift)``.
+
+* Basic Curl
+```shell 
+curl -F "image=@111.jpg" YOUR_MACHINE_IP:8001/cv/xxxrec
+```
+
+```shell
+curl -d "image=https://xxx.com/file/test.jpg" YOUR_MACHINE_IP:8001/cv/xxxrec
+```
+
+* Python
+```python
+import base64
+import requests
+
+req_url = 'YOUR_MACHINE_IP:8001/cv/xxxrec'
+with open("/path/to/test.jpg", mode='rb') as f:
+    image = base64.b64encode(f.read())
+    resp = requests.post(req_url, data={
+        'image': image,
+    })
+
+    print(resp.json())
+```
+
+
 ## Contributor
 * [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment/report
 * [@reallinfo](https://github.com/reallinfo): logo design
