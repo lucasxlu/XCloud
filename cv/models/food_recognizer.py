@@ -80,30 +80,22 @@ class FoodRecognizer:
         _, predicted = torch.max(outputs.data, 1)
 
         if prob[0][0] >= cfg['thresholds']['food_recognition']:
-            return {
-                'status': 0,
-                'message': 'success',
-                'results': [
-                    {
-                        'name': self.key_type[int(topK_label[0][i].to("cpu"))] if int(
-                            topK_label[0][i].to("cpu")) in self.key_type.keys() else 'Unknown',
-                        'category': int(topK_label[0][i].data.to("cpu").numpy()),
-                        'prob': round(prob[0][i], 4)
-                    } for i in range(self.topK)
-                ]
-            }
+            return [
+                {
+                    'name': self.key_type[int(topK_label[0][i].to("cpu"))] if int(
+                        topK_label[0][i].to("cpu")) in self.key_type.keys() else 'Unknown',
+                    'category': int(topK_label[0][i].data.to("cpu").numpy()),
+                    'prob': round(prob[0][i], 4)
+                } for i in range(self.topK)
+            ]
         else:
-            return {
-                'status': 0,
-                'message': 'success',
-                'results': [
-                    {
-                        'name': 'Unknown',
-                        'category': -1,
-                        'prob': round(prob[0][0], 4)
-                    }
-                ]
-            }
+            return [
+                {
+                    'name': 'Unknown',
+                    'category': -1,
+                    'prob': round(prob[0][0], 4)
+                }
+            ]
 
 
 food_recognizer = FoodRecognizer(num_cls=251)

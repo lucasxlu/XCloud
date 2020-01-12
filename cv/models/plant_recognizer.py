@@ -1,6 +1,6 @@
 import os
-import time
 
+import cv2
 import numpy as np
 import pandas as pd
 import requests
@@ -8,7 +8,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
-import cv2
 from torchvision import models
 from torchvision.transforms import transforms
 
@@ -57,7 +56,6 @@ class PlantRecognizer:
         self.topK = 5
 
     def infer(self, img):
-        tik = time.time()
         if isinstance(img, str):
             img = cv2.imread(img)
         mat = Image.fromarray(img)
@@ -83,105 +81,24 @@ class PlantRecognizer:
         topK_prob, topK_label = torch.topk(outputs, self.topK)
         prob = topK_prob.to("cpu").detach().numpy().tolist()
 
-        _, predicted = torch.max(outputs.data, 1)
-
-        tok = time.time()
+        print('[WARN]', prob[0][0])
 
         if prob[0][0] >= cfg['thresholds']['plant_recognition']:
-            return {
-                'status': 0,
-                'message': 'success',
-                'elapse': tok - tik,
-                'results': [
-                    {
-                        'name': self.key_type[int(topK_label[0][i].to("cpu"))],
-                        'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
-                        'prob': round(prob[0][i], 4)
-                    } for i in range(self.topK)
-                ]
-            }
+            return [
+                {
+                    'name': self.key_type[int(topK_label[0][i].to("cpu"))],
+                    'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
+                    'prob': round(prob[0][i], 4)
+                } for i in range(self.topK)
+            ]
         else:
-            return {
-                'status': 0,
-                'message': 'success',
-                'elapse': tok - tik,
-                'results': [
-                    {
-                        'name': "Unknown",
-                        'category_id': -1,
-                        'prob': round(prob[0][0], 4)
-                    }
-                ]
-            }
-
-    def infer_from_img_url(self, img_url):
-        tik = time.time()
-        response = requests.get(img_url, timeout=20)
-        if response.status_code in [403, 404, 500]:
-            return {
-                'status': 2,
-                'message': 'Invalid URL',
-                'elapse': time.time() - tik,
-                'results': None
-            }
-
-        else:
-            img_content = response.content
-
-            import io
-            from PIL import Image
-            img_np = np.array(Image.open(io.BytesIO(img_content)))
-            img = Image.fromarray(img_np.astype(np.uint8))
-
-            preprocess = transforms.Compose([
-                transforms.Resize(227),
-                transforms.CenterCrop(224),
-                transforms.ToTensor(),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-            ])
-
-            img = preprocess(img)
-            img.unsqueeze_(0)
-
-            img = img.to(self.device)
-
-            outputs = self.model.forward(img)
-            outputs = F.softmax(outputs, dim=1)
-
-            # get TOP-K output labels and corresponding probabilities
-            topK_prob, topK_label = torch.topk(outputs, self.topK)
-            prob = topK_prob.to("cpu").detach().numpy().tolist()
-
-            _, predicted = torch.max(outputs.data, 1)
-
-            tok = time.time()
-
-            if prob[0][0] >= cfg['thresholds']['plant_recognition']:
-                return {
-                    'status': 0,
-                    'message': 'success',
-                    'elapse': tok - tik,
-                    'results': [
-                        {
-                            'name': self.key_type[int(topK_label[0][i].to("cpu"))],
-                            'category_id': int(topK_label[0][i].data.to("cpu").numpy()) + 1,
-                            'prob': round(prob[0][i], 4)
-                        } for i in range(self.topK)
-                    ]
+            return [
+                {
+                    'name': "Unknown",
+                    'category_id': -1,
+                    'prob': round(prob[0][0], 4)
                 }
-            else:
-                return {
-                    'status': 0,
-                    'message': 'success',
-                    'elapse': tok - tik,
-                    'results': [
-                        {
-                            'name': "Unknown",
-                            'category_id': -1,
-                            'prob': round(prob[0][0], 4)
-                        }
-                    ]
-                }
+            ]
 
 
 plant_recognizer = PlantRecognizer(num_cls=998)

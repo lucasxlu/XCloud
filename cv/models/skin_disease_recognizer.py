@@ -67,27 +67,19 @@ class SkinDiseaseRecognizer:
         _, predicted = torch.max(outputs.data, 1)
 
         if prob[0][0] >= cfg['thresholds']['skin_disease_recognition']:
-            return {
-                "status": 0,
-                "message": "success",
-                "results": [
-                    {
-                        "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
-                        "probability": round(prob[0][i], 4),
-                    } for i in range(self.topK)
-                ]
-            }
+            return [
+                {
+                    "disease": self.mapping[int(topK_label[0][i].to("cpu"))],
+                    "probability": round(prob[0][i], 4),
+                } for i in range(self.topK)
+            ]
         else:
-            return {
-                "status": 0,
-                "message": "success",
-                "results": [
-                    {
-                        "disease": "Unknown",
-                        "probability": round(prob[0][0], 4),
-                    }
-                ]
-            }
+            return [
+                {
+                    "disease": "Unknown",
+                    "probability": round(prob[0][0], 4),
+                }
+            ]
 
 
 skin_disease_recognizer = SkinDiseaseRecognizer(num_cls=198)

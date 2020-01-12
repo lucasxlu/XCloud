@@ -1,11 +1,9 @@
 import os
-import time
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from PIL import Image
-
 from torchvision import models
 from torchvision.transforms import transforms
 
@@ -114,7 +112,6 @@ class PlantDiseaseRecognizer:
         self.topK = 5
 
     def infer(self, img_file):
-        tik = time.time()
         img = Image.open(img_file)
 
         preprocess = transforms.Compose([
@@ -137,34 +134,23 @@ class PlantDiseaseRecognizer:
         prob = topK_prob.to("cpu").detach().numpy().tolist()
 
         _, predicted = torch.max(outputs.data, 1)
-        tok = time.time()
 
         if prob[0][0] >= cfg['thresholds']['plant_disease_recognition']:
-            return {
-                'status': 0,
-                'message': 'success',
-                'elapse': tok - tik,
-                'results': [
-                    {
-                        'name': self.key_type[int(topK_label[0][i].to("cpu"))],
-                        'disease': int(topK_label[0][i].data.to("cpu").numpy()),
-                        'prob': round(prob[0][i], 4)
-                    } for i in range(self.topK)
-                ]
-            }
+            return [
+                {
+                    'name': self.key_type[int(topK_label[0][i].to("cpu"))],
+                    'disease': int(topK_label[0][i].data.to("cpu").numpy()),
+                    'prob': round(prob[0][i], 4)
+                } for i in range(self.topK)
+            ]
         else:
-            return {
-                'status': 0,
-                'message': 'success',
-                'elapse': tok - tik,
-                'results': [
-                    {
-                        'name': "Unknown",
-                        'disease': -1,
-                        'prob': round(prob[0][0], 4)
-                    }
-                ]
-            }
+            return [
+                {
+                    'name': "Unknown",
+                    'disease': -1,
+                    'prob': round(prob[0][0], 4)
+                }
+            ]
 
 
 pdr = PlantDiseaseRecognizer(num_cls=61)

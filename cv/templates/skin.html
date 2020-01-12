@@ -79,7 +79,7 @@
             success: function (data) {
                 $('#upload-btn').removeAttr('disabled');
                 var result = eval('(' + data + ')');
-                $('#desc').text(result.results[0].disease);
+                $('#desc').text(result.data[0].disease);
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/SkinUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));

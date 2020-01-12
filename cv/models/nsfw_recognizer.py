@@ -63,16 +63,12 @@ class NSFWEstimator:
 
         _, predicted = torch.max(outputs.data, 1)
 
-        return {
-            "status": 0,
-            "message": "success",
-            "results": [
-                {
-                    "prob": round(prob[0][i], 4),
-                    "type": self.mapping[int(topK_label[0][i].to("cpu"))],
-                } for i in range(self.topK)
-            ]
-        }
+        return [
+            {
+                "prob": round(prob[0][i], 4),
+                "type": self.mapping[int(topK_label[0][i].to("cpu"))],
+            } for i in range(self.topK)
+        ]
 
 
 nsfw_estimator = NSFWEstimator(num_cls=5)

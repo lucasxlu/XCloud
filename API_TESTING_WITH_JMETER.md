@@ -1,4 +1,4 @@
-# API Testing with JMeter
+# API Stress-Testing with JMeter
 ## Introduction
 This article describes several keypoint elements to test your RESTful APIs. To begin with, you should make sure you have installed the following softwares or SDK:
 - [JDK>=8.0](https://www.oracle.com/technetwork/java/javase/downloads/index.html)

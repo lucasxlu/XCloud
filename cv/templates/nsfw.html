@@ -79,7 +79,7 @@
             success: function (data) {
                 $('#upload-btn').removeAttr('disabled');
                 var result = eval('(' + data + ')');
-                $('#desc').text(result.results[0].type);
+                $('#desc').text(result.data[0].type);
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/NSFWUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));

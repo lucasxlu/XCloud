@@ -77,7 +77,7 @@
             success: function (data) {
                 $('#upload-btn').removeAttr('disabled');
                 var result = eval('(' + data + ')');
-                $('#desc').text(result.results[0].name);
+                $('#desc').text(result.data[0].name);
                 $('#time').text(result.elapse);
                 $('img').attr('src', '../../../static/PlantUpload/' + imgName);
                 $('code').text(JSON.stringify(result, null, 4));
