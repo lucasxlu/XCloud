@@ -225,10 +225,10 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print('Recall List: ')
     print(recalls)
 
-    print("Precision of {0} on val set = {1}".format(model_name,
+    print("Precision of {0} on test set = {1}".format(model_name,
                                                      sum(precisions) / len(precisions)))
     print(
-        "Recall of {0} on val set = {1}".format(model_name, sum(recalls) / len(recalls)))
+        "Recall of {0} on test set = {1}".format(model_name, sum(recalls) / len(recalls)))
 
     print('Output CSV...')
     col = ['filename', 'gt', 'pred', 'prob']

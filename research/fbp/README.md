@@ -14,6 +14,10 @@ Train deep model to recognize a person's beauty score from an given image.
 | [CRNet](https://github.com/lucasxlu/CRNet) | 0.2835 | 0.3677 | 0.8558 |
 | [TransFBP](https://github.com/lucasxlu/TransFBP) | - | - | 0.8519 |
 | [HMTNet](https://github.com/lucasxlu/HMTNet) | 0.2439	| 0.3226 | 0.8801 |
+| AaNet | 0.2236 | 0.2954 | 0.9055 |
+| R^2 ResNeXt | 0.2416 | 0.3046 | 0.8957 |
+| R^3CNN | 0.2120 | 0.2800 | 0.9142 |
+| [ComboLoss](https://github.com/lucasxlu/ComboLoss) | 0.2170 | 0.2742 | 0.9177 |
 
 
 ## References

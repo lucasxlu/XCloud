@@ -254,7 +254,7 @@ with open("/path/to/test.jpg", mode='rb') as f:
 * Add [docker](https://www.docker.com/) support
 * Add new dev-branch to pre-process images with [NVIDIA DALI](https://developer.nvidia.com/DALI)
 * Add new dev-branch to train models with [NVIDIA Apex](https://github.com/NVIDIA/apex)
-* Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support for accelerating deep models
+* Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support to accelerate deep models
 
 
 ## Citation
