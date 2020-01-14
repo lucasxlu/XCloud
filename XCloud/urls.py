@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from django.views import static
+from django.conf import settings
+
 from cv import views
 
 urlpatterns = [
@@ -26,6 +29,7 @@ urlpatterns = [
     path('dm/', include('dm.urls')),
     path('nlp/', include('nlp.urls')),
     url('index', views.index, name='index'),
+    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
