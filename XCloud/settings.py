@@ -120,15 +120,11 @@ USE_TZ = True
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10240000
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10240000
 
-STATIC_ROOT = ''
+STATIC_ROOT = 'cv/static'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    'D:/Users/LucasX/PycharmProjects/XCloud/cv/static',
-    '/root/Project/XCloud/cv/static',
-    '/home/xulu/Project/XCloud/cv/static',
-    'D:/Users/29140/PycharmProjects/XCloud/cv/static',
-    'D:/Users/LucasX/PycharmProjects/XCloud/nlp/static',
-    '/root/Project/XCloud/nlp/static',
-    '/home/xulu/Project/XCloud/nlp/static',
-    'D:/Users/29140/PycharmProjects/XCloud/nlp/static',
-)
+if DEBUG:
+    STATICFILES_DIRS = (
+        '/home/lucasxu/Projects/BCloud/cv/static',
+    )
+else:
+    STATICFILES_DIRS = ()
