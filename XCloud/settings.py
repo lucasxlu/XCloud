@@ -120,11 +120,12 @@ USE_TZ = True
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10240000
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10240000
 
-STATIC_ROOT = 'cv/static'
 STATIC_URL = '/static/'
 if DEBUG:
+    STATIC_ROOT = ''
     STATICFILES_DIRS = (
         '/home/lucasxu/Projects/BCloud/cv/static',
     )
 else:
+    STATIC_ROOT = 'cv/static'
     STATICFILES_DIRS = ()
