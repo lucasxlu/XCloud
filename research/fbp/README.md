@@ -1,7 +1,7 @@
 # Facial Beauty Prediction
 
 ## Introduction
-Train deep model to recognize a person's beauty score from an given image.
+Developing machine learning models to recognize a person's beauty score from an given image. I have reimplemented several SOTA methods in this module.
 
 ![demo](https://github.com/lucasxlu/HMTNet/blob/master/TikTok.gif)
 
@@ -12,7 +12,7 @@ Train deep model to recognize a person's beauty score from an given image.
 | ShuffleNetV2 | 0.4389 | 0.3348 | 0.7639 |
 | ResNet18 | 0.2887 | 0.3814 | 0.8276 |
 | [CRNet](https://github.com/lucasxlu/CRNet) | 0.2835 | 0.3677 | 0.8558 |
-| [TransFBP](https://github.com/lucasxlu/TransFBP) | - | - | 0.8519 |
+| [TransFBP](https://github.com/lucasxlu/TransFBP) | 0.2805 | 0.3559 | 0.8519 |
 | [HMTNet](https://github.com/lucasxlu/HMTNet) | 0.2439	| 0.3226 | 0.8801 |
 | AaNet | 0.2236 | 0.2954 | 0.9055 |
 | R^2 ResNeXt | 0.2416 | 0.3046 | 0.8957 |
