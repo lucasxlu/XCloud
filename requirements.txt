@@ -3,7 +3,7 @@ opencv_python==3.4.5.20
 mtcnn==0.0.6
 django>=2.1.5
 snownlp==0.12.3
-tensorflow-gpu==1.15.0
+tensorflow-gpu==1.15.2
 requests==2.22.0
 pymysql==0.9.3
 pandas==0.24.2
