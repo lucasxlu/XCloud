@@ -13,9 +13,6 @@ from skimage.color import gray2rgb, rgba2rgb
 from torchvision import models
 from torchvision.transforms import transforms
 
-sys.path.append('../../')
-from research.cbir import dataloaders
-
 USE_GPU = True
 
 
@@ -79,7 +76,9 @@ def ext_deep_feat(model_with_weights, img_filepath):
 
             # print('feat size = {}'.format(feat.shape))
 
-    return feat.to('cpu').detach().numpy()
+    feat = feat.to('cpu').detach().numpy()
+
+    return feat / np.linalg.norm(feat)
 
 
 def batch_ext_deep_feats(model, dataloader, model_path):
@@ -154,36 +153,54 @@ def batch_ext_deep_feats(model, dataloader, model_path):
         return feats
 
 
-def ext_feats_in_dir(model_with_weights, dir_name):
+def ext_feats_in_dir(model_with_weights, sku_root):
     """
     extract deep features in a directory
     :param model_with_weights:
-    :param dir_name:
+    :param sku_root:
     :return:
     """
+    model_with_weights.eval()
     print('[INFO] start extracting features')
     idx_filename = {}
     feats = []
-    for i, f in enumerate(sorted(os.listdir(dir_name))):
-        feat = ext_deep_feat(model_with_weights, os.path.join(dir_name, f))
-        print(
-            '[INFO] {0}/{1} extracting deep features, feat size = {2}'.format(i, len(os.listdir(dir_name)), feat.shape))
-        idx_filename[i] = os.path.join(dir_name, f)
-        feats.append(feat.ravel().tolist())
+    idx = 0
+    capacity_of_gallery = sum([len(os.path.join(sku_root, _)) for _ in os.listdir(sku_root)])
+
+    for sku_dir in sorted(os.listdir(sku_root)):
+        for f in sorted(os.listdir(os.path.join(sku_root, sku_dir))):
+            feat = ext_deep_feat(model_with_weights, os.path.join(sku_root, sku_dir, f))
+            print(
+                '[INFO] {0}/{1} extracting deep features, feat size = {2}'.format(idx, capacity_of_gallery, feat.shape))
+
+            idx_filename[idx] = '{}_{}'.format(sku_dir, f)
+            feats.append(feat.ravel().tolist())
+            idx += 1
     print('[INFO] finish extracting features')
 
-    with open('./feats.pkl', mode='wb') as f:
+    with open('/data/lucasxu/Features/feats_LightClothing.pkl', mode='wb') as f:
         pickle.dump(np.array(feats).astype('float32'), f)
 
-    with open('./filenames.pkl', mode='wb') as f:
+    with open('/data/lucasxu/Features/idx_LightClothing.pkl', mode='wb') as f:
         pickle.dump(idx_filename, f)
 
 
 if __name__ == '__main__':
     densenet121 = models.densenet121(pretrained=True)
-    # batch_ext_deep_feats(model=densenet121, dataloader=dataloaders.load_patch_dataset(), model_path=None)
-    ext_feats_in_dir(densenet121, '/home/xulu/DataSet/LightClothingCrops/LightClothing')
+    num_ftrs = densenet121.classifier.in_features
+    densenet121.classifier = nn.Linear(num_ftrs, 52)
 
-    # feat = ext_deep_feat(densenet121,
-    #                      img_filepath='/data/lucasxu/Dataset/TissuePhysiologyCrops/TissuePhysiology/b624d45a22b98e34f8a44071.orig_TissuePhysiology_3.jpg')
-    # print(feat)
+    # state_dict = torch.load('/data/lucasxu/ModelZoo/DenseNet121_TissuePhysiology_Embedding.pth')
+    state_dict = torch.load('/data/lucasxu/ModelZoo/DenseNet121_LightClothing_Embedding.pth')
+    try:
+        from collections import OrderedDict
+
+        new_state_dict = OrderedDict()
+        for k, v in state_dict.items():
+            name = k[7:]  # remove `module.`
+            new_state_dict[name] = v
+        densenet121.load_state_dict(new_state_dict)
+    except:
+        densenet121.load_state_dict(state_dict)
+
+    ext_feats_in_dir(densenet121, '/data/lucasxu/Dataset/LightClothingSku')

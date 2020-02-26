@@ -21,9 +21,9 @@ from torch.optim import lr_scheduler
 from torchvision import models
 
 sys.path.append('../')
-from products import data_loader
-from products.cfg import cfg
-from products.file_utils import mkdir_if_not_exist
+from research.cbir import data_loader
+from research.cbir.cfg import cfg
+from research.cbir.file_utils import mkdir_if_not_exist
 
 
 def myphi(x, m):
@@ -315,7 +315,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print(recalls)
 
     print("Precision of {0} on test set = {1}".format(model_name,
-                                                     sum(precisions) / len(precisions)))
+                                                      sum(precisions) / len(precisions)))
     print(
         "Recall of {0} on test set = {1}".format(model_name, sum(recalls) / len(recalls)))
 

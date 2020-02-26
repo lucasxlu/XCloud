@@ -197,7 +197,7 @@ In the near future, I will explore more methods in `Machine Leanring in Producti
 
 
 ## Stress Testing
-For stress testing, please refer to [API_TESTING_WITH_JMETER.md](API_TESTING_WITH_JMETER.md) for more details!
+For stress testing, please refer to [API_STRESS_TESTING_WITH_JMETER.md](API_STRESS_TESTING_WITH_JMETER.md) for more details!
  
 
 ## API Usage
