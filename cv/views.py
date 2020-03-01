@@ -19,6 +19,7 @@ from cv.controllers.plant_disease_controller import upload_and_rec_plant_disease
 from cv.controllers.fbp_controller import upload_and_rec_beauty
 from cv.controllers.skin_disease_controller import upload_and_rec_skin_disease
 from cv.controllers.cbir_controller import upload_and_search
+from cv.controllers.deblur_controller import upload_and_deblur
 from cv.cfg import cfg
 from utils import db_utils
 
@@ -180,3 +181,12 @@ def cbir_view(request):
 @csrf_exempt
 def cbir(request):
     return upload_and_search(request)
+
+
+def deblur_view(request):
+    return render(request, 'deblur.html')
+
+
+@csrf_exempt
+def deblur(request):
+    return upload_and_deblur(request)

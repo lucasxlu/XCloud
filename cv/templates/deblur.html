@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Image Deblurring</title>
+    {#    {% load static %}#}
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/favicon.ico">
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.ie8polyfill.js"></script>
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.widgets.helper.js"></script>
+    <style>
+        pre code {
+            background-color: #eee;
+            border: 1px solid #999;
+            display: block;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2 align="center" style="font-family: 'Times New Roman'">Image Deblurring</h2>
+
+<div align="center">
+    <form enctype="multipart/form-data" style="width: 30%">{% csrf_token %}
+        <div class="am-form-group am-form-file">
+            <button type="button" class="am-btn am-btn-danger am-btn-block">
+                <i class="am-icon-cloud-upload"></i> Choose Image
+                <input type="file" placeholder="upload image" name="image">
+                {#                <input id="doc-form-file" type="file" multiple>#}
+            </button>
+        </div>
+
+        <input type="button" value="Detect" id='upload-btn'
+               class="am-btn am-btn-success am-btn-block" onclick="upload()">
+    </form>
+
+    <div align="center" style="display: flex;">
+        <div style="width: 50%;">
+            <span>Original Image</span>
+            <img id="orig" class="am-img-responsive" alt="" src="" style="max-height: 540px; margin-top: 5px"/>
+        </div>
+        <div style="width: 50%;">
+            <span>Deblurred Image</span>
+            <img id="sr" class="am-img-responsive" alt="" src="" style="max-height: 540px; margin-top: 5px"/>
+        </div>
+      </div>
+</div>
+
+<div align="center">
+    <p>
+        Message: <span id="desc" style="color:red"></span>
+    </p>
+    <p>
+        AI takes <span id="time" style="color: red">0</span> seconds!
+    </p>
+</div>
+
+<pre>
+  <code>
+  </code>
+</pre>
+
+<footer style="text-align: center">
+    Powered by <a href="https://github.com/lucasxlu/XCloud.git" target="_blank">XCloud</a>
+    Supported by <a href="https://www.zhihu.com/people/xulu-0620/activities"
+                    target="_blank">LucasX</a>
+</footer>
+
+<script>
+    function upload() {
+        $('#upload-btn').attr("disabled", "disabled");
+        var src = $("input[name='image']").val();
+        var imgName = src.split("\\")[src.split('\\').length - 1];
+        var data = new FormData($('form').get(0));
+
+        $.ajax({
+            url: 'sr',
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                $('#upload-btn').removeAttr('disabled');
+                var result = eval('(' + data + ')');
+                $('#time').text(result.elapse);
+                $('#desc').text(result.msg);
+                $('img#orig').attr('src', '../../../static/SRImgs/' + imgName);
+                $('img#sr').attr('src', '../../../static/SRImgs/sr_' + imgName);
+                $('code').text(JSON.stringify(result, null, 4));
+            }
+        });
+
+        return false;
+    }
+</script>
+</body>
+</html>

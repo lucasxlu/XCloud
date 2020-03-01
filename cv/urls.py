@@ -27,4 +27,6 @@ urlpatterns = [
     url('mcloud/statskin', views.stat_skin, name='statskin'),
     url('cbirview', views.cbir_view, name='cbirview'),
     url('cbir', views.cbir, name='cbir'),
+    url('deblurview', views.deblur_view, name='deblurview'),
+    url('deblur', views.deblur, name='deblur'),
 ]

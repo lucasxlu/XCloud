@@ -16,3 +16,5 @@
     - [x] Pet Insects Detection & Recognition
     - [x] Pornography Image Recognition
     - [x] Skin Disease Recognition
+* Image Reconstruction
+    - [x] Image Deblurring
