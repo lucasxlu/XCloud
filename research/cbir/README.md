@@ -21,17 +21,13 @@ Exploring deep metric learning & hash methods to build efficient visual search s
  * [Django](https://www.djangoproject.com/)
  
 
-## Citation
-This module is a part of [XCloud](https://github.com/lucasxlu/XCloud.git), If you use this module in your research in ``Image Retrieval/ReID/Face Recognition``, please cite our [technical report](https://lucasxlu.github.io/blog/about/XCloud.pdf) about [XCloud](https://github.com/lucasxlu/XCloud.git) as:
-```
-@misc{xu2019xcloud,
-  author =       {Lu Xu and Yating Wang},
-  title =        {XCloud: Design and Implementation of AI Cloud Platform with RESTful API Service},
-  howpublished = {\url{https://github.com/lucasxlu/XCloud.git}},
-  year =         {2019}
-}
-```
+## About New Categories
+In image retrieval and ReID tasks, how to automatically mine new categories online remains a quite challenging problem.
+I propose a novel method by utilizing unsupervised learning algorithms (such as clustering) to assign pseudo label to a cluster.
+After cleaning noise samples in each cluster.
 
- 
+You can find this method implementation in [this script](./clustering.py).
+
+
 ## License
 [MIT](./LICENSE)
