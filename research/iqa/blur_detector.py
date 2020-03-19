@@ -4,22 +4,34 @@ from sklearn.metrics.classification import accuracy_score, confusion_matrix, rec
 
 
 class BlurDetector:
-    def __init__(self, var_threshold=100):
+    def __init__(self, var_threshold=400, show=False):
         self.var_threshold = var_threshold
+        self.show = show
 
     def cal_variance_of_laplacian(self, image):
         if isinstance(image, str):
             image = cv2.imread(image)
+
+        if self.show:
+            cv2.imshow('img', image)
+            cv2.waitKey()
+            cv2.destroyAllWindows()
+
         # compute the Laplacian of the image and then return the focus
         # measure, which is simply the variance of the Laplacian
         return cv2.Laplacian(image, cv2.CV_64F).var()
 
     def judge_blur_or_not(self, image):
+        if isinstance(image, str):
+            image = cv2.imread(image)
         var_laplacian = self.cal_variance_of_laplacian(image)
-        if var_laplacian > self.var_threshold:
-            return {'var': var_laplacian, 'desc': 'Not Blurry'}
-        else:
-            return {'var': var_laplacian, 'desc': 'Blurry'}
+        if self.show:
+            cv2.putText(image, str(round(var_laplacian, 2)), (0, 100), cv2.FONT_HERSHEY_COMPLEX, 3, (0, 0, 255), 3)
+            cv2.imshow('img', image)
+            cv2.waitKey()
+            cv2.destroyAllWindows()
+
+        return {'var': var_laplacian, 'blur': var_laplacian < self.var_threshold}
 
 
 if __name__ == '__main__':
