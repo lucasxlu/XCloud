@@ -1,7 +1,7 @@
 # Facial Beauty Prediction
 
 ## Introduction
-Developing machine learning models to recognize a person's beauty score from an given image. I have reimplemented several SOTA methods in this module.
+Developing machine learning models to recognize a person's beauty score from a given image. I have reimplemented several SOTA methods in this module.
 
 ![demo](https://github.com/lucasxlu/HMTNet/blob/master/TikTok.gif)
 

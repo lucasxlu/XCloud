@@ -1,7 +1,7 @@
 # XCloud for Research
 
 ## Introduction
-This module holds the source code for training & testing deep models.
+This module holds the model re-implementation and source code for training & testing deep models.
 
 * [Age Estimation](./age)
 * [Facial Beauty Prediction](./fbp)
