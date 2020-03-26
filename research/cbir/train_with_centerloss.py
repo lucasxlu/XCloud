@@ -96,10 +96,10 @@ def train_model(model, dataloaders, criterion_xent, criterion_cent, optimizer_mo
         model = nn.DataParallel(model)
     model = model.to(device)
 
-    dataset_sizes = {x: dataloaders[x].__len__() * cfg['batch_size'] for x in ['train', 'val', 'test']}
+    dataset_sizes = {x: len(dataloaders[x].dataset) for x in ['train', 'val', 'test']}
 
-    for k, v in dataset_sizes.items():
-        print('Dataset size of {0} is {1}...'.format(k, v))
+    for _ in dataset_sizes.keys():
+        print('Dataset size of {0} is {1}...'.format(_, dataset_sizes[_]))
 
     if not inference:
         print('Start training %s...' % model_name)

@@ -85,10 +85,10 @@ def finetune_model(model, dataloaders, criterion, optimizer, scheduler, num_epoc
 
     model = model.to(device)
 
-    dataset_sizes = {x: dataloaders[x].__len__() for x in ['train', 'val', 'test']}
+    dataset_sizes = {x: len(dataloaders[x].dataset) for x in ['train', 'val', 'test']}
 
-    for k, v in dataset_sizes.items():
-        print('Dataset size of {0} is {1}...'.format(k, v * args['batch_size']))
+    for _ in dataset_sizes.keys():
+        print('Dataset size of {0} is {1}...'.format(_, dataset_sizes[_]))
 
     if not inference:
         print('Start training %s...' % model_name)
@@ -139,8 +139,8 @@ def finetune_model(model, dataloaders, criterion, optimizer, scheduler, num_epoc
                 if phase == 'train':
                     scheduler.step()
 
-                epoch_loss = running_loss / (dataset_sizes[phase] * args['batch_size'])
-                epoch_acc = running_corrects.double() / (dataset_sizes[phase] * args['batch_size'])
+                epoch_loss = running_loss / dataset_sizes[phase]
+                epoch_acc = running_corrects.double() / dataset_sizes[phase]
 
                 print('{} Loss: {:.4f} Acc: {:.4f}'.format(phase, epoch_loss, epoch_acc))
 
