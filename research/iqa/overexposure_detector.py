@@ -1,4 +1,4 @@
-# class wrapper for reflection detection
+# class wrapper for image overexposure detection
 import cv2
 import imutils
 import numpy as np
@@ -6,7 +6,7 @@ from imutils import contours
 from skimage import measure
 
 
-class ReflectionDetector:
+class OverExposureDetector:
     def __init__(self, show_result=True, large_blob_threshold=300):
         self.show_result = show_result
         self.large_blob_threshold = large_blob_threshold
@@ -66,19 +66,18 @@ class ReflectionDetector:
             cv2.imshow("Image", image)
             cv2.waitKey()
 
-        return {'light_region_num': len(cnts), 'desc': 'No Reflection' if len(labels) == 0 else 'Reflection'}
+        return {'light_region_num': len(cnts), 'overexposure': 0 if len(labels) == 0 else 1}
 
 
 if __name__ == '__main__':
-    if __name__ == '__main__':
-        blur_detector = ReflectionDetector(False)
-        import os
-        import time
+    overexposure_detector = OverExposureDetector(True)
+    import os
+    import time
 
-        tik = time.time()
-        img_dir = ''
-        for _ in os.listdir(img_dir):
-            print(blur_detector.cal_light_region_num(img_dir + _))
+    tik = time.time()
+    img_dir = ''
+    for _ in os.listdir(img_dir):
+        print(overexposure_detector.cal_light_region_num(img_dir + _))
 
-        tok = time.time()
-        print('FPS={}'.format(len(os.listdir(img_dir)) / (tok - tik)))
+    tok = time.time()
+    print('FPS={}'.format(len(os.listdir(img_dir)) / (tok - tik)))
