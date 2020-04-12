@@ -2,7 +2,6 @@
 .idea/
 XCloud/__pycache__/
 cv/__pycache__/
-cv/static/FaceUpload/
 dm/__pycache__/
 nlp/__pycache__/
 __pycache__/
@@ -10,4 +9,4 @@ pyWeb/
 research/imgcensor/model/
 cv/model/
 cv/static/ImgCensorUpload/
-cv/static/SkinUpload/
+cv/static

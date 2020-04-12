@@ -237,7 +237,7 @@ with open("/path/to/test.jpg", mode='rb') as f:
 
 ## Note
 * XCloud is freely accessible for everyone, you can email me AT 
-**xulu0620@gmail.com** to inquiry tech support.
+**xulu0620@gmail.com** to inquire tech support.
 * **Please ensure that your machine has a strong GPU equipment**.
 * For [XCloud in Java](https://github.com/lucasxlu/CVLH.git), please refer to [CVLH](https://github.com/lucasxlu/CVLH.git) for more details! 
 * Technical details can be read from our [Technical Report](https://arxiv.org/abs/1912.10344). 

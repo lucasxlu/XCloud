@@ -21,6 +21,10 @@ the deep models to satisfy our requirement. You can also set the last output neu
 
 - I replace the input channel as RGB instead of Gray-scale, since I find RGB input improves accuracy, I also add BatchNorm as a standard component as in SOTA CNN architecture.
 
+- I also provide related code for [blur image generation](blur_creator.py), 
+[warp transformation](./lean_pose_creator.py) and [overexposure image 
+generation](./overexposure_creator.py).
+
 ## Performance Evaluation
 I adopt these models mentioned above for ``exposure/edge recognition`` in ``product recognition project`` to reject unqualified images. The performance is listed as follows, you can train your own model with the code provided within this module.
 
@@ -52,3 +56,6 @@ I adopt these models mentioned above for ``exposure/edge recognition`` in ``prod
 3. Talebi, Hossein, and Peyman Milanfar. ["Nima: Neural image assessment."](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8352823) IEEE Transactions on Image Processing 27.8 (2018): 3998-4011.
 4. Bosse S, Maniry D, Wiegand T, et al. [A deep neural network for image quality assessment](http://iphome.hhi.de/samek/pdf/BosICIP16.pdf)[C]//2016 IEEE International Conference on Image Processing (ICIP). IEEE, 2016: 3773-3777.
 5. Bianco S, Celona L, Napoletano P, et al. [On the use of deep learning for blind image quality assessment](https://arxiv.org/pdf/1602.05531.pdf)[J]. Signal, Image and Video Processing, 2018, 12(2): 355-362.
+6. Bansal, Raghav, Gaurav Raj, and Tanupriya Choudhury. ["Blur image 
+detection using Laplacian operator and Open-CV."](https://ieeexplore.ieee.org/abstract/document/7894491/) 2016 International 
+Conference System Modeling & Advancement in Research Trends (SMART). IEEE, 2016.
