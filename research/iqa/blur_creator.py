@@ -42,13 +42,13 @@ def blur_img(img_f):
                         blurry_img)
             print('[INFO] blurring {} using kernel [{}, {}]'.format(img_f, kernerl_size, kernerl_size))
         elif args['blur_type'] == 'Gaussian':
-            kernerl_size = 5
+            kernerl_size = 2 * random.randint(3, 6) + 1
             blurry_img = cv2.GaussianBlur(img, (kernerl_size, kernerl_size), 20)  # Gaussian Blur
             cv2.imwrite(os.path.join(args['ld_dir'], '{}_{}'.format(args['blur_type'], img_f.split(os.path.sep)[-1])),
                         blurry_img)
             print('[INFO] blurring {} using kernel [{}, {}]'.format(img_f, kernerl_size, kernerl_size))
         elif args['blur_type'] == 'Median':
-            kernerl_size = 5
+            kernerl_size = 2 * random.randint(3, 6) + 1
             blurry_img = cv2.medianBlur(img, kernerl_size)
             cv2.imwrite(os.path.join(args['ld_dir'], '{}_{}'.format(args['blur_type'], img_f.split(os.path.sep)[-1])),
                         blurry_img)
