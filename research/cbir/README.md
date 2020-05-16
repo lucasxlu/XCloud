@@ -24,9 +24,7 @@ Exploring deep metric learning & hash methods to build efficient visual search s
 ## About New Categories
 In image retrieval and ReID tasks, how to automatically mine new categories online remains a quite challenging problem.
 I propose a novel method by utilizing unsupervised learning algorithms (such as clustering) to assign pseudo label to a cluster.
-After cleaning noise samples in each cluster.
-
-You can find this method implementation in [this script](./clustering.py).
+After cleaning noise samples in each cluster, you can upgrade your embedding model and gallery. You can find this method implementation in [clustering.py](./clustering.py).
 
 
 ## License

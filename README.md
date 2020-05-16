@@ -243,7 +243,7 @@ with open("/path/to/test.jpg", mode='rb') as f:
 * Technical details can be read from our [Technical Report](https://arxiv.org/abs/1912.10344). 
 
 
-## Organizations using XCloud
+## Organizations using XCloud Codebase or Data for Projects and Research
 * [Blibee](https://bianlifeng.com/)
 * [DiDi](https://www.didiglobal.com/)
 * [XiaoMi](https://www.mi.com/)
@@ -251,6 +251,9 @@ with open("/path/to/test.jpg", mode='rb') as f:
 * [Green Pine Capital](http://www.pinevc.com.cn/)
 * [ZLFInfo](http://zlfinfo.com.cn/)
 * [MissPan](http://www.misspan.cn/)
+* [SEM of THU](http://www.sem.tsinghua.edu.cn/en/)
+* [HKU](https://www.hku.hk/)
+* [PKU](https://www.pku.edu.cn/)
 
 
 ## TODO List
