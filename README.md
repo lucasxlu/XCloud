@@ -93,7 +93,7 @@ pip3 install onnx onnxruntime-gpu
 | PyTorch | 29.45 |
 | TensorRT | 147.23 |
 | ONNX (CPU) | 6.93 |
-| ONNX (GPU) | [TODO] |
+| ONNX (GPU) | 68.42 |
 
 
 ### Upgrade Django Built-in Server
@@ -261,6 +261,7 @@ with open("/path/to/test.jpg", mode='rb') as f:
 * Add new dev-branch to pre-process images with [NVIDIA DALI](https://developer.nvidia.com/DALI)
 * Add new dev-branch to train models with [NVIDIA Apex](https://github.com/NVIDIA/apex)
 * Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support to accelerate deep models
+* Add [RPC API](https://dubbo.apache.org/zh-cn/blog/rpc-introduction.html) support
 
 
 ## Citation
