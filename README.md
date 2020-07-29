@@ -27,8 +27,9 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
         - [x] Pet Insects Detection & Recognition
         - [x] Pornography Image Recognition
         - [x] Skin Disease Recognition
-    * Image Reconstruction
+    * Image Processing
         - [x] Image Deblurring
+        - [x] Image Dehazing
 * [NLP](./nlp)
     - [x] Text Similarity Comparison
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
@@ -205,7 +206,7 @@ For stress testing, please refer to [API_STRESS_TESTING_WITH_JMETER.md](API_STRE
 ## API Usage
 We support **3 types** of request type in API, namely, ``web form uploaded file``, ``base64 image`` and ``image URL (such as Swift)``.
 
-* Basic Curl
+* Bash
 ```shell 
 curl -F "image=@111.jpg" YOUR_MACHINE_IP:8001/cv/xxxrec
 ```
