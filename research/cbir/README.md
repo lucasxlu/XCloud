@@ -12,6 +12,7 @@ Exploring deep metric learning & hash methods to build efficient visual search s
 | DenseNet121 | Softmax | [YES] |
 | DenseNet121 | CenterLoss | [YES] |
 | DenseNet121 | A-Softmax | [YES] |
+| DenseNet121 | ArcLoss | [YES] |
 | ResNeXt50 | A-Softmax | [TODO] |
 | SeResNeXt50 | A-Softmax | [TODO] |
 
