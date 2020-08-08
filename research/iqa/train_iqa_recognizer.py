@@ -157,7 +157,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     model_path_dir = './model'
                     if not os.path.exists(model_path_dir):
                         os.makedirs(model_path_dir)
-                    torch.save(model.state_dict(), './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
+                    torch.save(model.module.state_dict(), './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
 
         time_elapsed = time.time() - since
         print('Training complete in {:.0f}m {:.0f}s'.format(
@@ -169,7 +169,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
         model_path_dir = './model'
         if not os.path.exists(model_path_dir):
             os.makedirs(model_path_dir)
-        torch.save(model.state_dict(), './model/%s.pth' % model_name)
+        torch.save(model.module.state_dict(), './model/%s.pth' % model_name)
 
     else:
         print('Start testing %s...' % model_name)

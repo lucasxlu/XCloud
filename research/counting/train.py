@@ -66,7 +66,7 @@ if __name__ == "__main__":
         #        print("epoch:",epoch,"loss:",epoch_loss/len(dataloader))
         epoch_list.append(epoch)
         train_loss_list.append(epoch_loss / len(train_loader))
-        torch.save(model.state_dict(), './checkpoints/epoch_' + str(epoch) + ".pth")
+        torch.save(model.module.state_dict(), './checkpoints/epoch_' + str(epoch) + ".pth")
 
         # testing phase
         model.eval()

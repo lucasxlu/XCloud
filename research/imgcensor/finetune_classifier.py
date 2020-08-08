@@ -192,7 +192,7 @@ def finetune_model(model, dataloaders, criterion, optimizer, scheduler, num_epoc
                     model.load_state_dict(best_model_wts)
                     model_path_dir = './model'
                     mkdirs_if_not_exist(model_path_dir)
-                    torch.save(model.state_dict(),
+                    torch.save(model.module.state_dict(),
                                './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
 
         time_elapsed = time.time() - since
@@ -204,7 +204,7 @@ def finetune_model(model, dataloaders, criterion, optimizer, scheduler, num_epoc
         model.load_state_dict(best_model_wts)
         model_path_dir = './model'
         mkdirs_if_not_exist(model_path_dir)
-        torch.save(model.state_dict(), './model/%s.pth' % model_name)
+        torch.save(model.module.state_dict(), './model/%s.pth' % model_name)
 
     else:
         print('Start testing %s...' % model_name)
