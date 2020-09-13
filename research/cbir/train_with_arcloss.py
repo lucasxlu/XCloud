@@ -202,8 +202,11 @@ def train_model(model, dataloaders, criterion, optimizer, metric, scheduler, num
                     model.load_state_dict(best_model_wts)
                     model_path_dir = './model'
                     mkdir_if_not_exist(model_path_dir)
-                    torch.save(model.module.state_dict(),
-                               './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
+                    if torch.cuda.device_count() > 1:
+                        torch.save(model.module.state_dict(),
+                                   './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
+                    else:
+                        torch.save(model.state_dict(), './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
 
         time_elapsed = time.time() - since
         print('Training complete in {:.0f}m {:.0f}s'.format(
@@ -214,7 +217,10 @@ def train_model(model, dataloaders, criterion, optimizer, metric, scheduler, num
         model.load_state_dict(best_model_wts)
         model_path_dir = './model'
         mkdir_if_not_exist(model_path_dir)
-        torch.save(model.module.state_dict(), './model/%s.pth' % model_name)
+        if torch.cuda.device_count() > 1:
+            torch.save(model.module.state_dict(), './model/%s.pth' % model_name)
+        else:
+            torch.save(model.state_dict(), './model/%s.pth' % model_name)
 
     else:
         print('Start testing %s...' % model.__class__.__name__)

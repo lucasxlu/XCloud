@@ -116,8 +116,3 @@ def batch_ext_feats(img_base_dir):
 
     with open('../cv/model/face_features_gallery.pkl', mode='wb') as f:
         pickle.dump(hzau_master_face_features, f)
-
-
-if __name__ == "__main__":
-    # print(ext_feats(sphere_face=SphereFaceNet(feature=True), img_path="C:/Users/29140/Desktop/SCUT-FBP-1.jpg"))
-    batch_ext_feats("D:/HZAU")

@@ -151,8 +151,12 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
                     model.load_state_dict(best_model_wts)
                     model_path_dir = './model'
                     mkdirs_if_not_exist(model_path_dir)
-                    torch.save(model.module.state_dict(),
-                               './model/{0}_best_epoch-{1}.pth'.format(model.__class__.__name__, epoch))
+                    if torch.cuda.device_count() > 1:
+                        torch.save(model.module.state_dict(),
+                                   './model/{0}_best_epoch-{1}.pth'.format(model.__class__.__name__, epoch))
+                    else:
+                        torch.save(model.state_dict(),
+                                   './model/{0}_best_epoch-{1}.pth'.format(model.__class__.__name__, epoch))
 
         time_elapsed = time.time() - since
         print('Training complete in {:.0f}m {:.0f}s'.format(
@@ -163,7 +167,10 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
         model.load_state_dict(best_model_wts)
         model_path_dir = './model'
         mkdirs_if_not_exist(model_path_dir)
-        torch.save(model.module.state_dict(), './model/%s.pth' % model.__class__.__name__)
+        if torch.cuda.device_count() > 1:
+            torch.save(model.module.state_dict(), './model/%s.pth' % model.__class__.__name__)
+        else:
+            torch.save(model.state_dict(), './model/%s.pth' % model.__class__.__name__)
 
     else:
         print('Start testing %s...' % model.__class__.__name__)
@@ -220,7 +227,7 @@ def train_model(model, dataloaders, criterion, optimizer, scheduler, num_epochs,
     print(recalls)
 
     print("Precision of {0} on test set = {1}".format(model.__class__.__name__,
-                                                     sum(precisions) / len(precisions)))
+                                                      sum(precisions) / len(precisions)))
     print(
         "Recall of {0} on test set = {1}".format(model.__class__.__name__, sum(recalls) / len(recalls)))
 

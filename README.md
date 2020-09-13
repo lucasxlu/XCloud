@@ -35,8 +35,8 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
     - [x] Sentiment Classification for [douban.com](https://www.douban.com/)
     - [x] News Classification
 * [Data Mining](./dm)
-    - [x] Zhihu Live Quality Evaluation
-* Data Services
+    - [x] [Zhihu Live Quality Evaluation](https://github.com/lucasxlu/ZhihuDataDriven.git)
+* [Data Services](https://github.com/lucasxlu/DataHouse.git)
     - [x] Zhihu Live & Comments
     - [x] Major Hospital Information
     - [x] Primary and Secondary School on [Baidu Baike](https://baike.baidu.com/)

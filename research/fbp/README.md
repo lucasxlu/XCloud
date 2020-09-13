@@ -3,6 +3,8 @@
 ## Introduction
 Developing machine learning models to recognize a person's beauty score from a given image. I have reimplemented several SOTA methods in this module.
 
+> If you are looking for a SOTA algorithm in FBP, please refer our new algorithm named [ComboLoss](https://github.com/lucasxlu/ComboLoss)!
+
 ![demo](https://github.com/lucasxlu/HMTNet/blob/master/TikTok.gif)
 
 ## Performance

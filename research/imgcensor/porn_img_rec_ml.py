@@ -12,13 +12,18 @@ from skimage import io, transform
 from skimage.feature import hog
 from skimage.feature import local_binary_pattern
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.externals import joblib
+import joblib
 from sklearn.linear_model import LogisticRegression
 
 BASE_DIR = 'E:/DataSet/CV/TrainAndTestPornImages'
 
 
 def get_skin_area(image_filepath):
+    """
+    calculate the skin area in a given image
+    :param image_filepath:
+    :return:
+    """
     image = io.imread(image_filepath)
     hsv_img = skimage.color.rgb2hsv(image)
     gray_img = skimage.color.rgb2gray(image)
@@ -27,7 +32,7 @@ def get_skin_area(image_filepath):
 
     thresh = skimage.filters.threshold_otsu(gray_img)
     dst = (gray_img <= thresh) * 1.0
-    io.imsave('./image.jpg', dst)
+    io.imsave('./skin.jpg', dst)
 
 
 def get_skin_ratio(im):
@@ -218,8 +223,9 @@ def predict(image_filepath):
 
 
 if __name__ == '__main__':
+    get_skin_area("./1.jpg")
     # batch_rename("E:/DataSet/CV/TrainAndTestPornImages/PornImages/2")
-    start_train()
+    # start_train()
     # count = 0
     # for image in os.listdir(directory):
     #     for image_file in glob.glob(os.path.join(directory, image)):

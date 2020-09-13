@@ -192,8 +192,11 @@ def finetune_model(model, dataloaders, criterion, optimizer, scheduler, num_epoc
                     model.load_state_dict(best_model_wts)
                     model_path_dir = './model'
                     mkdirs_if_not_exist(model_path_dir)
-                    torch.save(model.module.state_dict(),
-                               './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
+                    if torch.cuda.device_count() > 1:
+                        torch.save(model.module.state_dict(),
+                                   './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
+                    else:
+                        torch.save(model.state_dict(), './model/{0}_best_epoch-{1}.pth'.format(model_name, epoch))
 
         time_elapsed = time.time() - since
         print('Training complete in {:.0f}m {:.0f}s'.format(
@@ -204,8 +207,10 @@ def finetune_model(model, dataloaders, criterion, optimizer, scheduler, num_epoc
         model.load_state_dict(best_model_wts)
         model_path_dir = './model'
         mkdirs_if_not_exist(model_path_dir)
-        torch.save(model.module.state_dict(), './model/%s.pth' % model_name)
-
+        if torch.cuda.device_count() > 1:
+            torch.save(model.module.state_dict(), './model/%s.pth' % model_name)
+        else:
+            torch.save(model.state_dict(), './model/%s.pth' % model_name)
     else:
         print('Start testing %s...' % model_name)
         model.load_state_dict(torch.load(os.path.join('./model/%s.pth' % model_name)))

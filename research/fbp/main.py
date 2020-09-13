@@ -94,8 +94,12 @@ def train_model(model, train_dataloader, test_dataloader, criterion, optimizer, 
 
                 model_path_dir = './model'
                 mkdirs_if_not_exist(model_path_dir)
-                torch.save(model.module.state_dict(),
-                           os.path.join(model_path_dir, model.__class__.__name__ + '-epoch-%d.pth' % epoch))
+                if torch.cuda.device_count() > 1:
+                    torch.save(model.module.state_dict(),
+                               os.path.join(model_path_dir, model.__class__.__name__ + '-epoch-%d.pth' % epoch))
+                else:
+                    torch.save(model.state_dict(),
+                               os.path.join(model_path_dir, model.__class__.__name__ + '-epoch-%d.pth' % epoch))
 
                 # print(len(tmp_y_true))
                 # print(len(tmp_y_pred))
@@ -116,7 +120,10 @@ def train_model(model, train_dataloader, test_dataloader, criterion, optimizer, 
         print('Saving trained model...')
         model_path_dir = './model'
         mkdirs_if_not_exist(model_path_dir)
-        torch.save(model.module.state_dict(), os.path.join(model_path_dir, '%s.pth' % model.__class__.__name__))
+        if torch.cuda.device_count() > 1:
+            torch.save(model.module.state_dict(), os.path.join(model_path_dir, '%s.pth' % model.__class__.__name__))
+        else:
+            torch.save(model.state_dict(), os.path.join(model_path_dir, '%s.pth' % model.__class__.__name__))
         print('%s has been saved successfully~' % model.__class__.__name__)
 
     else:
@@ -234,8 +241,12 @@ def train_model_with_crloss(model, train_dataloader, test_dataloader, criterion,
 
                 model_path_dir = './model'
                 mkdirs_if_not_exist(model_path_dir)
-                torch.save(model.module.state_dict(),
-                           os.path.join(model_path_dir, model.__class__.__name__ + '-epoch-%d.pth' % (epoch + 1)))
+                if torch.cuda.device_count() > 1:
+                    torch.save(model.module.state_dict(),
+                               os.path.join(model_path_dir, model.__class__.__name__ + '-epoch-%d.pth' % (epoch + 1)))
+                else:
+                    torch.save(model.state_dict(),
+                               os.path.join(model_path_dir, model.__class__.__name__ + '-epoch-%d.pth' % (epoch + 1)))
 
                 rmse_lr = round(np.math.sqrt(mean_squared_error(np.array(tmp_y_true), np.array(tmp_y_pred).ravel())), 4)
                 mae_lr = round(mean_absolute_error(np.array(tmp_y_true), np.array(tmp_y_pred).ravel()), 4)
@@ -250,7 +261,11 @@ def train_model_with_crloss(model, train_dataloader, test_dataloader, criterion,
         print('Saving trained model...')
         model_path_dir = './model'
         mkdirs_if_not_exist(model_path_dir)
-        torch.save(model.module.state_dict(), os.path.join(model_path_dir, '%s.pth' % model.__class__.__name__))
+        if torch.cuda.device_count() > 1:
+            torch.save(model.module.state_dict(), os.path.join(model_path_dir, '%s.pth' % model.__class__.__name__))
+        else:
+            torch.save(model.state_dict(), os.path.join(model_path_dir, '%s.pth' % model.__class__.__name__))
+
         print('CRNet has been saved successfully~')
 
     else:

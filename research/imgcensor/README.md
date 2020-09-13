@@ -35,46 +35,56 @@ This module holds the source code for **image censorship**, namely,
 ![1](./1.jpg)
 
 ```json
-{"message": "success",
- "results": [{"prob": 1.0, "type": "sexy"},
-             {"prob": 0.0, "type": "neutral"},
-             {"prob": 0.0, "type": "porn"},
-             {"prob": 0.0, "type": "hentai"},
-             {"prob": 0.0, "type": "drawings"}],
- "status": 0}
+{
+    "message": "success",
+     "results": [{"prob": 1.0, "type": "sexy"},
+                 {"prob": 0.0, "type": "neutral"},
+                 {"prob": 0.0, "type": "porn"},
+                 {"prob": 0.0, "type": "hentai"},
+                 {"prob": 0.0, "type": "drawings"}],
+     "status": 0
+}
 ```
 
-**Note**: the returned result indicates that ```sexy``` has the highest 
+> The returned result indicates that ```sexy``` has the highest 
 probability (prob=1.0)
+
+By calculating ``skin area``, you will get:
+
+![skin](./skin.jpg)
 
 * Example 2 
 
 ![2](./2.jpg)
 ```json
-{"message": "success",
- "results": [{"prob": 0.6981, "type": "neutral"},
-             {"prob": 0.1811, "type": "porn"},
-             {"prob": 0.1205, "type": "sexy"},
-             {"prob": 0.0002, "type": "hentai"},
-             {"prob": 0.0002, "type": "drawings"}],
- "status": 0}
+{
+    "message": "success",
+     "results": [{"prob": 0.6981, "type": "neutral"},
+                 {"prob": 0.1811, "type": "porn"},
+                 {"prob": 0.1205, "type": "sexy"},
+                 {"prob": 0.0002, "type": "hentai"},
+                 {"prob": 0.0002, "type": "drawings"}],
+     "status": 0
+}
 ```
 
-**Note**: the returned result indicates that ```neutral``` has the highest 
+> The returned result indicates that ```neutral``` has the highest 
 probability (prob=0.6981)
 
 * Example 3
 
 ![3](./3.jpg)
 ```json
-{"message": "success",
- "results": [{"prob": 0.9982, "type": "porn"},
-             {"prob": 0.0011, "type": "neutral"},
-             {"prob": 0.0004, "type": "hentai"},
-             {"prob": 0.0002, "type": "sexy"},
-             {"prob": 0.0, "type": "drawings"}],
- "status": 0}
+{
+    "message": "success",
+    "results": [{"prob": 0.9982, "type": "porn"},
+                 {"prob": 0.0011, "type": "neutral"},
+                 {"prob": 0.0004, "type": "hentai"},
+                 {"prob": 0.0002, "type": "sexy"},
+                 {"prob": 0.0, "type": "drawings"}],
+    "status": 0
+}
 ```
 
-**Note**: the returned result indicates that ```porn``` has the highest 
+> The returned result indicates that ```porn``` has the highest 
 probability (prob=0.9982)

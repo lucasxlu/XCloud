@@ -10,7 +10,7 @@ import pymysql
 import requests
 
 
-def connect_mysql_db(host='localhost', username='root', passwd='19930620', db='xcloud'):
+def connect_mysql_db(host='localhost', username='lucasxu', passwd='lucasxu', db='xcloud'):
     """
     connect to mysql database
     :param host:
