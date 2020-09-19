@@ -1,55 +1,28 @@
 import os
-import sys
 import pickle
+import sys
 
-from PIL import Image
 import numpy as np
-from skimage import io
-
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+from PIL import Image
+from skimage import io
 from skimage.color import gray2rgb, rgba2rgb
-from torchvision import models
 from torchvision.transforms import transforms
+
+sys.path.append('../')
+from research.cbir.densenet import DenseNet121
 
 USE_GPU = True
 
 
-class DenseNet121(nn.Module):
-    """
-    DenseNet with features, constructed for CenterLoss
-    """
-
-    def __init__(self, num_cls=198):
-        super(DenseNet121, self).__init__()
-        self.__class__.__name__ = 'DenseNet121'
-        densenet121 = models.densenet121(pretrained=True)
-        num_ftrs = densenet121.classifier.in_features
-        densenet121.classifier = nn.Linear(num_ftrs, num_cls)
-        self.model = densenet121
-
-    def forward(self, x):
-        for name, module in self.model.named_children():
-            if name == 'features':
-                feats = module(x)
-                feats = F.relu(feats, inplace=True)
-                feats = F.avg_pool2d(feats, kernel_size=7, stride=1).view(feats.size(0), -1)
-            elif name == 'classifier':
-                out = module(feats)
-
-        return feats, out
-
-    def num_flat_features(self, x):
-        size = x.size()[1:]  # all dimensions except the batch dimension
-        num_features = 1
-        for s in size:
-            num_features *= s
-
-        return num_features
-
-
 def load_model_with_weights(model, model_path):
+    """
+    load model with pretrained checkpoint
+    :param model:
+    :param model_path:
+    :return:
+    """
     print(model)
     model = model.float()
     model_name = model.__class__.__name__
@@ -100,22 +73,22 @@ def ext_deep_feat(model_with_weights, img_filepath):
 
             inputs = img.to(device)
 
-            feat = model_with_weights.model.features(inputs)
-            feat = F.relu(feat, inplace=True)
-            feat = F.adaptive_avg_pool2d(feat, (1, 1)).view(feat.size(0), -1)
+            feat = model_with_weights.embedding(model_with_weights.features(inputs))
 
             # print('feat size = {}'.format(feat.shape))
 
     feat = feat.to('cpu').detach().numpy()
+    feat = feat / np.linalg.norm(feat)
 
-    return feat / np.linalg.norm(feat)
+    return feat
 
 
-def ext_feats_in_dir(model_with_weights, sku_root):
+def ext_feats_in_dir(model_with_weights, sku_root, product_middle_class):
     """
     extract deep features in a directory
     :param model_with_weights:
     :param sku_root:
+    :param product_middle_class
     :return:
     """
     print(model_with_weights)
@@ -137,18 +110,21 @@ def ext_feats_in_dir(model_with_weights, sku_root):
             idx += 1
     print('[INFO] finish extracting features')
 
-    with open('/data/lucasxu/Features/feats_LightClothing.pkl', mode='wb') as f:
+    with open('/data/lucasxu/Features/feats_{}.pkl'.format(product_middle_class), mode='wb') as f:
         pickle.dump(np.array(feats).astype('float32'), f)
 
-    with open('/data/lucasxu/Features/idx_LightClothing.pkl', mode='wb') as f:
+    with open('/data/lucasxu/Features/idx_{}.pkl'.format(product_middle_class), mode='wb') as f:
         pickle.dump(idx_filename, f)
 
 
 if __name__ == '__main__':
-    densenet121 = DenseNet121(num_cls=52)
+    product_middle_class = 'AdditiveFood'
+    if product_middle_class == 'AdditiveFood':
+        out_num = 362
+    densenet121 = DenseNet121(num_cls=out_num)
 
-    # state_dict = torch.load('/data/lucasxu/ModelZoo/DenseNet121_TissuePhysiology_Embedding_DataAug.pth')
-    state_dict = torch.load('/data/lucasxu/ModelZoo/DenseNet121_LightClothing_Embedding_DataAug.pth')
+    state_dict = torch.load(
+        '/data/lucasxu/ModelZoo/DenseNet121_{}_Embedding_ASoftmaxLoss.pth'.format(product_middle_class))
     try:
         from collections import OrderedDict
 
@@ -159,5 +135,6 @@ if __name__ == '__main__':
         densenet121.load_state_dict(new_state_dict)
     except:
         densenet121.load_state_dict(state_dict)
+    densenet121.eval()
 
-    ext_feats_in_dir(densenet121, '/data/lucasxu/Dataset/LightClothingSku')
+    ext_feats_in_dir(densenet121, '/data/lucasxu/Dataset/%sSku' % product_middle_class, product_middle_class)

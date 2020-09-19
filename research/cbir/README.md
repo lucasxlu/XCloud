@@ -6,15 +6,15 @@ Exploring deep metric learning & hash methods to build efficient visual search s
 
 ![index](https://raw.githubusercontent.com/lucasxlu/CbirAnnoTool/master/index.png)
 
-### Backbone
-| Architecture | Supervision | Status |
-| :---: |:---: |:---: |
-| DenseNet121 | Softmax | [YES] |
-| DenseNet121 | CenterLoss | [YES] |
-| DenseNet121 | A-Softmax | [YES] |
-| DenseNet121 | ArcLoss | [YES] |
-| ResNeXt50 | A-Softmax | [TODO] |
-| SeResNeXt50 | A-Softmax | [TODO] |
+### Architecture and Loss
+#### Supported Architecture
+- [x] DenseNet121
+
+#### Supported Loss
+- [x] SoftmaxLoss
+- [x] CenterLoss
+- [x] ASoftmaxLoss
+- [x] ArcLoss
 
 
 ### Dependency
@@ -35,6 +35,7 @@ After manually cleaning noise samples in each cluster, you can upgrade your embe
 4. Wang F, Xiang X, Cheng J, Yuille AL. [Normface: L2 hypersphere embedding for face verification](https://arxiv.org/pdf/1704.06369v4.pdf). InProceedings of the 2017 ACM on Multimedia Conference 2017 Oct 23 (pp. 1041-1049). ACM.
 5. Liu, Weiyang, et al. ["Sphereface: Deep hypersphere embedding for face recognition."](http://openaccess.thecvf.com/content_cvpr_2017/papers/Liu_SphereFace_Deep_Hypersphere_CVPR_2017_paper.pdf) The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). Vol. 1. 2017.
 6. Hadsell, Raia, Sumit Chopra, and Yann LeCun. ["Dimensionality reduction by learning an invariant mapping."](http://www.cs.toronto.edu/~hinton/csc2535/readings/hadsell-chopra-lecun-06-1.pdf) null. IEEE, 2006.
+7. Luo H, Gu Y, Liao X, et al. [Bag of tricks and a strong baseline for deep person re-identification](http://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf)[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops. 2019: 0-0.
 
 
 ## License

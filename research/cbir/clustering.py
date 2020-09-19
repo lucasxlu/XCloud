@@ -2,21 +2,21 @@
 # Please carefully tune the hyper-param k, to make sure that max(x_i - \mu_i) <= \tau (such as 0.3)
 # to avoid introducing noise
 # author: @LucasX
-import os
-import math
 import argparse
-
-from PIL import Image
-from sklearn.cluster import KMeans
-import numpy as np
+import math
+import os
 import shutil
-from skimage import io
 
+import numpy as np
 import torch
 import torch.nn as nn
-from torch.nn import Parameter
 import torch.nn.functional as F
+from PIL import Image
+from skimage import io
 from skimage.color import gray2rgb, rgba2rgb
+from sklearn.cluster import KMeans
+from torch import Tensor
+from torch.nn import Parameter
 from torchvision import models
 from torchvision.transforms import transforms
 
@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-k', type=int)
 parser.add_argument('-out_num', type=int, default=369)
 parser.add_argument('-checkpoint', type=str,
-                    default='/data/lucasxu/ModelZoo/DenseNet121_Embedding_AngularLoss.pth')
+                    default='/data/lucasxu/ModelZoo/DenseNet121_Embedding_ASoftmaxLoss.pth')
 parser.add_argument('-max_l1_dist', type=float)
 parser.add_argument('-use_gpu', type=bool, default=True)
 parser.add_argument('-algorithm', type=str, default='kmeans')
@@ -42,29 +42,55 @@ def myphi(x, m):
            x ** 8 / math.factorial(8) - x ** 9 / math.factorial(9)
 
 
-class DenseNet121(nn.Module):
+class Flatten(nn.Module):
     """
-    DenseNet with features, constructed for AngularLoss
+    self constructed Flatten Module
+    Note: use nn.Flatten() directly after PyTorch 1.5 or higher
     """
 
-    def __init__(self, num_cls):
+    __constants__ = ['start_dim', 'end_dim']
+    start_dim: int
+    end_dim: int
+
+    def __init__(self, start_dim: int = 1, end_dim: int = -1) -> None:
+        super(Flatten, self).__init__()
+        self.start_dim = start_dim
+        self.end_dim = end_dim
+
+    def forward(self, input: Tensor) -> Tensor:
+        return input.flatten(self.start_dim, self.end_dim)
+
+
+class DenseNet121(nn.Module):
+    """
+    DenseNet121 as backbone, constructed for ASoftmaxLoss
+    """
+
+    def __init__(self, num_cls, embedding_dim=1024):
         super(DenseNet121, self).__init__()
         self.__class__.__name__ = 'DenseNet121'
         densenet121 = models.densenet121(pretrained=True)
+        self.features = densenet121.features
         num_ftrs = densenet121.classifier.in_features
-        densenet121.classifier = nn.Sequential(nn.Linear(num_ftrs, 1024), AngleLinear(1024, num_cls))
-        self.model = densenet121
+        self.embedding = nn.Sequential(
+            nn.ReLU(inplace=True),
+            nn.AdaptiveAvgPool2d((1, 1)),
+            Flatten(),
+            nn.Linear(num_ftrs, embedding_dim, bias=False),
+            nn.BatchNorm1d(embedding_dim)
+        )
+        self.classifier = AngleLinear(embedding_dim, num_cls)
 
     def forward(self, x):
-        for name, module in self.model.named_children():
-            if name == 'features':
-                feats = module(x)
-                feats = F.relu(feats, inplace=True)
-                feats = F.avg_pool2d(feats, kernel_size=7, stride=1).view(feats.size(0), -1)
-            elif name == 'classifier':
-                out = module(feats)
+        """
+        feedforward an image, return pooling features (with BNNeck) and logits before softmax layer
+        :param x:
+        :return:
+        """
+        feats = self.embedding(self.features(x))
+        logits = self.classifier(feats)
 
-        return feats, out
+        return feats, logits
 
     def num_flat_features(self, x):
         size = x.size()[1:]  # all dimensions except the batch dimension
@@ -95,13 +121,13 @@ class AngleLinear(nn.Module):
 
     def forward(self, input):
         x = input  # size=(B,F)    F is feature len
-        w = self.weight  # size=(F,Classnum) F=in_features Classnum=out_features
+        w = self.weight  # size=(F, ClassNum) F=in_features  ClassNum=out_features
 
         ww = w.renorm(2, 1, 1e-5).mul(1e5)
         xlen = x.pow(2).sum(1).pow(0.5)  # size=B
-        wlen = ww.pow(2).sum(0).pow(0.5)  # size=Classnum
+        wlen = ww.pow(2).sum(0).pow(0.5)  # size= ClassNum
 
-        cos_theta = x.mm(ww)  # size=(B,Classnum)
+        cos_theta = x.mm(ww)  # size=(B, ClassNum)
         cos_theta = cos_theta / xlen.view(-1, 1) / wlen.view(1, -1)
         cos_theta = cos_theta.clamp(-1, 1)
 
@@ -120,44 +146,16 @@ class AngleLinear(nn.Module):
         phi_theta = phi_theta * xlen.view(-1, 1)
         output = (cos_theta, phi_theta)
 
-        return output  # size=(B,Classnum,2)
-
-
-class AngularLoss(nn.Module):
-    def __init__(self, gamma=0):
-        super(AngularLoss, self).__init__()
-        self.gamma = gamma
-        self.it = 0
-        self.LambdaMin = 5.0
-        self.LambdaMax = 1500.0
-        self.lamb = 1500.0
-
-    def forward(self, input, target):
-        self.it += 1
-        cos_theta, phi_theta = input
-        target = target.view(-1, 1)  # size=(B,1)
-
-        index = cos_theta.data * 0.0  # size=(B,Classnum)
-        index.scatter_(1, target.data.view(-1, 1), 1)
-        index = index.byte()
-
-        self.lamb = max(self.LambdaMin, self.LambdaMax / (1 + 0.1 * self.it))
-        output = cos_theta * 1.0  # size=(B,Classnum)
-        output[index] -= cos_theta[index] * (1.0 + 0) / (1 + self.lamb)
-        output[index] += phi_theta[index] * (1.0 + 0) / (1 + self.lamb)
-
-        logpt = F.log_softmax(output, dim=0)
-        logpt = logpt.gather(1, target)
-        logpt = logpt.view(-1)
-        pt = logpt.data.exp()
-
-        loss = -1 * (1 - pt) ** self.gamma * logpt
-        loss = loss.mean()
-
-        return loss
+        return output  # size=(B, ClassNum, 2)
 
 
 def load_model_with_weights(model, model_path):
+    """
+    load model with pretrained checkpoint
+    :param model:
+    :param model_path:
+    :return:
+    """
     print(model)
     model = model.float()
     model_name = model.__class__.__name__

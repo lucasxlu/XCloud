@@ -49,9 +49,9 @@ def crop_subregion_from_img(label_me_xml_path, img_dir, save_to_base_dir):
 
 
 if __name__ == '__main__':
-    anno_dir = "C:/Users/Administrator/Desktop/JCL_Det"
-    img_dir = "C:/Users/Administrator/Desktop/JCL_Det"
-    crop_save_to_dir = "C:/Users/Administrator/Desktop/yumi"
+    anno_dir = "/path/to/Annotations"
+    img_dir = "/path/to/JPEGImages"
+    crop_save_to_dir = "/path/to/Crops"
 
     for xml in os.listdir(anno_dir):
         xml_path = os.path.join(anno_dir, xml)
