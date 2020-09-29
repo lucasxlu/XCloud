@@ -19,8 +19,7 @@ import torch.onnx
 import onnx
 import onnxruntime
 
-sys.path.append('../')
-from mengzhu import data_loader
+from . import data_loader
 
 
 def cvt_pytorch_model_to_trt_model(model, pretrained_pytorch_weights, save_to_trt_weights):
@@ -248,23 +247,14 @@ if __name__ == '__main__':
     num_ftrs = densenet169.classifier.in_features
     densenet169.classifier = nn.Linear(num_ftrs, 47)
 
-    # resnet18 = models.resnet18(pretrained=True)
-    # num_ftrs = resnet18.fc.in_features
-    # resnet18.fc = nn.Linear(num_ftrs, 6)
+    cvt_pytorch_model_to_trt_model(densenet169, '/data/lucasxu/ModelZoo/DenseNet169.pth',
+                                '/data/lucasxu/ModelZoo/DenseNet169_trt.pth')
 
-    # cvt_pytorch_model_to_trt_model(densenet169, '/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard.pth',
-    #                             '/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard_trt.pth')
+    cvt_pytorch_model_to_onnx_model(densenet169, '/data/lucasxu/ModelZoo/DenseNet169.pth',
+                                    '/data/lucasxu/ModelZoo/DenseNet169.onnx')
 
-    # cvt_pytorch_model_to_onnx_model(densenet169, '/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard.pth',
-    #                                 '/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard.onnx')
-
-    trainloader, valloader, testloader = data_loader.load_mengzhucrop_data()
-    eval_models(trt_model_weights='/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard_trt.pth',
-                onnx_model_weights='/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard.onnx',
-                py_model=densenet169, py_model_weights='/data/lucasxu/ModelZoo/DenseNet169_MengZhu_Discard.pth',
+    trainloader, valloader, testloader = data_loader.load_data()
+    eval_models(trt_model_weights='/data/lucasxu/ModelZoo/DenseNet169_trt.pth',
+                onnx_model_weights='/data/lucasxu/ModelZoo/DenseNet169.onnx',
+                py_model=densenet169, py_model_weights='/data/lucasxu/ModelZoo/DenseNet169.pth',
                 dataloader=testloader)
-
-    # trainloader, valloader, testloader = data_loader.load_mengzhu_quality_data()
-    # eval_trt_model(trt_model_weights='/data/lucasxu/ModelZoo/ResNet18_MengZhu_Discard_Quality_trt.pth',
-    #                py_model=resnet18, py_model_weights='/data/lucasxu/ModelZoo/ResNet18_MengZhu_Discard_Quality.pth',
-    #                dataloader=testloader)
