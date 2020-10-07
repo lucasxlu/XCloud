@@ -11,3 +11,4 @@ This module holds the model re-implementation and source code for training & tes
 * [Image Dehazing](./imagedehazing)
 * [Image Quality Assessment](./iqa)
 * [Data Augmentation](./dataaugmentation)
+* [Knowledge Distillation](./kd)

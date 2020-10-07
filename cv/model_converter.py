@@ -85,6 +85,11 @@ def cvt_pytorch_model_to_onnx_model(model, pretrained_pytorch_weights, save_to_o
 
 
 def softmax(x):
+    """
+    softmax function
+    :param x:
+    :return:
+    """
     x = x.reshape(-1)
     e_x = np.exp(x - np.max(x))
 

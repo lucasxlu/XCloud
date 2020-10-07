@@ -51,6 +51,7 @@ The codes of building RESTful APIs are listed in [cv](./cv)/[nlp](./nlp)/[dm](./
     - [x] Image Dehazing
     - [x] Image Quality Assessment
     - [x] Data Augmentation
+    - [x] Knowledge Distillation
     
     
 ## Deployment
@@ -258,11 +259,11 @@ with open("/path/to/test.jpg", mode='rb') as f:
 
 
 ## TODO List
-* Add [docker](https://www.docker.com/) support
-* Add new dev-branch to pre-process images with [NVIDIA DALI](https://developer.nvidia.com/DALI)
-* Add new dev-branch to train models with [NVIDIA Apex](https://github.com/NVIDIA/apex)
-* Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support to accelerate deep models
-* Add [RPC API](https://dubbo.apache.org/zh-cn/blog/rpc-introduction.html) support
+- [ ] Add [docker](https://www.docker.com/) support
+- [ ] Add new dev-branch to pre-process images with [NVIDIA DALI](https://developer.nvidia.com/DALI)
+- [ ] Add new dev-branch to train models with [NVIDIA Apex](https://github.com/NVIDIA/apex)
+- [ ] Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support to accelerate deep models
+- [ ] Add [RPC API](https://dubbo.apache.org/zh-cn/blog/rpc-introduction.html) support
 
 
 ## Citation
