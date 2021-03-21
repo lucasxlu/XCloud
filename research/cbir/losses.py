@@ -54,9 +54,13 @@ class CenterLoss(nn.Module):
         return loss
 
 
-class AngularLoss(nn.Module):
+class ASoftmaxLoss(nn.Module):
+    """
+    SphereFace: Deep hypersphere embedding for face recognition. CVPR'17
+    """
+
     def __init__(self, gamma=0):
-        super(AngularLoss, self).__init__()
+        super(ASoftmaxLoss, self).__init__()
         self.gamma = gamma
         self.it = 0
         self.LambdaMin = 5.0
@@ -89,6 +93,9 @@ class AngularLoss(nn.Module):
 
 
 class ArcLoss(nn.Module):
+    """
+    ArcFace: Additive angular margin loss for deep face recognition. CVPR'19
+    """
 
     def __init__(self, embedding_size, class_num, s=30.0, m=0.50):
         """ArcFace formula:

@@ -20,7 +20,7 @@ from sklearn.metrics import confusion_matrix
 from torch.optim import lr_scheduler
 
 from research.cbir.densenet import DenseNet121
-from research.cbir.losses import AngularLoss, ArcLoss, CenterLoss
+from research.cbir.losses import ASoftmaxLoss, ArcLoss, CenterLoss
 
 sys.path.append('../')
 from research.cbir import data_loader
@@ -771,7 +771,7 @@ def main_with_asoftmaxloss(model):
     :param model:
     :return:
     """
-    criterion_aloss = AngularLoss()
+    criterion_aloss = ASoftmaxLoss()
     optimizer = optim.SGD(model.parameters(), lr=cfg['init_lr'], momentum=0.9, weight_decay=cfg['weight_decay'])
     cosine_anneal_warmup_lr_scheduler = lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=10, T_mult=10,
                                                                                  eta_min=0, last_epoch=-1)
