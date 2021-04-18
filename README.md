@@ -234,6 +234,7 @@ with open("/path/to/test.jpg", mode='rb') as f:
 
 ## Contributor
 * [@LucasX](https://github.com/lucasxlu): system/algorithm/deployment/report
+* [@Yummy](https://www.zhihu.com/people/xiao-tian-yysina): front-end developer
 * [@reallinfo](https://github.com/reallinfo): logo design
 
 
@@ -260,8 +261,8 @@ with open("/path/to/test.jpg", mode='rb') as f:
 
 ## TODO List
 - [ ] Add [docker](https://www.docker.com/) support
-- [ ] Add new dev-branch to pre-process images with [NVIDIA DALI](https://developer.nvidia.com/DALI)
-- [ ] Add new dev-branch to train models with [NVIDIA Apex](https://github.com/NVIDIA/apex)
+- [ ] Add [NVIDIA DALI](https://developer.nvidia.com/DALI) support
+- [ ] Add [NVIDIA Apex](https://github.com/NVIDIA/apex) support
 - [ ] Add [Quantization](https://pytorch.org/docs/stable/quantization.html) support to accelerate deep models
 - [ ] Add [RPC API](https://dubbo.apache.org/zh-cn/blog/rpc-introduction.html) support
 
