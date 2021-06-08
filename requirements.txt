@@ -24,7 +24,7 @@ mmdet==0.6.2
 mtcnn==0.1.0
 onnx==1.6.0
 onnxruntime==1.1.2
-Pillow==8.1.1
+Pillow==8.2.0
 pretrainedmodels==0.7.4
 pycocotools==2.0.0
 pymongo==3.10.1
