@@ -1,7 +1,7 @@
 # some config used in XCloud
 
 cfg = {
-    'model_zoo_base': 'E:/ModelZoo',
+    'model_zoo_base': '/Users/lucasx/Documents/ModelZoo',
     'use_trt': False,
     'use_mysql': False,
     'thresholds': {

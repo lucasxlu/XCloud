@@ -2,41 +2,13 @@
 # Author: @LucasX
 # Mail: xulu0620@gmail.com
 
-import json
-import os
-import io
-import math
-import logging
-import requests
-import time
-import pickle
-from pprint import pprint
-from collections import OrderedDict
 import base64
+import json
+import time
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import numpy as np
-from numpy.linalg import norm
-import pandas as pd
-import cv2
-from PIL import Image
+import requests
 from django.http import HttpResponse
-from django import forms
-# from skimage import io
-from sklearn.externals import joblib
-from torchvision import models
-from torchvision.transforms import transforms
 
-import editdistance
-import mmcv
-from mmcv.runner import load_checkpoint
-from mmcv.visualization.image import imshow, imshow_bboxes, imshow_det_bboxes
-from mmdet.apis import init_detector, inference_detector, show_result
-from mmdet.models import build_detector
-
-from cv.controllers.helper import *
 from cv.models.deblur_gan_v2 import *
 
 
@@ -91,12 +63,15 @@ def upload_and_deblur(request):
                 json_result = json.dumps(result, ensure_ascii=False)
 
                 return HttpResponse(json_result)
-            else:    
+            else:
                 if 'http://' in imgstr or 'https://' in imgstr:
                     response = requests.get(imgstr)
-                    image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())), size=100, field_name="image", content_type="image/jpeg", charset=None)
+                    image = InMemoryUploadedFile(io.BytesIO(response.content), name="{}.jpg".format(str(time.time())),
+                                                 size=100, field_name="image", content_type="image/jpeg", charset=None)
                 else:
-                    image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)), name="{}.jpg".format(str(time.time())), size=100, field_name="image", content_type="image/jpeg", charset=None)
+                    image = InMemoryUploadedFile(io.BytesIO(base64.b64decode(imgstr)),
+                                                 name="{}.jpg".format(str(time.time())), size=100, field_name="image",
+                                                 content_type="image/jpeg", charset=None)
         if not image:
             result['code'] = 2
             result['msg'] = 'Invalid Image Path'

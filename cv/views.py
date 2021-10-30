@@ -4,14 +4,11 @@ import sys
 import time
 from collections import OrderedDict
 
-import cv2
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from mtcnn.mtcnn import MTCNN
 
 sys.path.append('../')
-from cv.controllers.face_search_controller import upload_and_search_face
 from cv.controllers.food_controller import upload_and_rec_food
 from cv.controllers.nswf_controller import upload_and_rec_porn
 from cv.controllers.plant_controller import upload_and_rec_plant
@@ -93,6 +90,7 @@ def pdr(request):
     return upload_and_rec_plant_disease(request)
 
 
+"""
 def face_search_view(request):
     return render(request, 'facesearch.html')
 
@@ -100,8 +98,9 @@ def face_search_view(request):
 @csrf_exempt
 def face_search(request):
     return upload_and_search_face(request)
+"""
 
-
+'''
 @csrf_exempt
 def detect_face(request):
     """
@@ -127,6 +126,7 @@ def detect_face(request):
     json_result = json.dumps(result, ensure_ascii=False)
 
     return HttpResponse(json_result)
+'''
 
 
 @csrf_exempt
