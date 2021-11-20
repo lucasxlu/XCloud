@@ -17,7 +17,7 @@ class PlantDiseaseRecognizer:
 
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "ResNet18_PDR.pth"),
                  num_cls=61):
-        model = models.resnet18(pretrained=True)
+        model = models.resnet18(pretrained=False)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, num_cls)
 

@@ -6,7 +6,7 @@ import numpy as np
 import torch
 from PIL import Image
 from mtcnn.mtcnn import MTCNN
-from sklearn.externals import joblib
+from joblib import dump, load
 from torchvision.transforms import transforms
 
 from cv.cfg import cfg
@@ -41,7 +41,7 @@ class BeautyRecognizerML:
         assert os.path.exists(pretrained_model)
 
         logger.info('Initiate BeautyRecognizerML')
-        gbr = joblib.load(pretrained_model)
+        gbr = load(pretrained_model)
         self.model = gbr
         self.detector = MTCNN()
 

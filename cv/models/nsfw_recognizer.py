@@ -18,7 +18,7 @@ class NSFWEstimator:
 
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "DenseNet121_NSFW.pth"), num_cls=5):
         self.num_cls = num_cls
-        model = models.densenet121(pretrained=True)
+        model = models.densenet121(pretrained=False)
         num_ftrs = model.classifier.in_features
         model.classifier = nn.Linear(num_ftrs, self.num_cls)
 

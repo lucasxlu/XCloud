@@ -23,10 +23,10 @@ urlpatterns = [
     url('pdr', views.pdr, name='pdr'),
     url('skinview', views.skin_view, name='skinview'),
     url('mcloud/skin', views.rec_skin, name='recskin'),
-    url('detectface', views.detect_face, name='detectface'),
+    # url('detectface', views.detect_face, name='detectface'),
     url('mcloud/statskin', views.stat_skin, name='statskin'),
     url('cbirview', views.cbir_view, name='cbirview'),
     url('cbir', views.cbir, name='cbir'),
-    url('deblurview', views.deblur_view, name='deblurview'),
-    url('deblur', views.deblur, name='deblur'),
+    # url('deblurview', views.deblur_view, name='deblurview'),
+    # url('deblur', views.deblur, name='deblur'),
 ]

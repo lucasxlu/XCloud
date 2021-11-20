@@ -22,7 +22,7 @@ class PlantRecognizer:
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "ResNet50_Plant.pth"), num_cls=998):
         assert os.path.exists(pretrained_model_path)
 
-        model = models.resnet50(pretrained=True)
+        model = models.resnet50(pretrained=False)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, num_cls)
 

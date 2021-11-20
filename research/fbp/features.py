@@ -1,13 +1,17 @@
 """
 feature extractor
 """
+import os
+
 import dlib
 import numpy as np
 from skimage import io
 from skimage.color import rgb2gray
 from skimage.feature import hog, local_binary_pattern, corner_harris
 
-DLIB_MODEL = "E:\ModelZoo\shape_predictor_68_face_landmarks.dat"
+from cv.cfg import cfg
+
+DLIB_MODEL = os.path.join(cfg['model_zoo_base'], "shape_predictor_68_face_landmarks.dat")
 predictor = dlib.shape_predictor(DLIB_MODEL)
 detector = dlib.get_frontal_face_detector()
 
