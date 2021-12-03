@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 if DEBUG:
     STATIC_ROOT = ''
     STATICFILES_DIRS = (
-        'XCloud/cv/static',
+        '/home/lucasxu/Project/XCloud/cv/static',
     )
 else:
     STATIC_ROOT = 'cv/static'

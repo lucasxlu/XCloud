@@ -32,3 +32,4 @@ torch==1.10.0
 torchsummary==1.5.1
 torchvision==0.11.1
 tqdm==4.61.2
+snownlp=0.12.3
