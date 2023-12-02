@@ -143,7 +143,7 @@ def rec_skin(request):
 
     if cfg['use_mysql'] and skin_disease_result_json['code'] == 0:
         conn = db_utils.connect_mysql_db()
-        db_utils.insert_to_api(conn, 'LucasX', 'cv/mcloud/skin', skin_disease_result_json['elapse'],
+        db_utils.insert_to_api(conn, 'LucasXU', 'cv/mcloud/skin', skin_disease_result_json['elapse'],
                                datetime.time(), 0, skin_disease_result_json['imgpath'],
                                skin_disease_result_json['results'][0]['disease'])
 

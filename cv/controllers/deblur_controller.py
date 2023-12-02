@@ -1,5 +1,5 @@
 # controllers for Image Deblurring
-# Author: @LucasX
+# Author: @LucasXU
 # Mail: xulu0620@gmail.com
 
 import base64
@@ -15,7 +15,7 @@ from cv.models.deblur_gan_v2 import *
 def deblur(sr_model, img_f: str):
     """
     run Deblur-GAN v2 to infer an image
-    @Author: LucasX
+    @Author: LucasXU
     """
 
     def sorted_glob(pattern):

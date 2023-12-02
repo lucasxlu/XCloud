@@ -1,6 +1,6 @@
 """
 train and eval Deep Model for Image Quality Assessment
-Author: LucasX
+Author: LucasXU
 """
 import copy
 import os

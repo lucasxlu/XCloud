@@ -1,6 +1,6 @@
 """
 fine-tune Deep Models
-Author: LucasX
+Author: LucasXU
 """
 import argparse
 import copy

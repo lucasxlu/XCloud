@@ -15,7 +15,7 @@ after running this code, you will get sample-paired images as:
     - category 3
     - ...
     - category N
-@Author: LucasX
+@Author: LucasXU
 """
 import os
 import random

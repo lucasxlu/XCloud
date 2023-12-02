@@ -1,6 +1,6 @@
 """
 some paper re-implementations proposed in NR-IQA fields
-@Author: LucasX
+@Author: LucasXU
 """
 import os
 
@@ -216,7 +216,7 @@ class NIMA(nn.Module):
     """
     PyTorch implementation of <NIMA: Neural Image Assessment> published at TIP'18
     Input size: 224*224*3
-    @Author: LucasX
+    @Author: LucasXU
     """
 
     def __init__(self, backbone, num_out):

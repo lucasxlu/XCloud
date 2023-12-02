@@ -32,12 +32,12 @@ CREATE TABLE `api` (
 -- ----------------------------
 -- Records of api
 -- ----------------------------
-INSERT INTO `api` VALUES ('LucasX', 'cv/mcloud/skin', '0', '2019-03-21 17:45:05', '0', null, null);
-INSERT INTO `api` VALUES ('LucasX', 'cv/mcloud/skin', '0', '2019-02-06 17:45:34', '0', null, null);
-INSERT INTO `api` VALUES ('LucasX', 'cv/mcloud/skin', '0', '2019-03-14 17:45:58', '1', null, null);
+INSERT INTO `api` VALUES ('LucasXU', 'cv/mcloud/skin', '0', '2019-03-21 17:45:05', '0', null, null);
+INSERT INTO `api` VALUES ('LucasXU', 'cv/mcloud/skin', '0', '2019-02-06 17:45:34', '0', null, null);
+INSERT INTO `api` VALUES ('LucasXU', 'cv/mcloud/skin', '0', '2019-03-14 17:45:58', '1', null, null);
 INSERT INTO `api` VALUES ('BigBear', 'cv/fbp', '0', '0000-00-00 00:00:00', '1', null, null);
-INSERT INTO `api` VALUES ('LucasX', 'cv/mcloud/skin', '0', '0000-00-00 00:00:00', '0', 'http://localhost:8000/static/SkinUpload/009899HB.jpg', 'Acne_Keloidalis_Nuchae\n');
-INSERT INTO `api` VALUES ('LucasX', 'cv/mcloud/skin', '1', '2019-03-21 20:02:31', '0', 'http://localhost:8000/static/SkinUpload/009895HB.jpg', 'Acne_Keloidalis_Nuchae\n');
+INSERT INTO `api` VALUES ('LucasXU', 'cv/mcloud/skin', '0', '0000-00-00 00:00:00', '0', 'http://localhost:8000/static/SkinUpload/009899HB.jpg', 'Acne_Keloidalis_Nuchae\n');
+INSERT INTO `api` VALUES ('LucasXU', 'cv/mcloud/skin', '1', '2019-03-21 20:02:31', '0', 'http://localhost:8000/static/SkinUpload/009895HB.jpg', 'Acne_Keloidalis_Nuchae\n');
 
 -- ----------------------------
 -- Table structure for users

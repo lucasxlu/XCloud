@@ -1,7 +1,7 @@
 """
 train deep feature embedding with SoftmaxLoss/CenterLoss/ASoftmaxLoss/ArcLoss
 DenseNet121 as backbone
-@Author: LucasX
+@Author: LucasXU
 """
 import ast
 import copy

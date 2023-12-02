@@ -4,7 +4,7 @@ This article describes several keypoint elements to test your RESTful APIs. To b
 - [JDK>=8.0](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [JMeter](https://jmeter.apache.org/download_jmeter.cgi)
 
-Author: [@LucasX](https://github.com/lucasxlu)
+Author: [@LucasXU](https://github.com/lucasxlu)
 
 
 ## Basic Usage

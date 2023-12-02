@@ -1,6 +1,6 @@
 """
 train and eval Deep Model for Insect Pets Recognition
-Author: LucasX
+Author: LucasXU
 """
 import os
 import sys

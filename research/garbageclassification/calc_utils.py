@@ -105,7 +105,7 @@ def plot_confusion_matrix(y_true, y_pred, classes,
 
 
 if __name__ == '__main__':
-    df = pd.read_csv("C:/Users/LucasX/Desktop/DenseNet.csv")
+    df = pd.read_csv("C:/Users/LucasXU/Desktop/DenseNet.csv")
     gts = df['gt']
     preds = df['pred']
 

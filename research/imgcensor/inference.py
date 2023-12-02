@@ -1,5 +1,5 @@
 # Model Inference for NSFW Estimation
-# Author: LucasX
+# Author: LucasXU
 import sys
 from pprint import pprint
 

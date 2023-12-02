@@ -1,5 +1,5 @@
 # generate overexposure samples from clear images
-# author: @LucasX
+# author: @LucasXU
 import argparse
 import os
 import random
@@ -10,9 +10,9 @@ import numpy as np
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-orig_dir', type=str,
-                    default='C:/Users/LucasX/Desktop/ShelfExposure/normal')
+                    default='C:/Users/LucasXU/Desktop/ShelfExposure/normal')
 parser.add_argument('-outpur_dir', type=str,
-                    default='C:/Users/LucasX/Desktop/ShelfExposure/exposure')
+                    default='C:/Users/LucasXU/Desktop/ShelfExposure/exposure')
 parser.add_argument('-alpha', type=float, default=2.0)
 parser.add_argument('-beta', type=float, default=0.0)
 parser.add_argument('-procs', type=int, default=2)

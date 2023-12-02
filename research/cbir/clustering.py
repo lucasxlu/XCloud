@@ -1,7 +1,7 @@
 # run unsupervised clustering algorithms to automatically find new categories
 # Please carefully tune the hyper-param k, to make sure that max(x_i - \mu_i) <= \tau (such as 0.3)
 # to avoid introducing noise
-# author: @LucasX
+# author: @LucasXU
 import argparse
 import math
 import os

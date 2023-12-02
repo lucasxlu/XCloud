@@ -1,6 +1,6 @@
 """
 @Note: Implementation of Knowledge Distillation Algorithms
-@Author: LucasX
+@Author: LucasXU
 """
 import copy
 import os

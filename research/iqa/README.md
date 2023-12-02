@@ -2,7 +2,7 @@
 ## Introduction
 This module provides reimplementation for `image quality assessment` in both conventional digital image processing and deep learning based approaches.
 
-If your research interests lie in IQA, please feel free to contact [@LucasX](https://github.com/lucasxlu) or send a Pull Request to this repository. 
+If your research interests lie in IQA, please feel free to contact [@LucasXU](https://github.com/lucasxlu) or send a Pull Request to this repository. 
 
 ## Features
 - [x] [Blurry Detection](./blur_detector.py)

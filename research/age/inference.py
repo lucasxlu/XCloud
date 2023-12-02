@@ -1,5 +1,5 @@
 # Model Inference for Age Estimation
-# Author: LucasX
+# Author: LucasXU
 from pprint import pprint
 
 import torch

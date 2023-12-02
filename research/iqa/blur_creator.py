@@ -1,5 +1,5 @@
 # generate blurry samples from clear images
-# author: @LucasX
+# author: @LucasXU
 import argparse
 import os
 import random

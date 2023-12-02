@@ -1,6 +1,6 @@
 """
 train and eval Deep Model for garbage classification
-Author: LucasX
+Author: LucasXU
 """
 import os
 import sys
