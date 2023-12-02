@@ -13,6 +13,7 @@ from cv.cfg import cfg
 class PlantDiseaseRecognizer:
     """
     Plant Disease Recognition Class Wrapper
+    pre-trained checkpoint: https://drive.google.com/file/d/1yqSDfVm32Kjn_uNMeANuApPcdGsbijXQ/view?usp=sharing
     """
 
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "ResNet18_PDR.pth"),

@@ -14,6 +14,7 @@ from cv.cfg import cfg
 class SkinDiseaseRecognizer:
     """
     Skin Disease Recognizer
+    pre-trained checkpoint: https://drive.google.com/file/d/1yqSDfVm32Kjn_uNMeANuApPcdGsbijXQ/view?usp=sharing
     """
 
     def __init__(self, num_cls, pretrained_model=os.path.join(cfg['model_zoo_base'], 'DenseNet121_SD198.pth')):

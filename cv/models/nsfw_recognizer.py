@@ -14,6 +14,7 @@ from cv.cfg import cfg
 class NSFWEstimator:
     """
     NSFW Estimator Class Wrapper
+    pre-trained checkpoint: https://drive.google.com/file/d/1BF2FaCqhr1LYeZ4vA56pTTlfFumUrg5q/view?usp=sharing
     """
 
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "DenseNet121_NSFW.pth"), num_cls=5):

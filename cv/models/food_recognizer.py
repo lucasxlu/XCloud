@@ -14,6 +14,7 @@ from cv.cfg import cfg
 class FoodRecognizer:
     """
     Food Recognition Class Wrapper
+    pre-trained checkpoint: https://drive.google.com/file/d/1_Wm7dsajpBDbf7JFBFxtbK-q0wJgCV-T/view?usp=sharing
     """
 
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "DenseNet161_iFood.pth"), num_cls=251):

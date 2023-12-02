@@ -17,6 +17,7 @@ from cv.cfg import cfg
 class PlantRecognizer:
     """
     Plant Recognition Class Wrapper
+    pre-trained checkpoint: https://drive.google.com/file/d/17xwWx2ZR4IEq2EsqBuSz9SL919HgWd7U/view?usp=sharing
     """
 
     def __init__(self, pretrained_model_path=os.path.join(cfg['model_zoo_base'], "ResNet50_Plant.pth"), num_cls=998):
